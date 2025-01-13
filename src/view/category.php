@@ -63,9 +63,9 @@
             <div class="container">
                 <!-- Add Course Button -->
                 <div class="d-flex justify-content-end mb-3">
-                    <button class="btn btn-primary" style=" background-color: #007bff; padding: 10px 20px; border-radius: 5px;">
-                        Add Course
-                    </button>
+                <button type="button" onclick="toggleModalCategory()" class="btn btn-primary">
+    Add Course
+  </button>
                 </div>
     
                 <!-- Grid Wrapper -->
@@ -150,8 +150,59 @@
             </div>
         </div>
     </section>
+
+
+    <section id="addModalCategory" class="d-none position-fixed top-0 start-0 w-100 h-100 d-flex align-items-start justify-content-center bg-dark bg-opacity-50">
+  <div class="bg-white rounded shadow p-4 w-50 mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="h4 fw-bold text-secondary">Add Category</h2>
+      <button type="button" onclick="returnPage1()" class="btn btn-primary">Close</button>
+    </div>
+    <form action="?action=save_category" method="POST">
+      <div class="mb-3">
+        <label for="categoryName" class="form-label text-secondary">Name</label>
+        <input 
+          type="text" 
+          name="name" 
+          id="categoryName" 
+          class="form-control" 
+          placeholder="Jane Doe">
+      </div>
+      <div class="mb-3">
+        <label for="categoryDescription" class="form-label text-secondary">Description</label>
+        <textarea 
+          name="description" 
+          id="categoryDescription" 
+          class="form-control" 
+          rows="3" 
+          placeholder="Enter some long form content."></textarea>
+      </div>
+      <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary">ADD</button>
+      </div>
+    </form>
+  </div>
+</section>
+
     
-    
+    <script>
+       const ModalCategory = document.getElementById("addModalCategory");
+
+function toggleModalCategory() {
+  console.log("toggleModalCategory called");
+  ModalCategory.classList.remove("d-none");
+  ModalCategory.classList.remove("position-fixed");
+  ModalCategory.classList.add("d-flex");
+}
+
+
+function returnPage1() {
+  ModalCategory.classList.add("d-none");
+  ModalCategory.classList.add("position-fixed");
+  ModalCategory.classList.remove("d-flex");
+} 
+
+    </script>
     
 </body>
 </html>
