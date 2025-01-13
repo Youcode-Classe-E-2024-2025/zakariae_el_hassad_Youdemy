@@ -11,10 +11,11 @@ class CategoryDao {
 
     public function create(Category $category){
 
-        $stmt = $this->connection->prepare("INSERT INTO ctaegory (name , description) VALUES (:name , :description)");
+        $stmt = $this->connection->prepare("INSERT INTO ctaegory (name , description , admin_id) VALUES (:name , :description , :admin_id)");
         return $stmt->execute([
             "name" => $category->getName(),
-            "description" => $category->getDescription()
+            "description" => $category->getDescription(),
+            "admin_id" => $category->getAdmin()
         ]);
     }
 }

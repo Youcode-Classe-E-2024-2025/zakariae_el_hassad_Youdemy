@@ -67,7 +67,9 @@ CREATE TABLE Notification (
 CREATE TABLE Category (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    amin_id INT NOT NULL,
+    FOREIGN KEY (amin_id) REFERENCES users(id)
 );
 
 
