@@ -9,15 +9,23 @@
 <body>
     <canvas id="c"></canvas>
     <div class="wrapper">
-        <form action="?action=login-submit" method="POST">
+        <form action="?action=register-submit" method="POST">
             <h2>Login</h2>
+            <div class="input-field">
+                <input type="name" name="name" id="name" required>
+                <label for="name">Enter your name</label>
+            </div>
             <div class="input-field">
                 <input type="email" name="email" id="email" required>
                 <label for="email">Enter your email</label>
             </div>
             <div class="input-field">
-                <input type="password" name="password" id="mode_de_passe" required>
-                <label for="mode_de_passe">Enter your password</label>
+                <input type="password" name="password" id="password" required>
+                <label for="password">Enter your password</label>
+            </div>
+            <div class="input-field">
+                <input type="confirm_password" name="confirm_password" id="confirm_password" required>
+                <label for="confirm_password">Enter your password</label>
             </div>
             <div class="forget">
                 <label for="remember">
@@ -26,7 +34,7 @@
                 </label>
                 <a href="#">Forgot password?</a>
             </div>
-            <button >Log In</button>
+            <button >sinup</button>
             <div class="register">
                 <p>Don't have an account? <a href="http://127.0.0.1:5500/login/home.html">Register</a></p>
             </div>

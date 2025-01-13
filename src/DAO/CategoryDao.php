@@ -15,7 +15,7 @@ class CategoryDao {
         return $stmt->execute([
             "name" => $category->getName(),
             "description" => $category->getDescription(),
-            "admin_id" => $category->getAdmin()
+            "admin_id" => $category->getAdmin()->getId()
         ]);
     }
 }

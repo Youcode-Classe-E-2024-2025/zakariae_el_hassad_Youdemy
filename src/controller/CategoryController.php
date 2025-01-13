@@ -14,4 +14,9 @@ class CategoryController {
         header("localtion : http://localhost/zakariae_el_hassad_Youdemy/?action=save_category");
         exit();
     }
+
+    public function getAll()
+    {
+        require_once APP_VIEWS . "category.php";
+    }
 }

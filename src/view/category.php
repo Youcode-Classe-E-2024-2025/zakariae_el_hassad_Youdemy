@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <link rel="stylesheet" href="../../public/css/style-starter.css">
+    <link rel="stylesheet" href="./public/css/style-starter.css">
     <link href="//fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="//fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
@@ -39,7 +39,9 @@
                                 <a class="nav-link" href="ton_course.html">ton course</a>
                             </li>
                                 <li class="nav-item mr-2">
-                                    <a href="contact.html" class="btn btn-primary register d-lg-block btn-style">Contact</a>
+                                    <a href="?action=login-form" class="btn btn-primary register d-lg-block btn-style">
+                                        <button>Contact</button>
+                                    </a>
                             </li>
                         </ul>
                     </div>

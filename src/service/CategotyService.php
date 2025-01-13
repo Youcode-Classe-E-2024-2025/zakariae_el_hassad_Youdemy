@@ -10,10 +10,12 @@ class CategoryService{
 
     public function save(array $data){
 
+        
         $admin = new User();
         $user = $_SESSION["user"];
         $admin->setId($user->getId());
         
+       
         $category = new Category(
             name : $data["name"],
             description : $data["description"],
