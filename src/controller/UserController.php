@@ -3,10 +3,12 @@
     class UserController
     {
         private UserService $userService;
+        private CategoryService $categoryService;
 
         public function __construct()
         {
             $this->userService = new UserService();
+            $this->categoryService = new CategoryService();
         }
         public function showRegisterForm()
         {
@@ -39,9 +41,9 @@
     $_SESSION['logged'] = true;
 
     if ($response['user']->getRole()->getId() == 1) { 
-        require_once APP_VIEWS . "category.php";
+        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=category");
     } else {
-        require_once APP_VIEWS . "login.php";
+        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=category");
     }
     exit();
 }
@@ -49,8 +51,15 @@
 
         public function getAll()
         {
-            $users = $this->userService->getAllByRoleId(1);
-            require_once APP_VIEWS . "workProject.php";
+            $users = $this->userService->getAllByRoleId(2);
+            require_once APP_VIEWS . "toutLesUser.php";
+        }
+
+        public function get3User()
+        {
+            $categorys = $this->categoryService->get3Category();
+            $users = $this->userService->get3UserByRoleId(2);
+            require_once APP_VIEWS . "admin.php";
         }
 
         public function logout(){

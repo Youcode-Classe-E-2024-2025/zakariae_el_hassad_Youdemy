@@ -48,11 +48,18 @@ if(isset($_GET["action"])) {
         case "logout":
             $userController->logout();
             break;
-        case "work-project":
+        case "admin":
+            $userController->get3User();
+            break;
+        case "tout-user":
             $userController->getAll();
             break;
         case "save_category" :
             $categoryController->save();
+            break;
+        case "category":
+            $categoryController->getAll();
+            break;
         default :
             echo "sjsisbx";
             break;

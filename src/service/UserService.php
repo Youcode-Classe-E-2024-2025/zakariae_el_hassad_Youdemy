@@ -56,9 +56,14 @@ class UserService
             "user" => $user
         ];
     }
-    public function getAllByRoleId($roleId)
+    public function getAllByRoleId($roleId) : array
     {
         return $this->userDao->getAllByRoleId($roleId);
+    }
+
+    public function get3UserByRoleId($roleId) : array
+    {
+        return $this->userDao->get3UserByRoleId($roleId);
     }
 
 }

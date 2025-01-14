@@ -24,4 +24,27 @@ class CategoryService{
 
         $this->categoryDao->create($category);
     }
+
+    public function categoryService()
+    {
+        $user = $_SESSION["user"];
+        return $this->categoryDao->getAllCategory($user->getId());
+    }
+
+    public function getCategoryById(int $id): ?Category
+    {
+        $category = $this->categoryDao->findById($id);
+
+        if ($category === null) {
+            throw new Exception("Category with ID $id not found.");
+        }
+
+        return $category;
+    }
+
+    public function get3Category()
+    {
+        $user = $_SESSION["user"];
+        return $this->categoryDao->get3Category($user->getId());
+    }
 }

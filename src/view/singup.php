@@ -24,8 +24,8 @@
                 <label for="password">Enter your password</label>
             </div>
             <div class="input-field">
-                <input type="confirm_password" name="confirm_password" id="confirm_password" required>
-                <label for="confirm_password">Enter your password</label>
+                <input type="password" name="confirm_password" id="confirm_password" required>
+                <label for="password">Enter your password</label>
             </div>
             <div class="forget">
                 <label for="remember">

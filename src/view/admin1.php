@@ -8,6 +8,41 @@
     <link rel="stylesheet" href="./public/css/style-starter.css">
     <link href="//fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link href="//fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* Bouton Invite */
+.invite-btn {
+    background-color: #007bff; /* Bleu principal */
+    color: white; /* Texte blanc */
+    font-weight: bold;
+    border: none; /* Pas de bordure */
+    border-radius: 8px; /* Coins arrondis */
+    transition: all 0.3s ease; /* Transition fluide */
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3); /* Ombre légère */
+}
+
+.invite-btn:hover {
+    background-color: #0056b3; /* Bleu foncé au survol */
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.5); /* Ombre plus intense */
+}
+
+/* Bouton Delete */
+.delete-btn {
+    background-color: #dc3545; /* Rouge principal */
+    color: white; /* Texte blanc */
+    font-weight: bold;
+    border: none; /* Pas de bordure */
+    border-radius: 8px; /* Coins arrondis */
+    transition: all 0.3s ease; /* Transition fluide */
+    box-shadow: 0 4px 6px rgba(220, 53, 69, 0.3); /* Ombre légère */
+}
+
+.delete-btn:hover {
+    background-color: #a71d2a; /* Rouge foncé au survol */
+    box-shadow: 0 6px 12px rgba(220, 53, 69, 0.5); /* Ombre plus intense */
+    transform: scale(1.05);
+}
+
+    </style>
 </head>
 <body>
 
@@ -29,7 +64,7 @@
                             <li class="nav-item @@about__active">
                                 <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item active">
+                            <li class="nav-item @@services__active">
                                 <a class="nav-link" href="about.html">category</a>
                             </li>
                             <li class="nav-item @@services__active">
@@ -38,13 +73,9 @@
                             <li class="nav-item @@about__active">
                                 <a class="nav-link" href="ton_course.html">ton course</a>
                             </li>
-                            <li class="nav-item @@about__active">
-                            <form action="?action=admin" method="POST">
-                                <button class="nav-link">admin</button>
-                                </form>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="ton_course.html">admin</a>
                             </li>
-
-              
                                 <li class="nav-item mr-2">
                                     <a href="?action=login-form" class="btn btn-primary register d-lg-block btn-style">
                                         <button>Contact</button>
@@ -67,20 +98,62 @@
         <!--/header-->
     </section>
 
+<section>
+    <div class="specification-layout editContent py-5">
+        <div class="container">
+            <?php if (isset($users) && is_array($users)): ?>
+                <div class="row g-4">
+                    <?php foreach ($users as $user): ?>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card shadow border-0 h-100">
+                                <div class="card-body d-flex flex-column justify-content-between">
+                                    <div>
+                                        <!-- Nom en noir -->
+                                        <h5 class="card-title text-dark"><span class="text-muted">Nom:</span> <?= htmlspecialchars($user->getName()); ?></h5>
+                                        <!-- Email en gris clair -->
+                                        <p class="card-title text-dark mb-3"><span class="text-muted">Email: </span> <?= htmlspecialchars($user->getEmail()); ?></p>
+                                    </div>
+                                    <!-- Boutons -->
+                                    <div class="d-flex gap-2">
+                                        <button 
+                                            class="btn btn-primary w-50 mt-auto invite-btn"
+                                        >
+                                        Invite
+                                        </button>
+                                        <button 
+                                            class="btn btn-danger w-50 mt-auto delete-btn"
+                                        >
+                                            Delete
+                                        </button>
+                                        </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <div class="text-center">
+                    <p class="text-muted">No users available.</p>
+                </div>
+            <?php endif; ?>
+        </div>
+        <form action="?action=tout-user" method="POST">
+            <button>vois plus</button>
+        </form>
+    </div>
+</section>
+
+
+
+
+
     <section class="w3l-specification-6">
         <div class="specification-layout editContent">
             <div class="container">
-                <!-- Add Course Button -->
-                <div class="d-flex justify-content-end mb-3">
-                <button type="button" onclick="toggleModalCategory()" class="btn btn-primary">
-                    Add Course
-                </button>
-                </div>
-    
-                <!-- Grid Wrapper -->
-                <div class="grid">
+                <div class="grid" style="width: 100%;">
                 <?php foreach ($categorys as $category): ?>
-                    <figure class="effect-apollo ser-bg1">
+                    <figure class="effect-apollo ser-bg1 g-col-4">
                         <figcaption>
                             <h5><a href="course.html"><?= htmlspecialchars($category->getName()) ?></a></h5>
                             <p class="para"><?= htmlspecialchars($category->getDescription()) ?></p>

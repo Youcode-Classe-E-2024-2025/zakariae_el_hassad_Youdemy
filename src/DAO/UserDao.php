@@ -45,14 +45,60 @@ class UserDao
         );
     }
 
-    public function getAllByRoleId($roleId)
+    public function getAllByRoleId($roleId) : array
     {
         $query = "SELECT * FROM users WHERE role_id = :role_id";
         $stmt = $this->connection->prepare($query);
         $stmt->bindParam(':role_id', $roleId, PDO::PARAM_INT);
         $stmt->execute();
     
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $users = array() ;
+
+        foreach($results as $result){
+
+            $user = new User(
+                $result["id"],
+                $result["name"],
+                $result["email"],
+                $result["password"]      
+            );
+
+            array_push($users , $user);
+        }
+
+        return $users;
+
+    }
+
+    public function get3UserByRoleId($roleId) : array
+    {
+        $query = "SELECT * FROM users WHERE role_id = :role_id ORDER BY id DESC LIMIT 3";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindParam(':role_id', $roleId, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $users = array() ;
+
+        foreach($results as $result){
+
+            $user = new User(
+                $result["id"],
+                $result["name"],
+                $result["email"],
+                $result["password"]      
+            );
+
+            array_push($users , $user);
+        }
+
+        return $users;
+
     }
 
 }
+
+
