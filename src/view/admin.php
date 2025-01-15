@@ -26,6 +26,15 @@
     <script src="./assets/js/charts-lines.js" defer></script>
     <script src="./assets/js/charts-pie.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        .tags-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px;
+    }
+
+    </style>
   </head>
   <body>
     <div
@@ -45,13 +54,9 @@
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                href="index.html"
+              class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+              href="?action=home"
               >
                 <svg
                   class="w-5 h-5"
@@ -67,15 +72,15 @@
                     d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                   ></path>
                 </svg>
-                <span class="ml-4">Dashboard</span>
+                <span class="ml-4">Home</span>
               </a>
             </li>
           </ul>
           <ul>
             <li class="relative px-6 py-3">
               <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="forms.html"
+              class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+              href="?action=category"
               >
                 <svg
                   class="w-5 h-5"
@@ -91,7 +96,7 @@
                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
                   ></path>
                 </svg>
-                <span class="ml-4">Forms</span>
+                <span class="ml-4">Category</span>
               </a>
             </li>
             <li class="relative px-6 py-3">
@@ -205,11 +210,14 @@
             </li>
             <li class="relative px-6 py-3">
               <button
-                class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
                 @click="togglePagesMenu"
                 aria-haspopup="true"
               >
-                <span class="inline-flex items-center">
+              <span
+                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
                   <svg
                     class="w-5 h-5"
                     aria-hidden="true"
@@ -224,7 +232,7 @@
                       d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
                     ></path>
                   </svg>
-                  <span class="ml-4">Pages</span>
+                  <span class="ml-4">Admin</span>
                 </span>
                 <svg
                   class="w-4 h-4"
@@ -253,31 +261,31 @@
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/login.html">Login</a>
+                    <a class="w-full" href="?action=admin">home</a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/create-account.html">
-                      Create account
+                    <a class="w-full" href="?action=tout-user">
+                      Usar
                     </a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/forgot-password.html">
-                      Forgot password
+                    <a class="w-full" href="?action=tout-Category">
+                    Category
                     </a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/404.html">404</a>
+                    <a class="w-full" href="pages/404.html">Tag</a>
                   </li>
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/blank.html">Blank</a>
+                    <a class="w-full" href="pages/blank.html">Course</a>
                   </li>
                 </ul>
               </template>
@@ -505,7 +513,7 @@
                       d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
                     ></path>
                   </svg>
-                  <span class="ml-4">Pages</span>
+                  <span class="ml-4">ADMIN</span>
                 </span>
                 <svg
                   class="w-4 h-4"
@@ -830,7 +838,7 @@
               </li>
             </ul>
           </div>
-        </header>
+        </header>   
         <main class="h-full overflow-y-auto">
           <div class="container px-6 mx-auto grid">
             <h2
@@ -949,171 +957,208 @@
             </div>
 
             <!-- New Table -->
-            <div class="w-full overflow-hidden rounded-lg shadow-xs">
-            <div class="bg-white rounded-lg overflow-hidden shadow-2xl mb-8 p-6 w-full text-center">
-      <h1 class="text-2xl font-bold">Header Section</h1>
-      <p class="text-gray-600">Welcome to the countryside homes catalog.</p>
-    </div>
+                <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                <div class="bg-white rounded-lg overflow-hidden shadow-2xl mb-8 p-6 w-full text-center">
+                    <h1 class="text-2xl font-bold">les User</h1>
+               </div>
               <div class="w-full overflow-x-auto">
-                <table class="w-full whitespace-no-wrap">
-                  <thead>
-                    <tr
-                      class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
-                    >
-                      <th class="px-4 py-3">Client</th>
-                      <th class="px-4 py-3">Amount</th>
-                      <th class="px-4 py-3">Status</th>
-                      <th class="px-4 py-3">Date</th>
-                    </tr>
-                  </thead>
-                  <tbody
-                    class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
-                  >
-                  <?php if (isset($users) && is_array($users)): ?>
-                    <?php foreach ($users as $user): ?>
-                    <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-                          <!-- Avatar with inset shadow -->
-                          <div
-                            class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
-                          >
-                            <img
-                              class="object-cover w-full h-full rounded-full"
-                              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6"
-                              alt=""
-                              loading="lazy"
-                            />
-                            <div
-                              class="absolute inset-0 rounded-full shadow-inner"
-                              aria-hidden="true"
-                            ></div>
-                          </div>
-                          <div>
-                            <p class="font-semibold"><?= htmlspecialchars($user->getName()); ?></p>
-                            <p class="text-xs text-gray-600 dark:text-gray-400">
-                            <?= htmlspecialchars($user->getEmail()); ?>
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        $ 369.95
-                      </td>
-                      <td class="px-4 py-3 text-xs">
-                        <span
-                          class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
-                        >
-                          Pending
-                        </span>
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        6/10/2020
-                      </td>
-                    </tr>
-                    <?php endforeach; ?>
-                    <?php else: ?>
-                <div class="text-center">
-                    <p class="text-muted">No users available.</p>
-                </div>
-            <?php endif; ?>
-
-                  </tbody>
-                </table>
-
-
-                <div class="antialiased text-gray-900">
-  <div class="bg-gray-800 min-h-screen p-8 flex flex-col items-center">
-    <!-- Header Div -->
-    <div class="bg-white rounded-lg overflow-hidden shadow-2xl mb-8 p-6 w-full text-center">
-      <h1 class="text-2xl font-bold">Header Section</h1>
-      <p class="text-gray-600">Welcome to the countryside homes catalog.</p>
-    </div>
-
-    <!-- Cards Container -->
-    <div class="flex flex-wrap justify-between gap-4">
-      <!-- Card 1 -->
-      <div class="bg-white rounded-lg overflow-hidden shadow-2xl xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2">
-        <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-        <div class="p-6">
-          <div class="flex items-baseline">
-            <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">New</span>
-            <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">3 beds &bull; 2 baths</div>
+              <div class="overflow-x-auto">
+  <table class="w-full whitespace-no-wrap">
+    <thead>
+      <tr
+        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+      >
+        <th class="px-4 py-3">Name</th>
+        <th class="px-4 py-3">Email</th>
+        <th class="px-4 py-3">Active</th>
+        <th class="px-4 py-3">Delete</th>
+      </tr>
+    </thead>
+    <tbody
+      class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+    >
+    <?php if (isset($users) && is_array($users)): ?>
+      <?php foreach ($users as $user): ?>
+      <tr class="text-gray-700 dark:text-gray-400">
+        <td class="px-4 py-3">
+          <div class="flex items-center text-sm">
+            <!-- Avatar with inset shadow -->
+            <div
+              class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
+            >
+              <img
+                class="object-cover w-full h-full rounded-full"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6"
+                alt=""
+                loading="lazy"
+              />
+              <div
+                class="absolute inset-0 rounded-full shadow-inner"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div>
+              <p class="font-semibold"><?= htmlspecialchars($user->getName()); ?></p>
+            </div>
           </div>
-          <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Beautiful Home in the countryside</h4>
-          <div class="mt-1">
-            <span>$1,900.00</span>
-            <span class="text-gray-600 text-sm">/ wk</span>
-          </div>
-          <div class="mt-2 flex items-center">
-            <span class="text-teal-600 font-semibold">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              <span class="ml-2 text-gray-600 text-sm">34 reviews</span>
+        </td>
+        <td class="px-4 py-3 text-sm">
+          <?= htmlspecialchars($user->getEmail()); ?>
+        </td>
+        <td class="px-4 py-3 text-xs">
+          <button>
+            <span
+              class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
+            >
+              Pending
             </span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="bg-white rounded-lg overflow-hidden shadow-2xl xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2">
-      <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-      <div class="p-6">
-          <div class="flex items-baseline">
-            <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">Featured</span>
-            <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">4 beds &bull; 3 baths</div>
-          </div>
-          <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Modern Home in the City</h4>
-          <div class="mt-1">
-            <span>$2,500.00</span>
-            <span class="text-gray-600 text-sm">/ wk</span>
-          </div>
-          <div class="mt-2 flex items-center">
-            <span class="text-teal-600 font-semibold">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              <span class="ml-2 text-gray-600 text-sm">45 reviews</span>
+          </button>
+        </td>
+        <td class="px-4 py-3 text-xs">
+          <button>
+            <span
+              class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
+            >
+              Pending
             </span>
-          </div>
-        </div>
+          </button>
+        </td>
+      </tr>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <div class="text-center">
+        <p class="text-muted">No users available.</p>
       </div>
+    <?php endif; ?>
+    </tbody>
+  </table>
+</div>
 
-      <!-- Card 3 -->
-      <div class="bg-white rounded-lg overflow-hidden shadow-2xl xl:w-1/5 lg:w-1/4 md:w-1/3 sm:w-1/2">
-      <img class="h-48 w-full object-cover object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
-      <div class="p-6">
-          <div class="flex items-baseline">
-            <span class="inline-block bg-teal-200 text-teal-800 py-1 px-4 text-xs rounded-full uppercase font-semibold tracking-wide">Exclusive</span>
-            <div class="ml-2 text-gray-600 text-xs uppercase font-semibold tracking-wide">2 beds &bull; 1 bath</div>
-          </div>
-          <h4 class="mt-2 font-semibold text-lg leading-tight truncate">Cozy Cottage by the Lake</h4>
-          <div class="mt-1">
-            <span>$1,200.00</span>
-            <span class="text-gray-600 text-sm">/ wk</span>
-          </div>
-          <div class="mt-2 flex items-center">
-            <span class="text-teal-600 font-semibold">
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="far fa-star"></i>
-              <i class="far fa-star"></i>
-              <span class="ml-2 text-gray-600 text-sm">12 reviews</span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="mt-4 text-center py-4">
+  <a href="?action=tout-user"
+     class="inline-block px-6 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition duration-300"
+  >
+    Voir tout
+  </a>
 </div>
 
 
+
+<div class="bg-white rounded-lg overflow-hidden shadow-2xl mb-8 p-6 w-full text-center">
+                    <h1 class="text-2xl font-bold">Les Category</h1>
+               </div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <?php foreach ($categorys as $category): ?>
+    <div class="relative overflow-hidden rounded-lg shadow-lg group h-50">
+        <img 
+            src="./public/images/3.jpg" 
+            alt="Category background" 
+            class="absolute inset-0 w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
+        <div class="relative h-full p-6 flex flex-col justify-between z-10">
+            <div>
+                <h5 class="text-xl font-semibold mb-3">
+                    <a href="course.html" class="text-white hover:text-blue-300 transition duration-300">
+                        <?= htmlspecialchars($category->getName()) ?>
+                    </a>
+                </h5>
+                <p class="text-gray-200 text-sm">
+                    <?= htmlspecialchars($category->getDescription()) ?>
+                </p>
+            </div>
+            
+            <div class="flex justify-between mt-4">
+                <a href="" 
+                   class="flex items-center gap-2 bg-green-600 text-white px-3 py-1.5 rounded hover:bg-green-700 transition duration-300">
+                    <i class="fas fa-edit"></i>
+                    <span>Edit</span>
+                </a>
+            
+                <a href="" 
+                   class="flex items-center gap-2 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition duration-300">
+                    <i class="fas fa-trash"></i>
+                    <span>Delete</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <?php endforeach; ?>
+</div>
+<div class="mt-4 text-center py-4">
+  <a href="?action=tout-Category"
+     class="inline-block px-6 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition duration-300"
+  >
+    Voir tout
+  </a>
+</div>
+
+
+ 
+            <div class="bg-white rounded-lg overflow-hidden shadow-2xl mb-8 p-6 w-full text-center">
+                <h1 class="text-2xl font-bold">Les Tags</h1>
+            </div>
+
+            <div class="flex justify-end mb-6">
+            <button 
+                type="button" 
+                onclick="toggleModalTag()" 
+                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                Add Tag
+            </button>
+        </div>
+        <div class="tags-container flex flex-wrap gap-4">
+    <?php foreach ($tags as $tag): ?>
+        <div class="border border-white rounded-xl text-white text-center p-2 w-24">
+            <p> <?= htmlspecialchars($tag->getName()) ?></p>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+
+
+            <section id="addModalTag" 
+         class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-16">
+    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl mx-4">
+        <!-- Modal Header -->
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold text-gray-700">Add Category</h2>
+            <button 
+                type="button" 
+                onclick="returnPageTag()" 
+                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
+                Close
+            </button>
+        </div>
+
+        <!-- Modal Form -->
+        <form action="?action=save_tag" method="POST">
+            <!-- Name Field -->
+            <div class="mb-6">
+                <label 
+                    for="categoryName" 
+                    class="block text-gray-700 font-medium mb-2">
+                    Name
+                </label>
+                <input 
+                    type="text" 
+                    name="name" 
+                    id="categoryName" 
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"
+                    placeholder="Jane Doe">
+            </div>
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button 
+                    type="submit" 
+                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                    ADD
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
 
 
 
@@ -1121,13 +1166,20 @@
               </div>
             </div>
             
-
-      
-
-
           </div>
         </main>
       </div>
     </div>
+    <script>
+        function toggleModalTag() {
+    const modal = document.getElementById('addModalTag');
+    modal.classList.toggle('hidden');
+}
+
+function returnPageTag() {
+    const modal = document.getElementById('addModalTag');
+    modal.classList.add('hidden');
+}
+    </script>
   </body>
 </html>

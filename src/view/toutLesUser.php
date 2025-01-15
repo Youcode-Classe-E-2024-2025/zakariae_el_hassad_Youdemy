@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <link rel="stylesheet" href="./public/css/style-starter.css">
-    <link href="//fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link href="//fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Bouton Invite */
 .invite-btn {
@@ -44,55 +41,85 @@
 
     </style>
 </head>
-<body>
-    
-<div>
-    <form action="?action=admin" method="POST">
-        <button>return</button>
-    </form>
-</div>
+<body class="bg-gray-800">
 
-<section>
-    <div class="specification-layout editContent py-5">
-        <div class="container">
-            <?php if (isset($users) && is_array($users)): ?>
-                <div class="row g-4">
-                    <?php foreach ($users as $user): ?>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card shadow border-0 h-100">
-                                <div class="card-body d-flex flex-column justify-content-between">
-                                    <div>
-                                        <!-- Nom en noir -->
-                                        <h5 class="card-title text-dark"><span class="text-muted">Nom:</span> <?= htmlspecialchars($user->getName()); ?></h5>
-                                        <!-- Email en gris clair -->
-                                        <p class="card-title text-dark mb-3"><span class="text-muted">Email: </span> <?= htmlspecialchars($user->getEmail()); ?></p>
-                                    </div>
-                                    <!-- Boutons -->
-                                    <div class="d-flex gap-2">
-                                        <button 
-                                            class="btn btn-primary w-50 mt-auto invite-btn"
-                                        >
-                                        Invite
-                                        </button>
-                                        <button 
-                                            class="btn btn-danger w-50 mt-auto delete-btn"
-                                        >
-                                            Delete
-                                        </button>
-                                        </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            <?php else: ?>
-                <div class="text-center">
-                    <p class="text-muted">No users available.</p>
-                </div>
-            <?php endif; ?>
-        </div>
+<div class="flex items-center justify-between mb-4 p-4 w-[100%]">
+      <h1 class="text-3xl font-bold text-gray-500">Tout Les User</h1>
+      <nav class="text-sm">
+        <a href="?action=admin" class="text-blue-400 hover:underline">Home</a>
+      </nav>
     </div>
-</section>
+
+<div class="overflow-x-auto">
+  <table class="w-full whitespace-no-wrap">
+    <thead>
+      <tr
+        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+      >
+        <th class="px-4 py-3">Name</th>
+        <th class="px-4 py-3">Email</th>
+        <th class="px-4 py-3">Active</th>
+        <th class="px-4 py-3">Delete</th>
+      </tr>
+    </thead>
+    <tbody
+      class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+    >
+    <?php if (isset($users) && is_array($users)): ?>
+      <?php foreach ($users as $user): ?>
+      <tr class="text-gray-700 dark:text-gray-400">
+        <td class="px-4 py-3">
+          <div class="flex items-center text-sm">
+            <!-- Avatar with inset shadow -->
+            <div
+              class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
+            >
+              <img
+                class="object-cover w-full h-full rounded-full"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6"
+                alt=""
+                loading="lazy"
+              />
+              <div
+                class="absolute inset-0 rounded-full shadow-inner"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div>
+              <p class="font-semibold"><?= htmlspecialchars($user->getName()); ?></p>
+            </div>
+          </div>
+        </td>
+        <td class="px-4 py-3 text-sm">
+          <?= htmlspecialchars($user->getEmail()); ?>
+        </td>
+        <td class="px-4 py-3 text-xs">
+          <button>
+            <span
+              class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
+            >
+              Pending
+            </span>
+          </button>
+        </td>
+        <td class="px-4 py-3 text-xs">
+          <button>
+            <span
+              class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
+            >
+              Pending
+            </span>
+          </button>
+        </td>
+      </tr>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <div class="text-center">
+        <p class="text-muted">No users available.</p>
+      </div>
+    <?php endif; ?>
+    </tbody>
+  </table>
+</div>
 </body>
 </html>
