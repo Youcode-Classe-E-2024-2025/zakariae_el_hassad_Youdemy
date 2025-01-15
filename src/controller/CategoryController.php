@@ -9,9 +9,15 @@ class CategoryController {
         $this->categoryService = new CategoryService();
     }
 
+    private function checkLogin()
+    {
+        return isset($_SESSION['logged']);
+    }
+
     public function save(){
+        $this->checkLogin();
         $this->categoryService->save($_POST);
-        header("localtion : http://localhost/zakariae_el_hassad_Youdemy/?action=category");
+        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=category");
         exit();
     }
 
@@ -19,6 +25,12 @@ class CategoryController {
     {
         $categorys = $this->categoryService->categoryService();
         require_once APP_VIEWS . "category.php";
+    }
+
+    public function getAll2()
+    {
+        $categorys = $this->categoryService->categoryService();
+        require_once APP_VIEWS . "toutLesCategory.php";
     }
 
     public function get3Category()

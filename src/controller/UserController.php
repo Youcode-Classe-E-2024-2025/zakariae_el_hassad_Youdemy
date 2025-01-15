@@ -4,11 +4,13 @@
     {
         private UserService $userService;
         private CategoryService $categoryService;
+        private TagService $tagService;
 
         public function __construct()
         {
             $this->userService = new UserService();
             $this->categoryService = new CategoryService();
+            $this->tagService = new TagService();
         }
         public function showRegisterForm()
         {
@@ -57,6 +59,7 @@
 
         public function get3User()
         {
+            $tags = $this->tagService->getAllTag();
             $categorys = $this->categoryService->get3Category();
             $users = $this->userService->get3UserByRoleId(2);
             require_once APP_VIEWS . "admin.php";
@@ -68,5 +71,9 @@
             session_destroy();
             header("Location: ?action=login-form");
             exit;
+        }
+
+        public function home(){
+            require_once APP_VIEWS . "home.php";
         }
     }

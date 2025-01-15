@@ -31,11 +31,11 @@ class Tag
         $this->name = $name;
     }
 
-    public function getProjectManager(): User
+    public function getAdmin(): User
     {
         return $this->admin;
     }
-    public function setProjectManager(User $admin): void
+    public function setAdmin(User $admin): void
     {
         $this->admin = $admin;
     }

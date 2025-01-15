@@ -56,7 +56,9 @@ CREATE TABLE category (
 
 CREATE TABLE tags (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL,
+    amin_id INT NOT NULL,
+    FOREIGN KEY (amin_id) REFERENCES users(id)
 );
 
 CREATE TABLE courseTags (
