@@ -42,9 +42,13 @@
     $_SESSION['user'] = $response['user'];
     $_SESSION['logged'] = true;
 
-    if ($response['user']->getRole()->getId() == 1 && $response['user']->getRole()->getId() == 2) { 
+    if ($response['user']->getRole()->getId() == 1) { 
         header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=category");
-    } else {
+    } 
+    else if($response['user']->getRole()->getId() == 2) {
+        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=home");
+    }
+    else {
         header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=login-form");
     }
     exit();

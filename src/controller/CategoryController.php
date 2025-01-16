@@ -14,12 +14,31 @@ class CategoryController {
         return isset($_SESSION['logged']);
     }
 
-    public function save(){
+    public function save() {
         $this->checkLogin();
+    
+        $imagePath = null;
+        if (!empty($_FILES['image']['name'])) {
+            $uploadDir = "uploads/";
+            $imageName = time() . "_" . basename($_FILES['image']['name']); 
+            $imagePath = $uploadDir . $imageName;
+    
+            if (!move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
+                $_SESSION["error"] = "Erreur lors du téléchargement de l'image.";
+                header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=ajout-Category");
+                exit();
+            }
+        }
+    
+        $_POST['image'] = $imagePath;
+    
         $this->categoryService->save($_POST);
-        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=category");
+        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=tout-Category");
         exit();
     }
+    
+    
+    
 
     public function getAll()
     {
