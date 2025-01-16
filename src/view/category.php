@@ -9,6 +9,8 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./assets/css/tailwind.output.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
@@ -69,6 +71,28 @@
           </ul>
           <ul>
             <li class="relative px-6 py-3">
+              <a
+              class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="?action=course"
+              >
+                <svg
+                  class="w-5 h-5"
+                  aria-hidden="true"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                  ></path>
+                </svg>
+                <span class="ml-4">Course</span>
+              </a>
+            </li>
+            <li class="relative px-6 py-3">
             <span
                 class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                 aria-hidden="true"
@@ -92,28 +116,6 @@
                   ></path>
                 </svg>
                 <span class="ml-4">Category</span>
-              </a>
-            </li>
-            <li class="relative px-6 py-3">
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="cards.html"
-              >
-                <svg
-                  class="w-5 h-5"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                  ></path>
-                </svg>
-                <span class="ml-4">Cards</span>
               </a>
             </li>
             <li class="relative px-6 py-3">
@@ -846,44 +848,48 @@
             </button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 p-6">
     <?php foreach ($categorys as $category): ?>
-    <div class="relative overflow-hidden rounded-lg shadow-lg group h-50">
-        <img 
-            src="./public/images/3.jpg" 
-            alt="Category background" 
-            class="absolute inset-0 w-full h-full object-cover"
-        />
-        <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
-        <div class="relative h-full p-6 flex flex-col justify-between z-10">
-            <div>
-                <h5 class="text-xl font-semibold mb-3">
-                    <a href="course.html" class="text-white hover:text-blue-300 transition duration-300">
-                        <?= htmlspecialchars($category->getName()) ?>
-                    </a>
-                </h5>
-                <p class="text-gray-200 text-sm">
-                    <?= htmlspecialchars($category->getDescription()) ?>
-                </p>
+        <button class="relative overflow-hidden rounded-lg shadow-lg group h-50 bg-white hover:shadow-2xl transform transition duration-300 hover:scale-105 animate__animated animate__fadeIn">
+            <div class="relative overflow-hidden rounded-lg shadow-lg group h-50">
+                <img 
+                    src="./public/images/3.jpg" 
+                    alt="Category background" 
+                    class="absolute inset-0 w-full h-full object-cover"
+                />
+                <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
+                <div class="relative h-full p-6 flex flex-col justify-between z-10">
+                    <div>
+                        <h5 class="text-xl font-semibold mb-3">
+                            <a href="course.html" class="text-white hover:text-blue-300 transition duration-300">
+                                <?= htmlspecialchars($category->getName()) ?>
+                            </a>
+                        </h5>
+                        <p class="text-gray-200 text-sm">
+                            <?= htmlspecialchars($category->getDescription()) ?>
+                        </p>
+                    </div>
+                    
+                    <div class="flex justify-between mt-4">
+                        <a href="" 
+                           class="flex items-center gap-2 bg-green-600 text-white px-3 py-1.5 rounded hover:bg-green-700 transition duration-300">
+                            <i class="fas fa-edit"></i>
+                            <span>Edit</span>
+                        </a>
+                    
+                        <a href="" 
+                           class="flex items-center gap-2 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition duration-300">
+                            <i class="fas fa-trash"></i>
+                            <span>Delete</span>
+                        </a>
+                    </div>
+                </div>
             </div>
-            
-            <div class="flex justify-between mt-4">
-                <a href="" 
-                   class="flex items-center gap-2 bg-green-600 text-white px-3 py-1.5 rounded hover:bg-green-700 transition duration-300">
-                    <i class="fas fa-edit"></i>
-                    <span>Edit</span>
-                </a>
-            
-                <a href="" 
-                   class="flex items-center gap-2 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition duration-300">
-                    <i class="fas fa-trash"></i>
-                    <span>Delete</span>
-                </a>
-            </div>
-        </div>
-    </div>
+        </button>
     <?php endforeach; ?>
 </div>
+
+
     </div>
 </section>
 
