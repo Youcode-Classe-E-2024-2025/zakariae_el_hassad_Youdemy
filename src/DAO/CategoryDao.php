@@ -9,18 +9,23 @@ class CategoryDao {
         $this->connection = $connectionHolder->connect();
     }
 
-    public function create(Category $category){
-
-        $stmt = $this->connection->prepare("INSERT INTO category (name , description , admin_id) VALUES (:name , :description , :admin_id)");
+    public function create(Category $category) {
+        $stmt = $this->connection->prepare("
+            INSERT INTO category (name, description, admin_id, image) 
+            VALUES (:name, :description, :admin_id, :image)
+        ");
+        
         return $stmt->execute([
             "name" => $category->getName(),
             "description" => $category->getDescription(),
-            "admin_id" => $category->getAdmin()->getId()
+            "admin_id" => $category->getAdmin()->getId(),
+            "image" => $category->getImage()
         ]);
     }
+    
 
 
-    public function getAllCategory(int $id)
+    public function getAllCategoryUser(int $id)
     {
         $stmt = $this->connection->prepare("SELECT * FROM category WHERE admin_id = :id");
 
@@ -34,6 +39,21 @@ class CategoryDao {
         }
         return $Categorys;
     }
+
+    public function getAllCategory()
+    {
+        $stmt = $this->connection->prepare("SELECT * FROM category");
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+        $Categorys = [];
+        foreach ($rows as $row) {
+            $Category = new Category($row["id"], $row["name"], $row["description"], $row["image"]);
+            array_push($Categorys, $Category);
+        }
+        return $Categorys;
+    }
+
 
     public function findById(int $id): ?Category
     {
@@ -81,7 +101,6 @@ class CategoryDao {
 
     public function get3Category(int $id)
 {
-    // SQL query bach tsift ghir 3 dial les catégories li dkhlo dernier
     $stmt = $this->connection->prepare("SELECT * FROM category WHERE admin_id = :id ORDER BY id DESC LIMIT 3");
 
     $stmt->execute(["id" => $id]);

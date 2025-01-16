@@ -18,11 +18,26 @@ class TagDao {
         ]);
     }
 
-    public function getAllTag(int $id)
+    public function getAllTagUser(int $id)
     {
         $stmt = $this->connection->prepare("SELECT * FROM tags WHERE admin_id = :id");
 
         $stmt->execute(["id" => $id]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $tags = [];
+        foreach ($rows as $row) {
+            $tag = new tag($row["id"], $row["name"],null);
+            array_push($tags, $tag);
+        }
+        return $tags;
+    }
+
+    public function getAllTag()
+    {
+        $stmt = $this->connection->prepare("SELECT * FROM tags");
+
+        $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $tags = [];
@@ -52,7 +67,6 @@ class TagDao {
             $tagData = $stmt->fetch(PDO::FETCH_ASSOC);
     
             if ($tagData) {
-                // إنشاء كائن User إذا كانت البيانات متوفرة
                 $admin = null;
     
                 if ($tagData['admin_id']) {
@@ -63,7 +77,6 @@ class TagDao {
                     );
                 }
     
-                // إرجاع كائن Tag
                 return new Tag(
                     id: (int)$tagData['tag_id'],
                     name: $tagData['tag_name'],
