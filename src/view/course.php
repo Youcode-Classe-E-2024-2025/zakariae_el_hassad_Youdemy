@@ -118,7 +118,7 @@
                 <span class="ml-4">Category</span>
               </a>
             </li>
-            <li class="relative px-6 py-3">
+            <!-- <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 href="charts.html"
@@ -162,11 +162,11 @@
                 </svg>
                 <span class="ml-4">Buttons</span>
               </a>
-            </li>
+            </li> -->
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="modals.html"
+                href="?action=ton_course"
               >
                 <svg
                   class="w-5 h-5"
@@ -182,7 +182,7 @@
                     d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
                   ></path>
                 </svg>
-                <span class="ml-4">Modals</span>
+                <span class="ml-4">Ton Course</span>
               </a>
             </li>
             <li class="relative px-6 py-3">
@@ -808,7 +808,7 @@
                     <li class="flex">
                       <a
                         class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                        href="#"
+                        href="?action=logout"
                       >
                         <svg
                           class="w-4 h-4 mr-3"
@@ -845,14 +845,6 @@
                     Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic fuga sit illo modi aut aspernatur tempore laboriosam saepe dolores eveniet.
                 </p>
             </div>
-            <!-- Button Add Course -->
-            <div class="flex justify-end mb-6">
-            <button 
-                type="button" 
-                onclick="toggleModalCourse()" 
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                Add category
-            </button>
         </div>
         </div>
 
@@ -891,12 +883,6 @@
                     </div>
                 </div>
             <?php endif; ?>
-
-            <!-- Buttons Edit and Delete -->
-            <div class="flex justify-center gap-2 mt-4">
-                <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1.5 rounded text-sm transition-colors duration-200">Edit</button>
-                <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-1.5 rounded text-sm transition-colors duration-200">Delete</button>
-            </div>
         </div>
     </div>
 <?php endforeach; ?>
@@ -911,116 +897,10 @@
     </div>
 </section>
 
-<!-- Add Category Modal -->
-<section id="addModalCourse" 
-         class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-16">
-    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl mx-4 w-[30%] h-[80%] mt-10 overflow-y-auto">
-        <!-- Modal Header -->
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold text-gray-700">Add course</h2>
-            <button 
-                type="button" 
-                onclick="returncourse()" 
-                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
-                Close
-            </button>
-        </div>
-
-        <!-- Modal Form -->
-        <form action="?action=save_course" method="POST">
-            <!-- Name Field -->
-            <div class="mb-6">
-                <label 
-                    for="categoryName" 
-                    class="block text-gray-700 font-medium mb-2">
-                    Name
-                </label>
-                <input 
-                    type="text" 
-                    name="name" 
-                    id="categoryName" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"
-                    placeholder="Jane Doe">
-            </div>
-
-            <!-- Description Field -->
-            <div class="mb-6">
-                <label 
-                    for="categoryDescription" 
-                    class="block text-gray-700 font-medium mb-2">
-                    Description
-                </label>
-                <textarea 
-                    name="description" 
-                    id="categoryDescription" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"
-                    rows="3" 
-                    placeholder="Enter some long form content."></textarea>
-            </div>
-            <div class="mb-6">
-    <label 
-        for="isCategory" 
-        class="block text-gray-700 font-medium mb-2">
-        Category
-    </label>
-    <select 
-        name="isCategory" 
-        id="isCategory" 
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300">
-        <?php foreach ($categorys as $category): ?>
-            <option value="<?= htmlspecialchars($category->getId()) ?>">
-                <?= htmlspecialchars($category->getName()) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</div>
-
-
-<div class="mb-4">
-    <span class="block text-sm text-gray-700 dark:text-gray-400">Categories</span>
-    <div class="mt-2">
-        <?php foreach ($tags as $tag): ?>
-            <label class="inline-flex items-center text-gray-600 dark:text-gray-400 mb-2">
-                <input 
-                    type="checkbox" 
-                    class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" 
-                    name="tags[]" 
-                    value="<?= htmlspecialchars($tag->getId()) ?>" />
-                <span class="ml-2"><?= htmlspecialchars($tag->getName()) ?></span>
-            </label><br>
-        <?php endforeach; ?>
-    </div>
-</div>
-
-
-
-            <!-- Submit Button -->
-            <div class="text-center">
-                <button 
-                    type="submit" 
-                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                    ADD
-                </button>
-            </div>
-        </form>
-    </div>
-</section>
             </div>
         </main>
         </div>
     </div>
-
-    <script>
-        function toggleModalCourse() {
-    const modal = document.getElementById('addModalCourse');
-    modal.classList.toggle('hidden');
-}
-
-function returncourse() {
-    const modal = document.getElementById('addModalCourse');
-    modal.classList.add('hidden');
-}
-    </script>
   </body>
 </html>
 

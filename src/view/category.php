@@ -118,7 +118,7 @@
                 <span class="ml-4">Category</span>
               </a>
             </li>
-            <li class="relative px-6 py-3">
+            <!-- <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                 href="charts.html"
@@ -162,11 +162,11 @@
                 </svg>
                 <span class="ml-4">Buttons</span>
               </a>
-            </li>
+            </li> -->
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="modals.html"
+                href="?action=ton_course"
               >
                 <svg
                   class="w-5 h-5"
@@ -182,7 +182,7 @@
                     d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
                   ></path>
                 </svg>
-                <span class="ml-4">Modals</span>
+                <span class="ml-4">Ton Course</span>
               </a>
             </li>
             <li class="relative px-6 py-3">
@@ -838,25 +838,15 @@
                 <!-- Main Category Section -->
 <section class="py-12">
     <div class="container mx-auto px-4">
-        <!-- Add Course Button -->
-        <div class="flex justify-end mb-6">
-            <button 
-                type="button" 
-                onclick="toggleModalCategory()" 
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                Add category
-            </button>
-        </div>
-
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 p-6">
     <?php foreach ($categorys as $category): ?>
         <button class="relative overflow-hidden rounded-lg shadow-lg group h-50 bg-white hover:shadow-2xl transform transition duration-300 hover:scale-105 animate__animated animate__fadeIn">
             <div class="relative overflow-hidden rounded-lg shadow-lg group h-50">
-                <img 
-                    src="./public/images/3.jpg" 
-                    alt="Category background" 
-                    class="absolute inset-0 w-full h-full object-cover"
-                />
+            <img 
+    src="<?= $category->getImage() ?>" 
+    alt="Category background" 
+    class="absolute inset-0 w-full h-full object-cover"
+/>
                 <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
                 <div class="relative h-full p-6 flex flex-col justify-between z-10">
                     <div>
@@ -869,20 +859,6 @@
                             <?= htmlspecialchars($category->getDescription()) ?>
                         </p>
                     </div>
-                    
-                    <div class="flex justify-between mt-4">
-                        <a href="" 
-                           class="flex items-center gap-2 bg-green-600 text-white px-3 py-1.5 rounded hover:bg-green-700 transition duration-300">
-                            <i class="fas fa-edit"></i>
-                            <span>Edit</span>
-                        </a>
-                    
-                        <a href="" 
-                           class="flex items-center gap-2 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition duration-300">
-                            <i class="fas fa-trash"></i>
-                            <span>Delete</span>
-                        </a>
-                    </div>
                 </div>
             </div>
         </button>
@@ -893,80 +869,10 @@
     </div>
 </section>
 
-<!-- Add Category Modal -->
-<section id="addModalCategory" 
-         class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-16">
-    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl mx-4">
-        <!-- Modal Header -->
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold text-gray-700">Add Category</h2>
-            <button 
-                type="button" 
-                onclick="returnPage1()" 
-                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
-                Close
-            </button>
-        </div>
-
-        <!-- Modal Form -->
-        <form action="?action=save_category" method="POST">
-            <!-- Name Field -->
-            <div class="mb-6">
-                <label 
-                    for="categoryName" 
-                    class="block text-gray-700 font-medium mb-2">
-                    Name
-                </label>
-                <input 
-                    type="text" 
-                    name="name" 
-                    id="categoryName" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"
-                    placeholder="Jane Doe">
-            </div>
-
-            <!-- Description Field -->
-            <div class="mb-6">
-                <label 
-                    for="categoryDescription" 
-                    class="block text-gray-700 font-medium mb-2">
-                    Description
-                </label>
-                <textarea 
-                    name="description" 
-                    id="categoryDescription" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"
-                    rows="3" 
-                    placeholder="Enter some long form content."></textarea>
-            </div>
-
-            <!-- Submit Button -->
-            <div class="text-center">
-                <button 
-                    type="submit" 
-                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                    ADD
-                </button>
-            </div>
-        </form>
-    </div>
-</section>
             </div>
         </main>
         </div>
     </div>
-
-    <script>
-        function toggleModalCategory() {
-    const modal = document.getElementById('addModalCategory');
-    modal.classList.toggle('hidden');
-}
-
-function returnPage1() {
-    const modal = document.getElementById('addModalCategory');
-    modal.classList.add('hidden');
-}
-    </script>
   </body>
 </html>
 
