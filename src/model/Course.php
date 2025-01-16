@@ -5,16 +5,18 @@ class Course
     private int $id;
     private string $name;
     private string $description;
+    private ?string $image;
     public ?User $enseignant;
     public ?Category $categoryId;
     public ?array $courseTags;
     private ?Media $contenu;
 
-    public function __construct(int $id = 0, string $name = "", string $description = "", ?User $enseignant = null, ?Category $categoryId = null, ?array $courseTags = null,  ?Media $contenu = null)
+    public function __construct(int $id = 0, string $name = "", string $description = "", ?string $image = null , ?User $enseignant = null, ?Category $categoryId = null, ?array $courseTags = null,  ?Media $contenu = null)
     {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
+        $this->image = $image;
         $this->enseignant = $enseignant;
         $this->categoryId = $categoryId;
         $this->courseTags = $courseTags;
@@ -49,6 +51,14 @@ class Course
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    public function getImage(): string {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): void {
+        $this->image = $image;
     }
 
     public function getEnseignant(): User

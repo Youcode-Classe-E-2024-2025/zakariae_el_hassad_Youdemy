@@ -31,7 +31,7 @@ require_once "./src/service/CourseService.php";
 require_once "./src/DAO/CategoryDao.php";
 require_once "./src/DAO/UserDao.php";
 require_once "./src/DAO/TagDao.php";
-require_once "./src/DAO/CourseDqo.php";
+require_once "./src/DAO/CourseDao.php";
 require_once "./src/dao/CourseTagDao.php";
 
 $categoryController = new CategoryController();
@@ -68,6 +68,9 @@ if(isset($_GET["action"])) {
         case "home":
             $userController->home();
             break;
+        case "logout":
+            $userController->logout();
+            break;
         case "save_category" :
             $categoryController->save();
             break;
@@ -85,6 +88,9 @@ if(isset($_GET["action"])) {
             break;
         case "course":
             $courseController->getAll();
+            break;
+        case "ton_course" :
+            $courseController->getAllByUser();
             break;
         default :
             echo "sjsisbx";

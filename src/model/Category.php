@@ -5,13 +5,15 @@ class Category
     private int $id;
     private string $name;
     private string $description;
+    private ?string $image;
     public ?User $admin;
 
-    public function __construct(int $id = 0, string $name = "", string $description = "", ?User $admin = null)
+    public function __construct(int $id = 0, string $name = "", string $description = "", ?string $image = null , ?User $admin = null)
     {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
+        $this->image = $image;
         $this->admin = $admin;
     }
 
@@ -40,6 +42,14 @@ class Category
     public function setDescription(string $description): void
     {
         $this->description = $description;
+    }
+
+    public function getImage(): string {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): void {
+        $this->image = $image;
     }
 
     public function getAdmin(): User

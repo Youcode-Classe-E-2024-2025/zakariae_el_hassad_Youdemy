@@ -20,6 +20,7 @@ CREATE TABLE courses (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
+    image VARCHAR(255) NULL,
     enseignant_id INT NOT NULL,
     category_id INT NOT NULL,
     tag_id INT NOT NULL,
@@ -54,6 +55,7 @@ CREATE TABLE category (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
+    image VARCHAR(255) NULL,
     amin_id INT NOT NULL,
     FOREIGN KEY (amin_id) REFERENCES users(id)
 );
