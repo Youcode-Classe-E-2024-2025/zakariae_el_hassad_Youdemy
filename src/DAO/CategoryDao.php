@@ -37,38 +37,47 @@ class CategoryDao {
 
     public function findById(int $id): ?Category
     {
-        $stmt = $this->connection->prepare("
-            SELECT c.id AS category_id, c.name AS category_name, c.description AS category_description, 
-                   u.id AS user_id, u.name AS user_name, u.email AS user_email
-            FROM categories c
-            LEFT JOIN users u ON c.project_manager_id = u.id
-            WHERE c.id = :id
-        ");
-        $stmt->execute(['id' => $id]);
-        $categoryData = $stmt->fetch(PDO::FETCH_ASSOC);
+        try {
+            $stmt = $this->connection->prepare("
+                SELECT c.id AS category_id, c.name AS category_name, c.description AS category_description, 
+                       u.id AS admin_id, u.name AS user_name, u.email AS user_email
+                FROM category c
+                LEFT JOIN users u ON c.admin_id = u.id
+                WHERE c.id = :id
+            ");
     
-        if ($categoryData) {
-            // Create User object for projectManager
-            $admin = null;
-            if ($categoryData['user_id']) {
-                $admin = new User(
-                    id: (int)$categoryData['user_id'],
-                    name: $categoryData['user_name'],
-                    email: $categoryData['user_email']
+            if (!$stmt) {
+                die('SQL Error: ' . implode(":", $this->connection->errorInfo()));
+            }
+    
+            $stmt->execute(['id' => $id]);
+            $categoryData = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($categoryData) {
+                $admin = null;
+    
+                if ($categoryData['admin_id']) {
+                    $admin = new User(
+                        id: (int)$categoryData['admin_id'],
+                        name: $categoryData['user_name'],
+                        email: $categoryData['user_email']
+                    );
+                }
+    
+                return new Category(
+                    id: (int)$categoryData['category_id'],
+                    name: $categoryData['category_name'],
+                    description: $categoryData['category_description'],
+                    admin: $admin
                 );
             }
     
-            // Return Category object
-            return new Category(
-                id: (int)$categoryData['category_id'],
-                name: $categoryData['category_name'],
-                description: $categoryData['category_description'],
-                admin: $admin
-            );
+            return null;
+        } catch (Exception $e) {
+            die('Error: ' . $e->getMessage());
         }
-    
-        return null;
     }
+    
 
     public function get3Category(int $id)
 {
@@ -85,5 +94,8 @@ class CategoryDao {
     }
     return $Categorys;
 }
+
+
+
 
 }

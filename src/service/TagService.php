@@ -31,5 +31,16 @@ class TagService{
 
     }
 
+    public function getTagById(int $id): ?Tag
+    {
+        $tag = $this->tagDao->findById($id);
+
+        if ($tag === null) {
+            throw new Exception("Category with ID $id not found.");
+        }
+
+        return $tag;
+    }
+
 
 }

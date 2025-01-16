@@ -47,4 +47,5 @@ class CategoryService{
         $user = $_SESSION["user"];
         return $this->categoryDao->get3Category($user->getId());
     }
+
 }

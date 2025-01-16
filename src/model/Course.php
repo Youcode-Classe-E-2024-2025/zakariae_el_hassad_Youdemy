@@ -1,48 +1,89 @@
 <?php
 
-class Course {
+class Course
+{
     private int $id;
     private string $name;
     private string $description;
+    public ?User $enseignant;
+    public ?Category $categoryId;
+    public ?array $courseTags;
     private ?Media $contenu;
 
-    public function __construct(int $id=0 ,string $name ="" , string $description="" , ?Media $contenu )
+    public function __construct(int $id = 0, string $name = "", string $description = "", ?User $enseignant = null, ?Category $categoryId = null, ?array $courseTags = null,  ?Media $contenu = null)
     {
-        $this->id = $id ;
-        $this->name = $name ;
-        $this->description = $description ;
-        $this->contenu = $contenu ;
-    }
-
-    public function getId(): int {
-        return $this->id;
-    }
-
-    public function setId(int $id): void {
         $this->id = $id;
-    }
-
-    public function getName(): string {
-        return $this->name;
-    }
-
-    public function setName(string $name): void {
         $this->name = $name;
-    }
-
-    public function getDescription(): string {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): void {
         $this->description = $description;
-    }
-
-    public function getContenu() : Media{
-        return $this->contenu;
-    }
-    public function setContenu(Media $contenu):void{
+        $this->enseignant = $enseignant;
+        $this->categoryId = $categoryId;
+        $this->courseTags = $courseTags;
         $this->contenu = $contenu;
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    public function getEnseignant(): User
+    {
+        return $this->enseignant;
+    }
+    public function setEnseignant(User $enseignant): void
+    {
+        $this->enseignant = $enseignant;
+    }
+
+    public function getCategoryId(): Category
+    {
+        return $this->categoryId;
+    }
+    public function setCategoryId(Category $categoryId): void
+    {
+        $this->categoryId = $categoryId;
+    }
+
+    public function getCourseTags(): array
+    {
+        return $this->courseTags;
+    }
+    public function setCourseTags(array $courseTags): void
+    {
+        $this->courseTags = $courseTags;
+    }
+
+    public function getContenu(): Media
+    {
+        return $this->contenu;
+    }
+    public function setContenu(Media $contenu): void
+    {
+        $this->contenu = $contenu;
+    }
 }

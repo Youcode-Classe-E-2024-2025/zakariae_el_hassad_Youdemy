@@ -32,4 +32,49 @@ class TagDao {
         }
         return $tags;
     }
+
+    public function findById(int $id): ?Tag
+    {
+        try {
+            $stmt = $this->connection->prepare("
+                SELECT t.id AS tag_id, t.name AS tag_name, 
+                       u.id AS admin_id, u.name AS user_name, u.email AS user_email
+                FROM tags t
+                LEFT JOIN users u ON t.amin_id = u.id
+                WHERE t.id = :id
+            ");
+    
+            if (!$stmt) {
+                die('SQL Error: ' . implode(":", $this->connection->errorInfo()));
+            }
+    
+            $stmt->execute(['id' => $id]);
+            $tagData = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+            if ($tagData) {
+                // إنشاء كائن User إذا كانت البيانات متوفرة
+                $admin = null;
+    
+                if ($tagData['admin_id']) {
+                    $admin = new User(
+                        id: (int)$tagData['admin_id'],
+                        name: $tagData['user_name'],
+                        email: $tagData['user_email']
+                    );
+                }
+    
+                // إرجاع كائن Tag
+                return new Tag(
+                    id: (int)$tagData['tag_id'],
+                    name: $tagData['tag_name'],
+                    admin: $admin
+                );
+            }
+    
+            return null;
+        } catch (Exception $e) {
+            die('Error: ' . $e->getMessage());
+        }
+    }
+    
 }

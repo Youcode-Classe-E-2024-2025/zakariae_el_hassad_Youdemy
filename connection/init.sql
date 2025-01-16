@@ -20,8 +20,13 @@ CREATE TABLE courses (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
-    teacher_id INT NOT NULL,
-    FOREIGN KEY (teacher_id) REFERENCES users(id) 
+    enseignant_id INT NOT NULL,
+    category_id INT NOT NULL,
+    tag_id INT NOT NULL,
+    FOREIGN KEY (enseignant_id) REFERENCES users(id) 
+    FOREIGN KEY (category_id) REFERENCES category(id),
+    FOREIGN KEY (tag_id) REFERENCES tags(id) 
+
 );
 
 
