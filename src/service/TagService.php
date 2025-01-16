@@ -26,8 +26,7 @@ class TagService{
 
     public function getAllTag()
     {
-        $user = $_SESSION["user"];
-        return $this->tagDao->getAllTag($user->getId());
+        return $this->tagDao->getAllTag();
 
     }
 

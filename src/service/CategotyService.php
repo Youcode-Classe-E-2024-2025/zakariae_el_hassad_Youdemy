@@ -8,27 +8,26 @@ class CategoryService{
         $this->categoryDao = new categoryDao();
     }
 
-    public function save(array $data){
-
-        
+    public function save(array $data) {
         $admin = new User();
         $user = $_SESSION["user"];
         $admin->setId($user->getId());
-        
-       
+    
+        // Création de l'objet Category avec l'image
         $category = new Category(
-            name : $data["name"],
-            description : $data["description"],
-            admin : $admin
+            name: $data["name"],
+            description: $data["description"],
+            admin: $admin,
+            image: $data["image"] ?? null // Vérifier si une image a été fournie
         );
-
+    
         $this->categoryDao->create($category);
     }
+    
 
     public function categoryService()
     {
-        $user = $_SESSION["user"];
-        return $this->categoryDao->getAllCategory($user->getId());
+        return $this->categoryDao->getAllCategory();
     }
 
     public function getCategoryById(int $id): ?Category

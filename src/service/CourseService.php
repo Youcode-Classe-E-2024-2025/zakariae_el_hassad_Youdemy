@@ -24,6 +24,7 @@ class CourseService{
         $course = new Course(
             name : $data["name"],
             description : $data["description"],
+            image: $data["image"] ?? null ,
             enseignant : $enseignant,
             categoryId : $category,
         );
@@ -35,4 +36,10 @@ class CourseService{
     public function getAll(){
         return $this->courseDao->getAll();
     }
+
+    public function getAllByUser($userId) {
+        return $this->courseDao->getAllByUser($userId);
+    }
+    
+    
 }
