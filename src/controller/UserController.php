@@ -63,7 +63,7 @@
 
         public function get3User()
         {
-            $tags = $this->tagService->getAllTag();
+            $tags = $this->tagService->get10tags();
             $categorys = $this->categoryService->get3Category();
             $users = $this->userService->get3UserByRoleId(2);
             require_once APP_VIEWS . "admin.php";

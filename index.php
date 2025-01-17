@@ -80,8 +80,14 @@ if(isset($_GET["action"])) {
         case "tout-Category":
             $categoryController->getAll2();
             break;
+        case "delet-category":
+            $categoryController->delete();
+            break;
         case "save_tag":
             $tagContrioller->save();
+            break;
+        case "tags":
+            $tagContrioller->getAll();
             break;
         case "save_course":
             $courseController->save();
@@ -91,6 +97,9 @@ if(isset($_GET["action"])) {
             break;
         case "ton_course" :
             $courseController->getAllByUser();
+            break;
+        case "course_documment" : 
+            $courseController->showCourseDetail();
             break;
         default :
             echo "sjsisbx";

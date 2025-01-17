@@ -6,17 +6,19 @@ class Course
     private string $name;
     private string $description;
     private ?string $image;
+    private ?string $file;
     public ?User $enseignant;
     public ?Category $categoryId;
     public ?array $courseTags;
     private ?Media $contenu;
 
-    public function __construct(int $id = 0, string $name = "", string $description = "", ?string $image = null , ?User $enseignant = null, ?Category $categoryId = null, ?array $courseTags = null,  ?Media $contenu = null)
+    public function __construct(int $id = 0, string $name = "", string $description = "", ?string $image = null ,?string $file = null,  ?User $enseignant = null, ?Category $categoryId = null, ?array $courseTags = null,  ?Media $contenu = null)
     {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
         $this->image = $image;
+        $this->file = $file;
         $this->enseignant = $enseignant;
         $this->categoryId = $categoryId;
         $this->courseTags = $courseTags;
@@ -59,6 +61,14 @@ class Course
 
     public function setImage(?string $image): void {
         $this->image = $image;
+    }
+
+    public function getFile(): ?string {
+        return $this->file;
+    }
+
+    public function setFile(?string $file): void {
+        $this->file = $file;
     }
 
     public function getEnseignant(): User

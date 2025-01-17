@@ -15,7 +15,6 @@ class CourseService{
     public function save(array $data){
 
         $category = $this->categoryService->getCategoryById((int)$data["isCategory"]);
-
         $enseignant = new User();
         $user = $_SESSION["user"];
         $enseignant->setId($user->getId());
@@ -25,6 +24,7 @@ class CourseService{
             name : $data["name"],
             description : $data["description"],
             image: $data["image"] ?? null ,
+            file: $data["file"] ?? null,
             enseignant : $enseignant,
             categoryId : $category,
         );
@@ -40,6 +40,11 @@ class CourseService{
     public function getAllByUser($userId) {
         return $this->courseDao->getAllByUser($userId);
     }
+
+    public function getCourseById($courseId) {
+        return $this->courseDao->getCourseById($courseId);
+    }
+    
     
     
 }

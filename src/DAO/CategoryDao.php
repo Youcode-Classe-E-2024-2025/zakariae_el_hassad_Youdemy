@@ -115,6 +115,21 @@ class CategoryDao {
 }
 
 
+public function getDelete($id) {
+
+    $stmt = $this->connection->prepare("DELETE FROM coursetags WHERE course_id IN (SELECT id FROM courses WHERE category_id = ?)");
+    $stmt->execute([$id]);
+
+    $stmt = $this->connection->prepare("DELETE FROM courses WHERE category_id = ?");
+    $stmt->execute([$id]);
+
+    $stmt = $this->connection->prepare("DELETE FROM category WHERE id = ?");
+    $stmt->execute([$id]);
+}
+
+
+
+
 
 
 }

@@ -57,4 +57,15 @@ class CategoryController {
         $categorys = $this->categoryService->get3Category();
         require_once APP_VIEWS . "category.php";
     }
+
+    public function delete() {
+        if (isset($_GET['category_id'])) {
+            $categoryId = $_GET['category_id']; 
+           
+            $this->categoryService->delete($categoryId); 
+        }
+    
+        $categorys = $this->categoryService->categoryService();
+        require_once APP_VIEWS . "toutLesCategory.php";
+    }
 }

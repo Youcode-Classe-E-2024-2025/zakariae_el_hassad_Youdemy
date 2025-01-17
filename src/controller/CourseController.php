@@ -33,6 +33,29 @@ class CourseController{
         }
     
         $_POST['image'] = $imagePath;
+
+        $filePath = null;
+
+    if (!empty($_FILES['file']['name'])) {
+        $uploadDir = "uploads/";
+
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $fileName = time() . "_" . basename($_FILES['file']['name']); 
+        $filePath = $uploadDir . $fileName;
+
+        if (!move_uploaded_file($_FILES['file']['tmp_name'], $filePath)) {
+            $_SESSION["error"] = "Erreur lors du téléchargement du fichier.";
+            header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=ajout-Category");
+            exit();
+        }
+    }
+
+    $_POST['file'] = $filePath;
+
+
         $this->courseService->save($_POST);
         header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=ton_course");
         exit();
@@ -56,7 +79,21 @@ class CourseController{
     
         require_once APP_VIEWS . "tonCourse.php";
     }
+
+    public function showCourseDetail() {
+        if (!isset($_GET['id']) || empty($_GET['id'])) {
+            die("ID du cours manquant.");
+        }
     
+        $courseId = (int) $_GET['id'];
+        $course = $this->courseService->getCourseById($courseId);
+    
+        if (!$course) {
+            die("Cours non trouvé.");
+        }
+  
+        require_once APP_VIEWS . "detailCourse.php";
+    }
     
 
 

@@ -1100,14 +1100,6 @@
                 <h1 class="text-2xl font-bold">Les Tags</h1>
             </div>
 
-            <div class="flex justify-end mb-6">
-            <button 
-                type="button" 
-                onclick="toggleModalTag()" 
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                Add Tag
-            </button>
-        </div>
         <div class="tags-container flex flex-wrap gap-4">
     <?php foreach ($tags as $tag): ?>
         <div class="border border-white rounded-xl text-white text-center p-2 w-24">
@@ -1116,51 +1108,13 @@
     <?php endforeach; ?>
 </div>
 
-
-
-            <section id="addModalTag" 
-         class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-16">
-    <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl mx-4">
-        <!-- Modal Header -->
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-xl font-bold text-gray-700">Add Category</h2>
-            <button 
-                type="button" 
-                onclick="returnPageTag()" 
-                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
-                Close
-            </button>
-        </div>
-
-        <!-- Modal Form -->
-        <form action="?action=save_tag" method="POST">
-            <!-- Name Field -->
-            <div class="mb-6">
-                <label 
-                    for="categoryName" 
-                    class="block text-gray-700 font-medium mb-2">
-                    Name
-                </label>
-                <input 
-                    type="text" 
-                    name="name" 
-                    id="categoryName" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"
-                    placeholder="Jane Doe">
-            </div>
-            <!-- Submit Button -->
-            <div class="text-center">
-                <button 
-                    type="submit" 
-                    class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                    ADD
-                </button>
-            </div>
-        </form>
-    </div>
-</section>
-
-
+<div class="mt-4 text-center py-4">
+  <a href="?action=tags"
+     class="inline-block px-6 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition duration-300"
+  >
+    Voir tout
+  </a>
+</div>
 
 
               </div>
@@ -1170,16 +1124,5 @@
         </main>
       </div>
     </div>
-    <script>
-        function toggleModalTag() {
-    const modal = document.getElementById('addModalTag');
-    modal.classList.toggle('hidden');
-}
-
-function returnPageTag() {
-    const modal = document.getElementById('addModalTag');
-    modal.classList.add('hidden');
-}
-    </script>
   </body>
 </html>

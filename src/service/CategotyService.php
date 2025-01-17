@@ -47,4 +47,8 @@ class CategoryService{
         return $this->categoryDao->get3Category($user->getId());
     }
 
+    public function delete($id) {
+        return $this->categoryDao->getDelete($id);
+    }
+
 }

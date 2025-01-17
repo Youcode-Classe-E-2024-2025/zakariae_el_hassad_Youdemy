@@ -12,7 +12,13 @@ class TagController {
     public function save()
     {
         $this->tagService->save($_POST);
-        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=admin");
+        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=tags");
         exit();
+    }
+
+    public function getAll()
+    {
+        $tags = $this->tagService->getAllTag();
+        require_once APP_VIEWS . "toutTag.php";
     }
 }

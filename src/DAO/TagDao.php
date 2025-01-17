@@ -89,5 +89,20 @@ class TagDao {
             die('Error: ' . $e->getMessage());
         }
     }
+
+    public function get10tags(int $id)
+    {
+        $stmt = $this->connection->prepare("SELECT * FROM tags WHERE admin_id = :id ORDER BY id DESC LIMIT 10");
+    
+        $stmt->execute(["id" => $id]);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $tags = [];
+        foreach ($rows as $row) {
+            $tag = new tag($row["id"], $row["name"],null);
+            array_push($tags, $tag);
+        }
+        return $tags;
+    }
     
 }

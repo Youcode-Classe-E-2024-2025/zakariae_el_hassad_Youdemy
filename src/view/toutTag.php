@@ -16,35 +16,18 @@
         <div class="flex justify-end mb-6">
             <button 
                 type="button" 
-                onclick="toggleModalCategory()" 
+                onclick="toggleModalTag()" 
                 class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                Add category
+                Add Tag
             </button>
         </div>
       </nav>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <?php foreach ($categorys as $category): ?>
-    <div class="relative overflow-hidden rounded-lg shadow-lg group h-50">
-    <img 
-    src="<?= $category->getImage() ?>" 
-    alt="Category background" 
-    class="absolute inset-0 w-full h-full object-cover"
-/>
-        <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
-        <div class="relative h-full p-6 flex flex-col justify-between z-10">
-            <div>
-                <h5 class="text-xl font-semibold mb-3">
-                    <a href="course.html" class="text-white hover:text-blue-300 transition duration-300">
-                        <?= htmlspecialchars($category->getName()) ?>
-                    </a>
-                </h5>
-                <p class="text-gray-200 text-sm">
-                    <?= htmlspecialchars($category->getDescription()) ?>
-                </p>
-            </div>
-            
+    <div class="tags-container flex flex-wrap gap-4">
+    <?php foreach ($tags as $tag): ?>
+        <div class="border border-white rounded-xl text-white text-center p-2 w-50">
+            <p> <?= htmlspecialchars($tag->getName()) ?></p>
             <div class="flex justify-between mt-4">
                 <a href="" 
                    class="flex items-center gap-2 bg-green-600 text-white px-3 py-1.5 rounded hover:bg-green-700 transition duration-300">
@@ -52,19 +35,18 @@
                     <span>Edit</span>
                 </a>
             
-                <a href="?action=delet-category&category_id=<?= htmlspecialchars($category->getId()) ?>"
+                <a href=""
                    class="flex items-center gap-2 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition duration-300">
                     <i class="fas fa-trash"></i>
                     <span>Delete</span>
                 </a>
             </div>
         </div>
-    </div>
     <?php endforeach; ?>
 </div>
 
 
-<section id="addModalCategory" 
+<section id="addModalTag" 
          class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-16">
     <div class="bg-white rounded-lg shadow-xl p-6 w-full max-w-2xl mx-4">
         <!-- Modal Header -->
@@ -72,17 +54,19 @@
             <h2 class="text-xl font-bold text-gray-700">Add Category</h2>
             <button 
                 type="button" 
-                onclick="returnPage1()" 
+                onclick="returnPageTag()" 
                 class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-300">
                 Close
             </button>
         </div>
 
         <!-- Modal Form -->
-        <form action="?action=save_category" method="POST" enctype="multipart/form-data">
+        <form action="?action=save_tag" method="POST">
             <!-- Name Field -->
             <div class="mb-6">
-                <label for="categoryName" class="block text-gray-700 font-medium mb-2">
+                <label 
+                    for="categoryName" 
+                    class="block text-gray-700 font-medium mb-2">
                     Name
                 </label>
                 <input 
@@ -92,32 +76,7 @@
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"
                     placeholder="Jane Doe">
             </div>
-
-            <!-- Description Field -->
-            <div class="mb-6">
-                <label for="categoryDescription" class="block text-gray-700 font-medium mb-2">
-                    Description
-                </label>
-                <textarea 
-                    name="description" 
-                    id="categoryDescription" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300"
-                    rows="3" 
-                    placeholder="Enter some long form content."></textarea>
-            </div>
-
-            <div class="mb-6">
-                <label for="categoryImage" class="block text-gray-700 font-medium mb-2">
-                    Upload Image
-                </label>
-                <input 
-                    type="file" 
-                    name="image" 
-                    id="categoryImage" 
-                    accept="image/*"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300">
-            </div>
-
+            <!-- Submit Button -->
             <div class="text-center">
                 <button 
                     type="submit" 
@@ -131,16 +90,16 @@
 
 
 <script>
-         function toggleModalCategory() {
-    const modal = document.getElementById('addModalCategory');
+        function toggleModalTag() {
+    const modal = document.getElementById('addModalTag');
     modal.classList.toggle('hidden');
 }
 
-function returnPage1() {
-    const modal = document.getElementById('addModalCategory');
+function returnPageTag() {
+    const modal = document.getElementById('addModalTag');
     modal.classList.add('hidden');
 }
-</script>
+    </script>
 
 
 </body>

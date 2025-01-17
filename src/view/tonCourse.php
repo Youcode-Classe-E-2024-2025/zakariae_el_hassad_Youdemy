@@ -857,7 +857,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- First Course -->
             <?php foreach($courses as $course):  ?>
     <div class=" bg-gray-700 mb-4 p-4 border-2 border-transparent hover:border-blue-500 hover:scale-105 transition-all duration-300 ease-in-out animate__animated animate__fadeIn">
         <img src="<?= $course->getImage() ?>" alt="product" class="w-full h-48 object-cover">
@@ -892,13 +891,18 @@
                 </div>
             <?php endif; ?>
 
-            <!-- Buttons Edit and Delete -->
             <div class="flex justify-center gap-2 mt-4">
                 <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-1.5 rounded text-sm transition-colors duration-200">Edit</button>
                 <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-1.5 rounded text-sm transition-colors duration-200">Delete</button>
             </div>
+            <a href="?action=course_documment&id=<?= $course->getId() ?>" 
+              class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded text-sm transition-colors duration-200">
+              Détail
+            </a>
+
         </div>
     </div>
+
 <?php endforeach; ?>
 
 
@@ -926,9 +930,7 @@
             </button>
         </div>
 
-        <!-- Modal Form -->
         <form action="?action=save_course" method="POST" enctype="multipart/form-data">
-            <!-- Name Field -->
             <div class="mb-6">
                 <label 
                     for="categoryName" 
@@ -943,7 +945,6 @@
                     placeholder="Jane Doe">
             </div>
 
-            <!-- Description Field -->
             <div class="mb-6">
                 <label 
                     for="categoryDescription" 
@@ -970,46 +971,44 @@
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300">
             </div>
 
+            <div action="?action=save_course" method="POST" enctype="multipart/form-data">
+              <label for="file">Upload Document/Video</label>
+              <input type="file" name="file" id="file" accept=".pdf,.doc,.docx,.mp4,.avi,.mov" required>
+            </div>
 
-            
             <div class="mb-6">
-    <label 
-        for="isCategory" 
-        class="block text-gray-700 font-medium mb-2">
-        Category
-    </label>
-    <select 
-        name="isCategory" 
-        id="isCategory" 
-        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300">
-        <?php foreach ($categorys as $category): ?>
-            <option value="<?= htmlspecialchars($category->getId()) ?>">
-                <?= htmlspecialchars($category->getName()) ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</div>
+              <label 
+                for="isCategory" 
+                class="block text-gray-700 font-medium mb-2">
+                Category
+              </label>
+              <select 
+                name="isCategory" 
+                id="isCategory" 
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition duration-300">
+              <?php foreach ($categorys as $category): ?>
+                <option value="<?= htmlspecialchars($category->getId()) ?>">
+                  <?= htmlspecialchars($category->getName()) ?>
+                </option>
+              <?php endforeach; ?>
+              </select>
+            </div>
 
-
-<div class="mb-4">
-    <span class="block text-sm text-gray-700 dark:text-gray-400">Categories</span>
-    <div class="mt-2">
-        <?php foreach ($tags as $tag): ?>
-            <label class="inline-flex items-center text-gray-600 dark:text-gray-400 mb-2">
-                <input 
+            <div class="mb-4">
+              <span class="block text-sm text-gray-700 dark:text-gray-400">Categories</span>
+              <div class="mt-2">
+                <?php foreach ($tags as $tag): ?>
+                <label class="inline-flex items-center text-gray-600 dark:text-gray-400 mb-2">
+                  <input 
                     type="checkbox" 
                     class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" 
                     name="tags[]" 
                     value="<?= htmlspecialchars($tag->getId()) ?>" />
-                <span class="ml-2"><?= htmlspecialchars($tag->getName()) ?></span>
-            </label><br>
-        <?php endforeach; ?>
-    </div>
-</div>
-
-
-
-            <!-- Submit Button -->
+                  <span class="ml-2"><?= htmlspecialchars($tag->getName()) ?></span>
+                </label><br>
+                <?php endforeach; ?>
+              </div>
+            </div>
             <div class="text-center">
                 <button 
                     type="submit" 
@@ -1036,6 +1035,7 @@ function returncourse() {
     modal.classList.add('hidden');
 }
     </script>
+    
   </body>
 </html>
 

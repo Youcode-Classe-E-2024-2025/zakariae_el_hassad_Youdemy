@@ -41,5 +41,11 @@ class TagService{
         return $tag;
     }
 
+    public function get10tags()
+    {
+        $user = $_SESSION["user"];
+        return $this->tagDao->get10tags($user->getId());
+    }
+
 
 }

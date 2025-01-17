@@ -852,8 +852,8 @@
             <!-- First Course -->
             <?php foreach($courses as $course):  ?>
     <div class=" bg-gray-700 mb-4 p-4 border-2 border-transparent hover:border-blue-500 hover:scale-105 transition-all duration-300 ease-in-out animate__animated animate__fadeIn">
-        <img src="./public/images/b2.jpg" alt="product" class="w-full h-48 object-cover">
-        <div class="mt-3 text-center">
+          <img src="<?= $course->getImage() ?>" alt="product" class="w-full h-48 object-cover">
+          <div class="mt-3 text-center">
             <h5 class="text-xl font-semibold mb-2 text-gray-200"><?= htmlspecialchars($course->getName()) ?></h5>
             <div class="flex justify-center gap-4 text-gray-200 text-sm mb-2">
                 <p class="flex items-center"><span class="mr-1">📅</span>7 April</p>
@@ -883,6 +883,11 @@
                     </div>
                 </div>
             <?php endif; ?>
+            <a href="?action=course_documment&id=<?= $course->getId() ?>" 
+              class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded text-sm transition-colors duration-200">
+              Détail
+            </a>
+
         </div>
     </div>
 <?php endforeach; ?>
