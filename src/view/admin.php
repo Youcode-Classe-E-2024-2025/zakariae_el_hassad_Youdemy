@@ -1,3 +1,8 @@
+<?php
+$user = $_SESSION['user'] ?? null; 
+$imagePath = $user ? $user->getImage() : "uploads/default.jpg";
+?>
+
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
   <head>
@@ -749,12 +754,8 @@
                   aria-label="Account"
                   aria-haspopup="true"
                 >
-                  <img
-                    class="object-cover w-8 h-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
-                    alt=""
-                    aria-hidden="true"
-                  />
+                <img class="object-cover w-8 h-8 rounded-full" src="<?= htmlspecialchars($imagePath) ?>" alt="User Image">
+
                 </button>
                 <template x-if="isProfileMenuOpen">
                   <ul
@@ -814,7 +815,7 @@
                     <li class="flex">
                       <a
                         class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                        href="#"
+                        href="?action=logout"
                       >
                         <svg
                           class="w-4 h-4 mr-3"
@@ -986,12 +987,7 @@
             <div
               class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
             >
-              <img
-                class="object-cover w-full h-full rounded-full"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6"
-                alt=""
-                loading="lazy"
-              />
+            <img class="object-cover w-8 h-8 rounded-full" src="<?= $user->getImage() ?>">
               <div
                 class="absolute inset-0 rounded-full shadow-inner"
                 aria-hidden="true"
@@ -1052,10 +1048,10 @@
     <?php foreach ($categorys as $category): ?>
     <div class="relative overflow-hidden rounded-lg shadow-lg group h-50">
         <img 
-            src="./public/images/3.jpg" 
-            alt="Category background" 
-            class="absolute inset-0 w-full h-full object-cover"
-        />
+          src="<?= $category->getImage() ?>" 
+          alt="Category background" 
+          class="absolute inset-0 w-full h-full object-cover"
+      />
         <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
         <div class="relative h-full p-6 flex flex-col justify-between z-10">
             <div>
@@ -1076,7 +1072,7 @@
                     <span>Edit</span>
                 </a>
             
-                <a href="" 
+                      <a href="?action=delet-category&category_id=<?= htmlspecialchars($category->getId()) ?>"
                    class="flex items-center gap-2 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition duration-300">
                     <i class="fas fa-trash"></i>
                     <span>Delete</span>
@@ -1100,10 +1096,23 @@
                 <h1 class="text-2xl font-bold">Les Tags</h1>
             </div>
 
-        <div class="tags-container flex flex-wrap gap-4">
+            <div class="tags-container flex flex-wrap gap-4">
     <?php foreach ($tags as $tag): ?>
-        <div class="border border-white rounded-xl text-white text-center p-2 w-24">
+        <div class="border border-white rounded-xl text-white text-center p-2 w-50">
             <p> <?= htmlspecialchars($tag->getName()) ?></p>
+            <div class="flex justify-between mt-4">
+                <a href="" 
+                   class="flex items-center gap-2 bg-green-600 text-white px-3 py-1.5 rounded hover:bg-green-700 transition duration-300">
+                    <i class="fas fa-edit"></i>
+                    <span>Edit</span>
+                </a>
+            
+                <a href="?action=delete_tag&tag_id=<?= htmlspecialchars($tag->getId()) ?>"
+                   class="flex items-center gap-2 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition duration-300">
+                    <i class="fas fa-trash"></i>
+                    <span>Delete</span>
+                </a>
+            </div>
         </div>
     <?php endforeach; ?>
 </div>

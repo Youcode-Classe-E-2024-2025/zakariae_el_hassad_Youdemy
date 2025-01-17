@@ -6,14 +6,16 @@ class User
     private string $name;
     private string $email;
     private string $password;
+    private ?string $image;
     private ?Role $role;
 
-    public function __construct(int $id = 0, string $name = "", string $email = "", string $password = "", ?Role $role = null)
+    public function __construct(int $id = 0, string $name = "", string $email = "", string $password = "", ?string $image = null , ?Role $role = null)
     {
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
+        $this->image = $image;
         $this->role = $role;
     }
 
@@ -55,6 +57,14 @@ class User
     public function setPassword(string $password): void
     {
         $this->password = $password;
+    }
+
+    public function getImage(): string {
+        return $this->image ?: "uploads/default.jpg"; 
+    }
+
+    public function setImage(?string $image): void {
+        $this->image = $image;
     }
 
     public function getRole(): Role

@@ -1,3 +1,8 @@
+<?php
+$user = $_SESSION['user'] ?? null; 
+$imagePath = $user ? $user->getImage() : "uploads/default.jpg";
+?>
+
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
   <head>
@@ -203,6 +208,7 @@
                 <span class="ml-4">Tables</span>
               </a>
             </li>
+            <?php if ($_SESSION['user']->getRole()->getId() == 1): ?>
             <li class="relative px-6 py-3">
               <button
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -283,6 +289,7 @@
               </template>
             </li>
           </ul>
+          <?php endif; ?>
           <div class="px-6 my-6">
             <button
               class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
@@ -741,12 +748,9 @@
                   aria-label="Account"
                   aria-haspopup="true"
                 >
-                  <img
-                    class="object-cover w-8 h-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1502378735452-bc7d86632805?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=aa3a807e1bbdfd4364d1f449eaa96d82"
-                    alt=""
-                    aria-hidden="true"
-                  />
+
+                  <img class="object-cover w-8 h-8 rounded-full" src="<?= htmlspecialchars($imagePath) ?>" alt="User Image">
+
                 </button>
                 <template x-if="isProfileMenuOpen">
                   <ul
@@ -1047,57 +1051,27 @@
   <div class="container mx-auto px-4">
     <div class="max-w-3xl mx-auto">
       <!-- Slider Structure -->
-      <div class="relative" x-data="{ currentSlide: 0 }">
+      <div class="relative" x-data="{ currentSlide: 0, totalSlides: <?= count($users) ?> }">
     <div class="transition-all duration-300">
-        <!-- Testimonial 1 -->
-        <div x-show="currentSlide === 0" class="flex flex-col items-center text-center space-y-6">
-            <img src="./public/images/c3.jpg" alt="testimonial" class="w-24 h-24 rounded-full object-cover">
-            <h6 class="text-xl font-semibold">Limitless learning</h6>
-            <p class="text-gray-600 max-w-2xl">Consectetur adipisicing Lorem ipsum dolor sit amet,elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <h4 class="text-lg font-medium">Jack Willson</h4>
-        </div>
-
-        <!-- Testimonial 2 -->
-        <div x-show="currentSlide === 1" class="flex flex-col items-center text-center space-y-6">
-            <img src="./public/images/c3.jpg" alt="testimonial" class="w-24 h-24 rounded-full object-cover">
-            <h6 class="text-xl font-semibold">World's best courses</h6>
-            <p class="text-gray-600 max-w-2xl">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <h4 class="text-lg font-medium">Nike Samson</h4>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div x-show="currentSlide === 2" class="flex flex-col items-center text-center space-y-6">
-            <img src="./public/images/c3.jpg" alt="testimonial" class="w-24 h-24 rounded-full object-cover">
-            <h6 class="text-xl font-semibold">Popular Courses</h6>
-            <p class="text-gray-600 max-w-2xl">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-            <h4 class="text-lg font-medium">Milky Deo</h4>
-        </div>
-
-        <!-- Testimonial 4 -->
-        <div x-show="currentSlide === 3" class="flex flex-col items-center text-center space-y-6">
-            <img src="./public/images/c3.jpg" alt="testimonial" class="w-24 h-24 rounded-full object-cover">
-            <h6 class="text-xl font-semibold">Expert Teachers</h6>
-            <p class="text-gray-600 max-w-2xl">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <h4 class="text-lg font-medium">Sarah Johnson</h4>
-        </div>
+        <?php foreach ($users as $index => $user): ?>
+            <div x-show="currentSlide === <?= $index ?>" class="flex flex-col items-center text-center space-y-6">
+                <img src="<?= htmlspecialchars($user->getImage()) ?>" alt="testimonial" class="w-24 h-24 rounded-full object-cover">
+                <h6 class="text-xl font-semibold"><?= htmlspecialchars($user->getName()); ?></h6>
+                <p class="text-gray-600 max-w-2xl">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+        <?php endforeach; ?>
     </div>
 
     <!-- Navigation Dots -->
     <div class="flex justify-center space-x-3 mt-8">
-        <button @click="currentSlide = 0" 
-                :class="currentSlide === 0 ? 'bg-blue-600' : 'bg-gray-300 hover:bg-blue-400'" 
-                class="w-3 h-3 rounded-full transition-colors"></button>
-        <button @click="currentSlide = 1" 
-                :class="currentSlide === 1 ? 'bg-blue-600' : 'bg-gray-300 hover:bg-blue-400'" 
-                class="w-3 h-3 rounded-full transition-colors"></button>
-        <button @click="currentSlide = 2" 
-                :class="currentSlide === 2 ? 'bg-blue-600' : 'bg-gray-300 hover:bg-blue-400'" 
-                class="w-3 h-3 rounded-full transition-colors"></button>
-        <button @click="currentSlide = 3" 
-                :class="currentSlide === 3 ? 'bg-blue-600' : 'bg-gray-300 hover:bg-blue-400'" 
-                class="w-3 h-3 rounded-full transition-colors"></button>
+        <?php foreach ($users as $index => $user): ?>
+            <button @click="currentSlide = <?= $index ?>" 
+                    :class="currentSlide === <?= $index ?> ? 'bg-blue-600' : 'bg-gray-300 hover:bg-blue-400'" 
+                    class="w-3 h-3 rounded-full transition-colors"></button>
+        <?php endforeach; ?>
     </div>
 </div>
+
 
       <!-- Other Testimonials (Initially Hidden) -->
       <div class="hidden">

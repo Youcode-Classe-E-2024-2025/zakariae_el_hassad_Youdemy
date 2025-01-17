@@ -48,4 +48,8 @@ class TagService{
     }
 
 
+    public function delete($id) {
+        return $this->tagDao->getDelete($id);
+    }
+
 }

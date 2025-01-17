@@ -19,6 +19,20 @@
 
         public function submitRegister()
         {
+            $imagePath = null;
+        if (!empty($_FILES['image']['name'])) {
+            $uploadDir = "uploads/";
+            $imageName = time() . "_" . basename($_FILES['image']['name']); 
+            $imagePath = $uploadDir . $imageName;
+    
+            if (!move_uploaded_file($_FILES['image']['tmp_name'], $imagePath)) {
+                $_SESSION["error"] = "Erreur lors du téléchargement de l'image.";
+                header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=register-form");
+                exit();
+            }
+        }
+    
+        $_POST['image'] = $imagePath; 
             $this->userService->register($_POST);
             require_once APP_VIEWS . "login.php";
         }
@@ -41,7 +55,7 @@
     session_reset();
     $_SESSION['user'] = $response['user'];
     $_SESSION['logged'] = true;
-
+    
     if ($response['user']->getRole()->getId() == 1) { 
         header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=category");
     } 
@@ -63,6 +77,7 @@
 
         public function get3User()
         {
+            
             $tags = $this->tagService->get10tags();
             $categorys = $this->categoryService->get3Category();
             $users = $this->userService->get3UserByRoleId(2);
@@ -78,6 +93,7 @@
         }
 
         public function home(){
+            $users = $this->userService->get3UserByRoleId(2);
             require_once APP_VIEWS . "home.php";
         }
     }

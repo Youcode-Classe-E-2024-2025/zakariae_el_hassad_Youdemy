@@ -35,7 +35,7 @@
                     <span>Edit</span>
                 </a>
             
-                <a href=""
+                <a href="?action=delete_tag&tag_id=<?= htmlspecialchars($tag->getId()) ?>"
                    class="flex items-center gap-2 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition duration-300">
                     <i class="fas fa-trash"></i>
                     <span>Delete</span>

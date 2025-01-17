@@ -21,4 +21,15 @@ class TagController {
         $tags = $this->tagService->getAllTag();
         require_once APP_VIEWS . "toutTag.php";
     }
+
+    public function delete() {
+        if (isset($_GET['tag_id'])) {
+            $tagId = $_GET['tag_id']; 
+           
+            $this->tagService->delete($tagId); 
+        }
+    
+        $tags = $this->tagService->getAllTag();
+        require_once APP_VIEWS . "toutTag.php";
+    }
 }

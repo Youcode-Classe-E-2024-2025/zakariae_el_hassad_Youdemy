@@ -89,6 +89,9 @@ if(isset($_GET["action"])) {
         case "tags":
             $tagContrioller->getAll();
             break;
+        case "delete_tag":
+            $tagContrioller->delete();
+            break;
         case "save_course":
             $courseController->save();
             break;

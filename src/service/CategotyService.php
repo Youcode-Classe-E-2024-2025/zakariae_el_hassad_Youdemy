@@ -13,12 +13,11 @@ class CategoryService{
         $user = $_SESSION["user"];
         $admin->setId($user->getId());
     
-        // Création de l'objet Category avec l'image
         $category = new Category(
             name: $data["name"],
             description: $data["description"],
             admin: $admin,
-            image: $data["image"] ?? null // Vérifier si une image a été fournie
+            image: $data["image"] ?? null 
         );
     
         $this->categoryDao->create($category);

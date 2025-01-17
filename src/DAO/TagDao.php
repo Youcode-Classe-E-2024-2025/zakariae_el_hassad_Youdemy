@@ -92,7 +92,7 @@ class TagDao {
 
     public function get10tags(int $id)
     {
-        $stmt = $this->connection->prepare("SELECT * FROM tags WHERE admin_id = :id ORDER BY id DESC LIMIT 10");
+        $stmt = $this->connection->prepare("SELECT * FROM tags WHERE admin_id = :id ORDER BY id DESC LIMIT 6");
     
         $stmt->execute(["id" => $id]);
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -103,6 +103,11 @@ class TagDao {
             array_push($tags, $tag);
         }
         return $tags;
+    }
+
+    public function getDelete($id){
+        $stmt = $this->connection->prepare("DELETE FROM tags WHERE id = ?");
+        $stmt->execute([$id]);
     }
     
 }

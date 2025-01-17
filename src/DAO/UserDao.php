@@ -12,11 +12,12 @@ class UserDao
 
     public function create(User $user): int
     {
-        $stmt = $this->connection->prepare("INSERT INTO users (name,email,password, role_id) VALUES( :name , :email , :password, :role_id)");
+        $stmt = $this->connection->prepare("INSERT INTO users (name,email,password, image , role_id) VALUES( :name , :email , :password, :image , :role_id)");
         $stmt->execute([
             "name" => $user->getName(),
             "email" => $user->getEmail(),
             "password" => $user->getPassword(),
+            "image" => $user->getImage(),
             "role_id" => $user->getRole()->getId()
         ]);
         return $this->connection->lastInsertId();
@@ -40,6 +41,7 @@ class UserDao
             id: $userData["id"],
             name: $userData["name"],
             email: $userData["email"],
+            image : $userData["image"],
             password: $userData["password"],
             role: $role
         );
@@ -62,7 +64,9 @@ class UserDao
                 $result["id"],
                 $result["name"],
                 $result["email"],
-                $result["password"]      
+                $result["password"],
+                $result["image"]
+
             );
 
             array_push($users , $user);
@@ -89,7 +93,8 @@ class UserDao
                 $result["id"],
                 $result["name"],
                 $result["email"],
-                $result["password"]      
+                $result["password"],
+                $result["image"]   
             );
 
             array_push($users , $user);

@@ -22,12 +22,13 @@ class UserService
         }
 
         $hashedPassword = password_hash($data["password"], PASSWORD_DEFAULT);
-        $role = new Role(1);
+        $role = new Role(2);
 
         $user = new User(
             name: $data["name"],
             email: $data["email"],
             password: $hashedPassword,
+            image: $data["image"] ?? null,
             role: $role
         );
         $id = $this->userDao->create($user);

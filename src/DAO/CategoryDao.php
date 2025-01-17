@@ -108,7 +108,7 @@ class CategoryDao {
 
     $Categorys = [];
     foreach ($rows as $row) {
-        $Category = new category($row["id"], $row["name"], $row["description"], null);
+        $Category = new category($row["id"], $row["name"], $row["description"] , $row["image"], null);
         array_push($Categorys, $Category);
     }
     return $Categorys;
