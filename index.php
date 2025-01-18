@@ -28,6 +28,7 @@ require_once "./src/service/TagService.php";
 require_once "./src/service/CourseService.php";
 
 // dao
+require_once "./src/DAO/BaseDao.php";
 require_once "./src/DAO/CategoryDao.php";
 require_once "./src/DAO/UserDao.php";
 require_once "./src/DAO/TagDao.php";

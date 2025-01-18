@@ -8,11 +8,11 @@ class Course
     private ?string $image;
     private ?string $file;
     public ?User $enseignant;
-    public ?Category $categoryId;
+    public ?Category $category;
     public ?array $courseTags;
     private ?Media $contenu;
 
-    public function __construct(int $id = 0, string $name = "", string $description = "", ?string $image = null ,?string $file = null,  ?User $enseignant = null, ?Category $categoryId = null, ?array $courseTags = null,  ?Media $contenu = null)
+    public function __construct(int $id = 0, string $name = "", string $description = "", ?string $image = null ,?string $file = null,  ?User $enseignant = null, ?Category $category = null, ?array $courseTags = null,  ?Media $contenu = null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -20,7 +20,7 @@ class Course
         $this->image = $image;
         $this->file = $file;
         $this->enseignant = $enseignant;
-        $this->categoryId = $categoryId;
+        $this->category = $category;
         $this->courseTags = $courseTags;
         $this->contenu = $contenu;
     }
@@ -80,13 +80,13 @@ class Course
         $this->enseignant = $enseignant;
     }
 
-    public function getCategoryId(): Category
+    public function getCategory(): Category
     {
-        return $this->categoryId;
+        return $this->category;
     }
-    public function setCategoryId(Category $categoryId): void
+    public function setCategory(Category $category): void
     {
-        $this->categoryId = $categoryId;
+        $this->category = $category;
     }
 
     public function getCourseTags(): array

@@ -869,11 +869,11 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
             </div>
             <p class="text-gray-300 mb-3"><?= htmlspecialchars($course->getDescription()) ?></p>
 
-            <?php if ($course->getCategoryId()): ?>
+            <?php if ($course->getCategory()): ?>
               <div class="mt-4">
                 <span class="text-gray-500 font-medium">Category:</span>
                 <div class="bg-gradient-to-r from-green-400 to-gray-700 rounded-full text-white text-center py-2 px-4 mt-2 w-max mx-auto transform transition-all duration-300 ease-in-out hover:scale-105 shadow-lg">
-                  <p class="text-lg"><?= htmlspecialchars($course->getCategoryId()->getName()) ?></p>
+                  <p class="text-lg"><?= htmlspecialchars($course->getCategory()->getName()) ?></p>
                 </div>
               </div>
             <?php endif; ?>

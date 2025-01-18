@@ -1,29 +1,11 @@
 <?php 
 
-class CategoryDao {
-    private PDO $connection ;
+class CategoryDao extends BaseDao {
 
     public function __construct()
     {
-        $connectionHolder = new DatabaseConnection; 
-        $this->connection = $connectionHolder->connect();
+        parent::__construct("category");
     }
-
-    public function create(Category $category) {
-        $stmt = $this->connection->prepare("
-            INSERT INTO category (name, description, admin_id, image) 
-            VALUES (:name, :description, :admin_id, :image)
-        ");
-        
-        return $stmt->execute([
-            "name" => $category->getName(),
-            "description" => $category->getDescription(),
-            "admin_id" => $category->getAdmin()->getId(),
-            "image" => $category->getImage()
-        ]);
-    }
-    
-
 
     public function getAllCategoryUser(int $id)
     {

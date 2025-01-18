@@ -1,21 +1,10 @@
 <?php 
 
-class TagDao {
-    private PDO $connection ;
+class TagDao extends BaseDao {
 
     public function __construct()
     {
-        $connectionHolder = new DatabaseConnection; 
-        $this->connection = $connectionHolder->connect();
-    }
-
-    public function create(Tag $tag){
-
-        $stmt = $this->connection->prepare("INSERT INTO tags (name , admin_id) VALUES (:name , :admin_id)");
-        return $stmt->execute([
-            "name" => $tag->getName(),
-            "admin_id" => $tag->getAdmin()->getId()
-        ]);
+        parent::__construct("tags");
     }
 
     public function getAllTagUser(int $id)

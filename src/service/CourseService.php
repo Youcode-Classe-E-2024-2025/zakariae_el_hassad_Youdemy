@@ -26,7 +26,7 @@ class CourseService{
             image: $data["image"] ?? null ,
             file: $data["file"] ?? null,
             enseignant : $enseignant,
-            categoryId : $category,
+            category : $category,
         );
 
         $courseId = $this->courseDao->create($course);

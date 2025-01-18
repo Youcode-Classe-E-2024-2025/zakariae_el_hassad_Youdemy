@@ -1,28 +1,11 @@
 <?php
 
-class CourseDao
+class CourseDao extends BaseDao
 {
-    private PDO $connection;
 
     public function __construct()
     {
-        $connectionHolder = new DatabaseConnection;
-        $this->connection = $connectionHolder->connect();
-    }
-
-    public function create(Course $course)
-    {
-
-        $stmt = $this->connection->prepare("INSERT INTO courses (name , description , image , file , enseignant_id , category_id ) VALUES (:name , :description , :image , :file , :enseignant_id , :category_id)");
-        $stmt->execute([
-            "name" => $course->getName(),
-            "description" => $course->getDescription(),
-            "image" => $course->getImage(),
-            "file" => $course->getFile(),
-            "enseignant_id" => $course->getEnseignant()->getId(),
-            "category_id" => $course->getCategoryId()->getId(),
-        ]);
-        return $this->connection->lastInsertId();
+        parent::__construct("courses");
     }
 
     public function getAll() {
