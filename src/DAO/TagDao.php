@@ -4,7 +4,7 @@ class TagDao extends BaseDao {
 
     public function __construct()
     {
-        parent::__construct("tags");
+        parent::__construct("tags", Tag::class , "coursetags" );
     }
 
     public function getAllTagUser(int $id)
@@ -16,22 +16,7 @@ class TagDao extends BaseDao {
 
         $tags = [];
         foreach ($rows as $row) {
-            $tag = new tag($row["id"], $row["name"],null);
-            array_push($tags, $tag);
-        }
-        return $tags;
-    }
-
-    public function getAllTag()
-    {
-        $stmt = $this->connection->prepare("SELECT * FROM tags");
-
-        $stmt->execute();
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $tags = [];
-        foreach ($rows as $row) {
-            $tag = new tag($row["id"], $row["name"],null);
+            $tag = new Tag($row["id"], $row["name"],null);
             array_push($tags, $tag);
         }
         return $tags;
@@ -94,9 +79,13 @@ class TagDao extends BaseDao {
         return $tags;
     }
 
-    public function getDelete($id){
-        $stmt = $this->connection->prepare("DELETE FROM tags WHERE id = ?");
-        $stmt->execute([$id]);
-    }
+    // public function delete($id){
+
+    //     $stmt = $this->connection->prepare("DELETE FROM   WHERE tag_id = ?");
+    //     $stmt->execute([$id]);
+
+    //     $stmt = $this->connection->prepare("DELETE FROM tags WHERE id = ?");
+    //     $stmt->execute([$id]);
+    // }
     
 }

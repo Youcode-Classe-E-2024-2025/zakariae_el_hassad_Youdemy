@@ -69,6 +69,12 @@ if(isset($_GET["action"])) {
         case "home":
             $userController->home();
             break;
+        case "delete_user":
+            $userController->delete();
+            break;
+        case "toggle-active":
+            $userController->toggleActive();
+            break;
         case "logout":
             $userController->logout();
             break;
@@ -104,6 +110,9 @@ if(isset($_GET["action"])) {
             break;
         case "course_documment" : 
             $courseController->showCourseDetail();
+            break;
+        case "delete_course":
+            $courseController->delete();
             break;
         default :
             echo "sjsisbx";

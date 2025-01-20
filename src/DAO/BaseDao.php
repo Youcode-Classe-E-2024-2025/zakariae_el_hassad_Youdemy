@@ -5,12 +5,14 @@ abstract class BaseDao
     protected PDO $connection;
     protected readonly string $tableName;
     protected readonly array $columns;
+    protected readonly string $className;
 
-    protected function __construct(string $tableName)
+    protected function __construct(string $tableName , string $className)
     {
         $connectionHolder = new DatabaseConnection;
         $this->connection = $connectionHolder->connect();
         $this->tableName = $tableName;
+        $this->className = $className;
         $this->columns = $this->loadColumns();
     }
 
@@ -46,44 +48,40 @@ abstract class BaseDao
         return $this->connection->lastInsertId();
     }
 
+    public function delete($id){
+    
+        $stmt = $this->connection->prepare("DELETE FROM $this->tableName WHERE id = ?");
+        $stmt->execute([$id]);
+    }
 
+    public function getAllEntities(): array {
+        $stmt = $this->connection->prepare("SELECT * FROM $this->tableName");
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $entities = [];
+        
+        foreach ($rows as $row) {
+            $reflectionClass = new ReflectionClass($this->className);
+    
+            $constructor = $reflectionClass->getConstructor();
+            
+            if ($constructor) {
+                $params = [];
+                foreach ($constructor->getParameters() as $param) {
+                    $paramName = $param->getName();
+                    if (array_key_exists($paramName, $row)) {
+                        $params[] = $row[$paramName]; 
+                    } else {
+                        $params[] = null; 
+                    }
+                }
+                $entity = $reflectionClass->newInstanceArgs($params);
+            } 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public function getAll(){
-
-        $columns = implode("," , $this->columns);
-
-        $stmt = $this->connection->query("SELECT ($columns) FROM $this->tableName ");
-
-
+            $entities[] = $entity;
+        }
+        
+        return $entities;
     }
 }

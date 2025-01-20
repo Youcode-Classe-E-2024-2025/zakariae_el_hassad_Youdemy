@@ -1002,22 +1002,23 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
           <?= htmlspecialchars($user->getEmail()); ?>
         </td>
         <td class="px-4 py-3 text-xs">
-          <button>
-            <span
-              class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
-            >
-              Pending
-            </span>
-          </button>
+          <a href="?action=delete_user&user_id=<?= htmlspecialchars($user->getId()) ?>"
+            class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600">
+              <i class="fas fa-trash"></i>
+                <span>Delete</span>
+          </a>
         </td>
         <td class="px-4 py-3 text-xs">
-          <button>
-            <span
-              class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
-            >
-              Pending
-            </span>
-          </button>
+        <?php
+$activeStatus = $user->getActive(); // Store the result of getActive()
+var_dump($activeStatus); // Debugging output to check the value
+?>
+
+<a href="?action=toggle-active&id=<?= $user->getId(); ?>" class="toggle-active-btn px-2 py-1 font-semibold leading-tight text-white rounded-full <?= $activeStatus == 1 ? 'bg-green-600' : 'bg-red-600' ?>">
+    <span><?= $activeStatus == 0 ? 'Active' : 'Désactivé' ?></span>
+</a>
+
+
         </td>
       </tr>
       <?php endforeach; ?>
@@ -1133,5 +1134,19 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
         </main>
       </div>
     </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const userStatusBtn = document.querySelector('.toggle-active-btn');
+            userStatusBtn.addEventListener("click", function() {
+                const statusText = userStatusBtn.querySelector("span");
+                if (statusText.innerHTML === 'Active') {
+                    statusText.innerHTML = 'Désactivé';
+                } else {
+                    statusText.innerHTML = 'Active';
+                }
+            });
+        });
+    </script>
   </body>
 </html>

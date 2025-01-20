@@ -45,6 +45,8 @@ class CourseService{
         return $this->courseDao->getCourseById($courseId);
     }
     
-    
+    public function delete($id) {
+        return $this->courseDao->delete($id);
+    }
     
 }

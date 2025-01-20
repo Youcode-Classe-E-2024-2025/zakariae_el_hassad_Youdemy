@@ -8,8 +8,9 @@ class User
     private string $password;
     private ?string $image;
     private ?Role $role;
+    private int $active;
 
-    public function __construct(int $id = 0, string $name = "", string $email = "", string $password = "", ?string $image = null , ?Role $role = null)
+    public function __construct(int $id = 0, string $name = "", string $email = "", string $password = "", ?string $image = null , ?Role $role = null , int $active = 1)
     {
         $this->id = $id;
         $this->name = $name;
@@ -17,6 +18,7 @@ class User
         $this->password = $password;
         $this->image = $image;
         $this->role = $role;
+        $this->active = $active;
     }
 
     public function getId(): int
@@ -75,5 +77,15 @@ class User
     public function setRole(Role $role): void
     {
         $this->role = $role;
+    }
+
+    public function getActive(): int
+    {
+        return $this->active;
+    }
+
+    public function setActive(int $active): void
+    {
+        $this->active = $active;
     }
 }

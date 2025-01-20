@@ -24,11 +24,8 @@ CREATE TABLE courses (
     image VARCHAR(255) NULL,
     enseignant_id INT NOT NULL,
     category_id INT NOT NULL,
-    tag_id INT NOT NULL,
-    FOREIGN KEY (enseignant_id) REFERENCES users(id) 
-    FOREIGN KEY (category_id) REFERENCES category(id),
-    FOREIGN KEY (tag_id) REFERENCES tags(id) 
-
+    FOREIGN KEY (enseignant_id) REFERENCES users(id),
+    FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE CASCADE ,
 );
 
 
@@ -58,7 +55,7 @@ CREATE TABLE category (
     description TEXT NOT NULL,
     image VARCHAR(255) NULL,
     amin_id INT NOT NULL,
-    FOREIGN KEY (amin_id) REFERENCES users(id)
+    FOREIGN KEY (amin_id) REFERENCES users(id);
 );
 
 
@@ -73,8 +70,8 @@ CREATE TABLE courseTags (
     id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
     tag_id INT NOT NULL,
-    FOREIGN KEY (course_id) REFERENCES courses(id),
-    FOREIGN KEY (tag_id) REFERENCES tags(id)
+    FOREIGN KEY (course_id) REFERENCES courses(id)  ON DELETE CASCADE ,
+    FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE 
 );
 
 

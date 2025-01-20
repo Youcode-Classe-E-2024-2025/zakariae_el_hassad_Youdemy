@@ -48,7 +48,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
             class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200"
             href="#"
           >
-            Windmill
+            Youdemy
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
@@ -210,6 +210,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                 <span class="ml-4">Tables</span>
               </a>
             </li>
+            <?php if ($_SESSION['user']->getRole()->getId() == 1): ?>
             <li class="relative px-6 py-3">
               <button
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -290,6 +291,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
               </template>
             </li>
           </ul>
+          <?php endif; ?>
           <div class="px-6 my-6">
             <button
               class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
@@ -860,8 +862,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                 <p class="flex items-center"><span class="mr-1">📅</span>7 April</p>
                 <p class="flex items-center"><span class="mr-1">👁</span> 3286 Views</p>
             </div>
-            <p class="text-gray-300 mb-3"><?= htmlspecialchars($course->getDescription()) ?></p>
-
             <?php if ($course->getCategory()): ?>
               <div class="mt-4">
                 <span class="text-gray-500 font-medium">Category:</span>
@@ -869,20 +869,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                   <p class="text-lg"><?= htmlspecialchars($course->getCategory()->getName()) ?></p>
                 </div>
               </div>
-            <?php endif; ?>
-
-
-            <?php if (!empty($course->getCourseTags())): ?>
-                <div class="mt-2">
-                    <span class="text-gray-300">Tags:</span>
-                    <div class="flex justify-center gap-2 mt-2">
-                        <?php foreach ($course->getCourseTags() as $tag): ?>
-                            <div class="border border-white rounded-xl text-white text-center p-2 w-16 hover:scale-105 transition-transform duration-300 ease-in-out">
-                                <p><?= htmlspecialchars($tag) ?></p>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
+              <br>
             <?php endif; ?>
             <a href="?action=course_documment&id=<?= $course->getId() ?>" 
               class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded text-sm transition-colors duration-200">

@@ -26,7 +26,7 @@ class CategoryService{
 
     public function categoryService()
     {
-        return $this->categoryDao->getAllCategory();
+        return $this->categoryDao->getAllEntities();
     }
 
     public function getCategoryById(int $id): ?Category
@@ -47,7 +47,7 @@ class CategoryService{
     }
 
     public function delete($id) {
-        return $this->categoryDao->getDelete($id);
+        return $this->categoryDao->delete($id);
     }
 
 }

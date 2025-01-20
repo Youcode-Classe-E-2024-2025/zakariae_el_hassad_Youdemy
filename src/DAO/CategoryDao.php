@@ -4,7 +4,7 @@ class CategoryDao extends BaseDao {
 
     public function __construct()
     {
-        parent::__construct("category");
+        parent::__construct("category", Category::class);
     }
 
     public function getAllCategoryUser(int $id)
@@ -22,19 +22,19 @@ class CategoryDao extends BaseDao {
         return $Categorys;
     }
 
-    public function getAllCategory()
-    {
-        $stmt = $this->connection->prepare("SELECT * FROM category");
-        $stmt->execute();
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    // public function getAllCategory()
+    // {
+    //     $stmt = $this->connection->prepare("SELECT * FROM category");
+    //     $stmt->execute();
+    //     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
-        $Categorys = [];
-        foreach ($rows as $row) {
-            $Category = new Category($row["id"], $row["name"], $row["description"], $row["image"]);
-            array_push($Categorys, $Category);
-        }
-        return $Categorys;
-    }
+    //     $Categorys = [];
+    //     foreach ($rows as $row) {
+    //         $Category = new Category($row["id"], $row["name"], $row["description"], $row["image"]);
+    //         array_push($Categorys, $Category);
+    //     }
+    //     return $Categorys;
+    // }
 
 
     public function findById(int $id): ?Category
@@ -97,17 +97,17 @@ class CategoryDao extends BaseDao {
 }
 
 
-public function getDelete($id) {
+// public function getDelete($id) {
 
-    $stmt = $this->connection->prepare("DELETE FROM coursetags WHERE course_id IN (SELECT id FROM courses WHERE category_id = ?)");
-    $stmt->execute([$id]);
+//     $stmt = $this->connection->prepare("DELETE FROM coursetags WHERE course_id IN (SELECT id FROM courses WHERE category_id = ?)");
+//     $stmt->execute([$id]);
 
-    $stmt = $this->connection->prepare("DELETE FROM courses WHERE category_id = ?");
-    $stmt->execute([$id]);
+//     $stmt = $this->connection->prepare("DELETE FROM courses WHERE category_id = ?");
+//     $stmt->execute([$id]);
 
-    $stmt = $this->connection->prepare("DELETE FROM category WHERE id = ?");
-    $stmt->execute([$id]);
-}
+//     $stmt = $this->connection->prepare("DELETE FROM category WHERE id = ?");
+//     $stmt->execute([$id]);
+// }
 
 
 

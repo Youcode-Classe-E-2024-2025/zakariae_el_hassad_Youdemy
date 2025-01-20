@@ -94,6 +94,21 @@ class CourseController{
   
         require_once APP_VIEWS . "detailCourse.php";
     }
+
+    public function delete() {
+        if (isset($_GET['course_id'])) {
+            $courseId = $_GET['course_id']; 
+           
+            $this->categoryService->delete($courseId); 
+        }
+    
+        $userId = $_SESSION['user']->getId();  
+        $courses = $this->courseService->getAllByUser($userId);
+        $tags = $this->tagService->getAllTag();
+        $categorys = $this->categoryService->categoryService();
+    
+        require_once APP_VIEWS . "tonCourse.php";
+    }
     
 
 

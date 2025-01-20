@@ -210,6 +210,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                 <span class="ml-4">Tables</span>
               </a>
             </li>
+            <?php if ($_SESSION['user']->getRole()->getId() == 1): ?>
             <li class="relative px-6 py-3">
               <button
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -290,6 +291,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
               </template>
             </li>
           </ul>
+          <?php endif; ?>
           <div class="px-6 my-6">
             <button
               class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"

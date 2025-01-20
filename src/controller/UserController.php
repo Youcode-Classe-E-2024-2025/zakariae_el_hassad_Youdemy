@@ -71,9 +71,11 @@
 
         public function getAll()
         {
-            $users = $this->userService->getAllByRoleId(2);
+            $roleIds = [2, 3]; 
+            $users = $this->userService->getAllByRoleIds($roleIds);
             require_once APP_VIEWS . "toutLesUser.php";
         }
+
 
         public function get3User()
         {
@@ -93,7 +95,48 @@
         }
 
         public function home(){
-            $users = $this->userService->get3UserByRoleId(2);
+            $users = $this->userService->get3UserByRoleId();
             require_once APP_VIEWS . "home.php";
         }
+
+        public function delete(){
+            if (isset($_GET['user_id'])) {
+                $userId = $_GET['user_id']; 
+               
+                $this->userService->delete($userId); 
+            }
+        
+            $roleIds = [2, 3]; 
+            $users = $this->userService->getAllByRoleIds($roleIds);
+            require_once APP_VIEWS . "toutLesUser.php";
+        }
+
+        public function toggleActive()
+        {
+            if (!isset($_GET['id'])) {
+                header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=users&message=ID is missing");
+                exit();
+            }
+        
+            $userId = $_GET['id'];
+            $user = $this->userService->getById($userId);
+        
+            if (!$user) {
+                header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=users&message=User not found");
+                exit();
+            }
+        
+            $newActiveStatus = $user->getActive() == 1 ? 0 : 1;
+            $this->userService->updateActiveStatus($userId, $newActiveStatus);
+            $user = $this->userService->getById($userId);
+
+
+            $tags = $this->tagService->get10tags();
+            $categorys = $this->categoryService->get3Category();
+            $users = $this->userService->get3UserByRoleId(2);
+            require_once APP_VIEWS . "admin.php";
+        }
+        
+        
+
     }

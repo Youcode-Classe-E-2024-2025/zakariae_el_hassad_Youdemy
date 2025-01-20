@@ -26,7 +26,7 @@ class TagService{
 
     public function getAllTag()
     {
-        return $this->tagDao->getAllTag();
+        return $this->tagDao->getAllEntities();
 
     }
 
@@ -49,7 +49,7 @@ class TagService{
 
 
     public function delete($id) {
-        return $this->tagDao->getDelete($id);
+        return $this->tagDao->delete($id);
     }
 
 }

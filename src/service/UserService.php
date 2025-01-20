@@ -35,36 +35,55 @@ class UserService
         $user->setId($id);
     }
 
-    public function login(array $data)
-    {
-        $user = $this->userDao->getByEmail($data["email"]);
-        if (!$user) {
-            return [
-                "logged" => false,
-                "message" => "user not found"
-            ];
-        }   
-
-        if (!password_verify($data["password"], $user->getPassword())) {
-            return [
-                "logged" => false,
-                "message" => "password is incorrect"
-            ];
-        }
+    public function login(array $data) 
+{
+    $user = $this->userDao->getByEmail($data["email"]);
+    if (!$user) {
         return [
-            "logged" => true,
-            "message" => "user logged in successfully",
-            "user" => $user
+            "logged" => false,
+            "message" => "User not found"
+        ];
+    }   
+
+    if ($user->getActive() == 0) {
+        return [
+            "logged" => false,
+            "message" => "Votre compte est désactivé"
         ];
     }
-    public function getAllByRoleId($roleId) : array
+
+    if (!password_verify($data["password"], $user->getPassword())) {
+        return [
+            "logged" => false,
+            "message" => "Password is incorrect"
+        ];
+    }
+    return [
+        "logged" => true,
+        "message" => "User logged in successfully",
+        "user" => $user
+    ];
+}
+
+    public function getAllByRoleIds($roleIds) : array
     {
-        return $this->userDao->getAllByRoleId($roleId);
+        return $this->userDao->getAllByRoleIds($roleIds);
     }
 
-    public function get3UserByRoleId($roleId) : array
+    public function get3UserByRoleId() : array
     {
-        return $this->userDao->get3UserByRoleId($roleId);
+        return $this->userDao->getLast3UsersByRoles();
+    }
+    public function delete($id){
+        return $this->userDao->delete($id);
+    }
+
+    public function updateActiveStatus($userId , $newStatus){
+        return $this->userDao->updateActiveStatus($userId , $newStatus);
+    }
+
+    public function getById($id){
+        return $this->userDao->getById($id);
     }
 
 }

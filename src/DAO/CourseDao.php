@@ -1,11 +1,10 @@
 <?php
 
-class CourseDao extends BaseDao
-{
+class CourseDao extends BaseDao {
 
-    public function __construct()
-    {
-        parent::__construct("courses");
+
+    public function __construct() {
+        parent::__construct("courses", Course::class);
     }
 
     public function getAll() {
@@ -125,7 +124,7 @@ class CourseDao extends BaseDao
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$row) {
-        return null; // Retourne null si aucun cours n'est trouvé
+        return null;
     }
 
     $enseignant = new User($row['user_id'], $row['user_name']);

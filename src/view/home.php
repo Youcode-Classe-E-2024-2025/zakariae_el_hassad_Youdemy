@@ -1071,33 +1071,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
         <?php endforeach; ?>
     </div>
 </div>
-
-
-      <!-- Other Testimonials (Initially Hidden) -->
-      <div class="hidden">
-        <!-- Testimonial 2 -->
-        <div class="flex flex-col items-center text-center space-y-6">
-          <img src="../../public/images/c3.jpg" alt="testimonial" class="w-24 h-24 rounded-full object-cover">
-          <h6 class="text-xl font-semibold">World's best courses</h6>
-          <p class="text-gray-600 max-w-2xl">Consectetur adipisicing Lorem ipsum dolor sit amet,elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-          <h4 class="text-lg font-medium">Nike samson</h4>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="flex flex-col items-center text-center space-y-6">
-          <img src="../../public/images/c3.jpg" alt="testimonial" class="w-24 h-24 rounded-full object-cover">
-          <h6 class="text-xl font-semibold">Popular Courses</h6>
-          <p class="text-gray-600 max-w-2xl">Consectetur adipisicing Lorem ipsum dolor sit amet,elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-          <h4 class="text-lg font-medium">Milky Deo</h4>
-        </div>
-
-        <!-- Testimonial 4 -->
-        <div class="flex flex-col items-center text-center space-y-6">
-          <img src="../../public/images/c3.jpg" alt="testimonial" class="w-24 h-24 rounded-full object-cover">
-          <h6 class="text-xl font-semibold">Popular Courses</h6>
-          <p class="text-gray-600 max-w-2xl">Consectetur adipisicing Lorem ipsum dolor sit amet,elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
-          <h4 class="text-lg font-medium">Milky Deo</h4>
-        </div>
       </div>
     </div>
   </div>
