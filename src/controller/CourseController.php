@@ -132,6 +132,18 @@ class CourseController{
     
         require_once APP_VIEWS . "tonCourse.php";
     }
+
+    public function handleSearch() {
+        if (isset($_GET['search'])) {
+            $keyword = htmlspecialchars($_GET['search']); 
+            $courses = $this->courseService->searchCourses($keyword);
+    
+            require_once APP_VIEWS . "course.php";
+        } else {
+            echo "Veuillez entrer un mot-clé pour la recherche.";
+        }
+    }
+    
     
     
 

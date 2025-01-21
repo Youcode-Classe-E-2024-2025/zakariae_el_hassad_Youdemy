@@ -840,92 +840,98 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
         <main class="h-full overflow-y-auto">
             <div class="container px-6 mx-auto grid">
 
-<section class="py-12">
+            <section class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 py-12">
     <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center mb-8">
+        <div class="flex justify-between items-center mb-16">
             <div>
-                <h3 class="text-3xl font-bold mb-4">Browse our top courses</h3>
-                <p class="text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic fuga sit illo modi aut aspernatur tempore laboriosam saepe dolores eveniet.
-                </p>
+                <h3 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-4" style="background-clip: text; -webkit-background-clip: text;">Les courses disponibles</h3>
+                <p class="text-gray-300 text-lg">Explorez notre sélection de formations premium pour développer vos compétences</p>
             </div>
-            <!-- Button Add Course -->
-            <div class="flex justify-end mb-6">
-            <button 
-                type="button" 
-                onclick="toggleModalCourse()" 
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                Add category
-            </button>
-        </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <?php foreach($courses as $course):  ?>
-    <div class=" bg-gray-700 mb-4 p-4 border-2 border-transparent hover:border-blue-500 hover:scale-105 transition-all duration-300 ease-in-out animate__animated animate__fadeIn">
-        <img src="<?= $course->getImage() ?>" alt="product" class="w-full h-48 object-cover">
-        <div class="mt-3 text-center">
-            <h5 class="text-xl font-semibold mb-2 text-gray-200"><?= htmlspecialchars($course->getName()) ?></h5>
-            <div class="flex justify-center gap-4 text-gray-200 text-sm mb-2">
-                <p class="flex items-center"><span class="mr-1">📅</span>7 April</p>
-                <p class="flex items-center"><span class="mr-1">👁</span> 3286 Views</p>
+            <div>
+                <button 
+                    type="button" 
+                    onclick="toggleModalCourse()" 
+                    class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg hover:opacity-90 transition duration-300 flex items-center gap-2">
+                    <span>Add Course</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                </button>
             </div>
-            <p class="text-gray-300 mb-3"><?= htmlspecialchars($course->getDescription()) ?></p>
+        </div>
 
-            <?php if ($course->getCategory()): ?>
-              <div class="mt-4">
-                <span class="text-gray-500 font-medium">Category:</span>
-                <div class="bg-gradient-to-r from-green-400 to-gray-700 rounded-full text-white text-center py-2 px-4 mt-2 w-max mx-auto transform transition-all duration-300 ease-in-out hover:scale-105 shadow-lg">
-                  <p class="text-lg"><?= htmlspecialchars($course->getCategory()->getName()) ?></p>
-                </div>
-              </div>
-            <?php endif; ?>
-
-
-            <div class="flex justify-between mt-4">
-                <a href="" 
-                   class="flex items-center gap-2 bg-green-600 text-white px-3 py-1.5 rounded hover:bg-green-700 transition duration-300">
-                    <i class="fas fa-edit"></i>
-                    <span>Edit</span>
-                </a>
-            
-                <a href="?action=&course_id=<?= htmlspecialchars($course->getId()) ?>"
-                   class="flex items-center gap-2 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition duration-300">
-                    <i class="fas fa-trash"></i>
-                    <span>Delete</span>
-                </a>
+        <?php if (isset($courses) && !empty($courses)): ?>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <?php foreach($courses as $course): ?>
+                    <div class="group bg-gray-800 rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="relative">
+                            <img src="<?= $course->getImage() ?>" alt="product" class="w-full h-48 object-cover">
+                            <div class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm">Premium</div>
+                        </div>
+                        <div class="p-6">
+                            <h5 class="text-xl font-bold text-white mb-3"><?= htmlspecialchars($course->getName()) ?></h5>
+                            <div class="flex justify-center gap-6 text-gray-400 text-sm mb-4">
+                                <p class="flex items-center"><span class="mr-2">📅</span>7 April</p>
+                                <p class="flex items-center"><span class="mr-2">👁</span> 3286 Views</p>
+                            </div>
+                            <p class="text-gray-300 mb-4"><?= htmlspecialchars($course->getDescription()) ?></p>
+                            <?php if ($course->getCategory()): ?>
+                                <div class="mt-4 mb-6">
+                                    <span class="text-gray-400 text-sm">Category:</span>
+                                    <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white text-center py-2 px-6 mt-2 w-max mx-auto transform transition-all duration-300 hover:opacity-90">
+                                        <p class="text-sm font-medium"><?= htmlspecialchars($course->getCategory()->getName()) ?></p>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+                            <div class="flex justify-between gap-4 mb-4">
+                                <a href="" 
+                                   class="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300 flex-1 justify-center">
+                                    <i class="fas fa-edit"></i>
+                                    <span>Edit</span>
+                                </a>
+                                <a href="?action=&course_id=<?= htmlspecialchars($course->getId()) ?>"
+                                   class="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300 flex-1 justify-center">
+                                    <i class="fas fa-trash"></i>
+                                    <span>Delete</span>
+                                </a>
+                            </div>
+                            <a href="?action=course_documment&id=<?= $course->getId() ?>" 
+                               class="block w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-lg text-center hover:opacity-90 transition-all duration-200">
+                                Détail
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <a href="?action=course_documment&id=<?= $course->getId() ?>" 
-              class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded text-sm transition-colors duration-200">
-              Détail
-            </a>
-
-        </div>
-    </div>
-
-<?php endforeach; ?>
-
-        </div>
-        <div class="flex justify-center mt-8">
-    <?php if ($page > 1): ?>
-        <a href="?action=ton_course&page=<?= $page - 1 ?>" class="px-4 py-2 mx-1 bg-gray-300 rounded hover:bg-gray-400">Précédent</a>
-    <?php endif; ?>
-
-    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <a href="?action=ton_course&page=<?= $i ?>" class="px-4 py-2 mx-1 <?= $i == $page ? 'bg-blue-500 text-white' : 'bg-gray-300 hover:bg-gray-400' ?> rounded">
-            <?= $i ?>
-        </a>
-    <?php endfor; ?>
-
-    <?php if ($page < $totalPages): ?>
-        <a href="?action=ton_course&page=<?= $page + 1 ?>" class="px-4 py-2 mx-1 bg-gray-300 rounded hover:bg-gray-400">Suivant</a>
-    <?php endif; ?>
-</div>
+            <div class="flex justify-center mt-12 space-x-2">
+                <?php if ($page > 1): ?>
+                    <a href="?action=ton_course&page=<?= $page - 1 ?>" 
+                       class="px-4 py-2 rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 transition-all duration-200">
+                        Précédent
+                    </a>
+                <?php endif; ?>
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?action=ton_course&page=<?= $i ?>" 
+                       class="px-4 py-2 rounded-lg transition-all duration-200 <?= $i == $page ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700' ?>">
+                        <?= $i ?>
+                    </a>
+                <?php endfor; ?>
+                <?php if ($page < $totalPages): ?>
+                    <a href="?action=ton_course&page=<?= $page + 1 ?>" 
+                       class="px-4 py-2 rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 transition-all duration-200">
+                        Suivant
+                    </a>
+                <?php endif; ?>
+            </div>
+        <?php else: ?>
+            <div class="text-center py-12">
+                <p class="text-gray-400 text-lg">Aucun cours trouvé pour votre recherche.</p>
+            </div>
+        <?php endif; ?>
     </div>
 </section>
 
-    </div>
-</section>
+
 
 <!-- Add Category Modal -->
 <section id="addModalCourse" 

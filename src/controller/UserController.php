@@ -141,7 +141,4 @@
             $users = $this->userService->get3UserByRoleId(2);
             require_once APP_VIEWS . "admin.php";
         }
-        
-        
-
     }

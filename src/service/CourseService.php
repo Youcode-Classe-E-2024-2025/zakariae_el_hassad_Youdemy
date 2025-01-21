@@ -57,5 +57,10 @@ class CourseService{
     public function delete($id) {
         return $this->courseDao->delete($id);
     }
+
+    public function searchCourses($keyword) {
+        return $this->courseDao->searchCourses($keyword);
+    }
+
     
 }

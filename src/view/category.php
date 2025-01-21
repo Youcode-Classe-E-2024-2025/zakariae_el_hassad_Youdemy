@@ -753,51 +753,76 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
         </header>
         <main class="h-full overflow-y-auto">
             <div class="container px-6 mx-auto grid">
-<section class="py-12">
+            <section class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 py-12">
     <div class="container mx-auto px-4">
+        <!-- Header Section -->
+        <div class="text-center mb-16">
+            <h3 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-4" style="background-clip: text; -webkit-background-clip: text;">Catégories des Cours</h3>
+            <p class="text-gray-300 text-lg">
+                Découvrez nos différentes catégories de formation
+            </p>
+        </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 p-6">
-    <?php foreach ($categorys as $category): ?>
-        <button class="relative overflow-hidden rounded-lg shadow-lg group h-50 bg-white hover:shadow-2xl transform transition duration-300 hover:scale-105 animate__animated animate__fadeIn">
-            <div class="relative overflow-hidden rounded-lg shadow-lg group h-50">
-            <img 
-    src="<?= $category->getImage() ?>" 
-    alt="Category background" 
-    class="absolute inset-0 w-full h-full object-cover"
-/>
-                <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-black/80"></div>
-                <div class="relative h-full p-6 flex flex-col justify-between z-10">
-                    <div>
-                        <h5 class="text-xl font-semibold mb-3">
-                            <a href="course.html" class="text-white hover:text-blue-300 transition duration-300">
-                                <?= htmlspecialchars($category->getName()) ?>
-                            </a>
-                        </h5>
-                        <p class="text-gray-200 text-sm">
-                            <?= htmlspecialchars($category->getDescription()) ?>
-                        </p>
+            <?php foreach ($categorys as $category): ?>
+                <button class="relative overflow-hidden rounded-xl shadow-lg group h-64 transform transition duration-300 hover:scale-105 hover:shadow-2xl animate__animated animate__fadeIn">
+                    <div class="relative overflow-hidden rounded-xl h-full">
+                        <img 
+                            src="<?= $category->getImage() ?>" 
+                            alt="Category background" 
+                            class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/80 group-hover:from-black/40 group-hover:to-black/90 transition-all duration-300"></div>
+                        
+                        <div class="relative h-full p-6 flex flex-col justify-between z-10">
+                            <div>
+                                <h5 class="text-2xl font-bold mb-3">
+                                    <a href="course.html" class="text-white group-hover:text-blue-400 transition duration-300">
+                                        <?= htmlspecialchars($category->getName()) ?>
+                                    </a>
+                                </h5>
+                                <p class="text-gray-200 text-sm line-clamp-3 group-hover:text-gray-100 transition-colors duration-300">
+                                    <?= htmlspecialchars($category->getDescription()) ?>
+                                </p>
+                            </div>
+                            
+                            <div class="mt-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                <span class="inline-flex items-center text-sm text-blue-400">
+                                    Découvrir 
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </button>
-    <?php endforeach; ?>
-</div>
-<div class="flex justify-center mt-8">
-    <?php if ($page > 1): ?>
-        <a href="?action=tout-Category&page=<?= $page - 1 ?>" class="px-4 py-2 mx-1 bg-gray-300 rounded hover:bg-gray-400">Précédent</a>
-    <?php endif; ?>
+                </button>
+            <?php endforeach; ?>
+        </div>
 
-    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <a href="?action=tout-Category&page=<?= $i ?>" class="px-4 py-2 mx-1 <?= $i == $page ? 'bg-blue-500 text-white' : 'bg-gray-300 hover:bg-gray-400' ?> rounded">
-            <?= $i ?>
-        </a>
-    <?php endfor; ?>
+        <!-- Pagination -->
+        <div class="flex justify-center mt-12 space-x-2">
+            <?php if ($page > 1): ?>
+                <a href="?action=tout-Category&page=<?= $page - 1 ?>" 
+                   class="px-4 py-2 rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 transition-all duration-200">
+                    Précédent
+                </a>
+            <?php endif; ?>
 
-    <?php if ($page < $totalPages): ?>
-        <a href="?action=tout-Category&page=<?= $page + 1 ?>" class="px-4 py-2 mx-1 bg-gray-300 rounded hover:bg-gray-400">Suivant</a>
-    <?php endif; ?>
-</div>
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <a href="?action=tout-Category&page=<?= $i ?>" 
+                   class="px-4 py-2 rounded-lg transition-all duration-200 <?= $i == $page ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700' ?>">
+                    <?= $i ?>
+                </a>
+            <?php endfor; ?>
 
-
+            <?php if ($page < $totalPages): ?>
+                <a href="?action=tout-Category&page=<?= $page + 1 ?>" 
+                   class="px-4 py-2 rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 transition-all duration-200">
+                    Suivant
+                </a>
+            <?php endif; ?>
+        </div>
     </div>
 </section>
 

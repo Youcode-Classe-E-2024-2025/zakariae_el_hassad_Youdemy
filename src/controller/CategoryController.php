@@ -42,7 +42,7 @@ class CategoryController {
 
     public function getAll() {
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $limit = 15; 
+        $limit = 8; 
         $offset = ($page - 1) * $limit;
     
         $categorys = $this->categoryService->categoryService($limit, $offset);
@@ -79,12 +79,12 @@ class CategoryController {
                 header("Location: ?page=categories&message=deleted");
                 exit();
             } else {
-                header("Location: ?page=categories&message=error");
+                header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=tout-Category");
                 exit();
             }
         }
     
-        header("Location: ?page=categories&message=invalid");
+        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=tout-Category");
         exit();
     }
 }

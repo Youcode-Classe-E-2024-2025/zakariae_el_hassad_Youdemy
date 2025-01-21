@@ -114,6 +114,9 @@ if(isset($_GET["action"])) {
         case "delete_course":
             $courseController->delete();
             break;
+        case "search" :
+            $courseController->handleSearch();
+            break;
         default :
             echo "sjsisbx";
             break;

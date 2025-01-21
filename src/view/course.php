@@ -610,32 +610,11 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
               </svg>
             </button>
             <!-- Search input -->
-            <div class="flex justify-center flex-1 lg:mr-32">
-              <div
-                class="relative w-full max-w-xl mr-6 focus-within:text-purple-500"
-              >
-                <div class="absolute inset-y-0 flex items-center pl-2">
-                  <svg
-                    class="w-4 h-4"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                </div>
-                <input
-                  class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                  type="text"
-                  placeholder="Search for projects"
-                  aria-label="Search"
-                />
-              </div>
-            </div>
+            <form method="GET" action="?action=search">
+    <input type="text" name="search" placeholder="Rechercher un cours..." required>
+    <button type="submit">Rechercher</button>
+</form>
+
             <ul class="flex items-center flex-shrink-0 space-x-6">
             <?php if (!$_SESSION['user']->getRole()->getId() == 1 || !$_SESSION['user']->getRole()->getId() == 2 || !$_SESSION['user']->getRole()->getId() == 3): ?>
             <a href="?action=login-form">
@@ -753,71 +732,92 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
         </header>
         <main class="h-full overflow-y-auto">
             <div class="container px-6 mx-auto grid">
-
-<section class="py-12">
+            <section class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 py-12">
     <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center mb-8">
-            <div>
-                <h3 class="text-3xl font-bold mb-4">Browse our top courses</h3>
-                <p class="text-gray-600">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic fuga sit illo modi aut aspernatur tempore laboriosam saepe dolores eveniet.
-                </p>
-            </div>
-        </div>
+        <!-- Header Section -->
+        <div class="text-center mb-16">
+            <h3 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-6" style="background-clip: text; -webkit-background-clip: text;">Découvrez Nos Cours</h3>
+            <p class="text-gray-300 text-xl max-w-2xl mx-auto">
+                Explorez notre sélection de formations premium pour développer vos compétences
+            </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- First Course -->
-            <?php foreach($courses as $course):  ?>
-    <div class=" bg-gray-700 mb-4 p-4 border-2 border-transparent hover:border-blue-500 hover:scale-105 transition-all duration-300 ease-in-out animate__animated animate__fadeIn">
-          <img src="<?= $course->getImage() ?>" alt="product" class="w-full h-48 object-cover">
-          <div class="mt-3 text-center">
-            <h5 class="text-xl font-semibold mb-2 text-gray-200"><?= htmlspecialchars($course->getName()) ?></h5>
-            <div class="flex justify-center gap-4 text-gray-200 text-sm mb-2">
-                <p class="flex items-center"><span class="mr-1">📅</span>7 April</p>
-                <p class="flex items-center"><span class="mr-1">👁</span> 3286 Views</p>
-            </div>
-            <?php if ($course->getCategory()): ?>
-              <div class="mt-4">
-                <span class="text-gray-500 font-medium">Category:</span>
-                <div class="bg-gradient-to-r from-green-400 to-gray-700 rounded-full text-white text-center py-2 px-4 mt-2 w-max mx-auto transform transition-all duration-300 ease-in-out hover:scale-105 shadow-lg">
-                  <p class="text-lg"><?= htmlspecialchars($course->getCategory()->getName()) ?></p>
-                </div>
-              </div>
-              <br>
-            <?php endif; ?>
-            <?php if ($_SESSION['user']->getRole()->getId() == 1 || $_SESSION['user']->getRole()->getId() == 2 || $_SESSION['user']->getRole()->getId() == 3): ?>
-            <a href="?action=course_documment&id=<?= $course->getId() ?>" 
-              class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded text-sm transition-colors duration-200">
-              Détail
-            </a>
-            <?php endif; ?>
+        <?php if (isset($courses) && !empty($courses)): ?>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <?php foreach($courses as $course): ?>
+                    <div class="group bg-gray-800 rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <!-- Image Section -->
+                        <div class="relative">
+                            <img src="<?= $course->getImage() ?>" alt="product" class="w-full h-48 object-cover">
+                            <div class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
+                                Premium
+                            </div>
+                        </div>
 
-        </div>
+                        <!-- Content Section -->
+                        <div class="p-6">
+                            <h5 class="text-xl font-bold text-white mb-3"><?= htmlspecialchars($course->getName()) ?></h5>
+                            
+                            <!-- Stats -->
+                            <div class="flex justify-center gap-6 text-gray-400 text-sm mb-4">
+                                <p class="flex items-center"><span class="mr-2">📅</span>7 April</p>
+                                <p class="flex items-center"><span class="mr-2">👁</span> 3286 Views</p>
+                            </div>
+
+                            <!-- Category -->
+                            <?php if ($course->getCategory()): ?>
+                                <div class="mt-4">
+                                    <span class="text-gray-400 text-sm">Category:</span>
+                                    <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white text-center py-2 px-6 mt-2 w-max mx-auto transform transition-all duration-300 hover:opacity-90">
+                                        <p class="text-sm font-medium"><?= htmlspecialchars($course->getCategory()->getName()) ?></p>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
+                            <!-- Action Button -->
+                            <?php if ($_SESSION['user']->getRole()->getId() == 1 || $_SESSION['user']->getRole()->getId() == 2 || $_SESSION['user']->getRole()->getId() == 3): ?>
+                                <div class="mt-6">
+                                    <a href="?action=course_documment&id=<?= $course->getId() ?>" 
+                                       class="block w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-lg text-center hover:opacity-90 transition-all duration-200">
+                                        Détail
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex justify-center mt-12 space-x-2">
+                <?php if ($page > 1): ?>
+                    <a href="?action=course&page=<?= $page - 1 ?>" 
+                       class="px-4 py-2 rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 transition-all duration-200">
+                        Précédent
+                    </a>
+                <?php endif; ?>
+
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                    <a href="?action=course&page=<?= $i ?>" 
+                       class="px-4 py-2 rounded-lg transition-all duration-200 <?= $i == $page ? 'bg-blue-500 text-white' : 'bg-gray-800 text-gray-300 hover:bg-gray-700' ?>">
+                        <?= $i ?>
+                    </a>
+                <?php endfor; ?>
+
+                <?php if ($page < $totalPages): ?>
+                    <a href="?action=course&page=<?= $page + 1 ?>" 
+                       class="px-4 py-2 rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 transition-all duration-200">
+                        Suivant
+                    </a>
+                <?php endif; ?>
+            </div>
+        <?php else: ?>
+            <div class="text-center py-12">
+                <p class="text-gray-400 text-lg">Aucun cours trouvé pour votre recherche.</p>
+            </div>
+        <?php endif; ?>
     </div>
-<?php endforeach; ?>
-
-</div> <!-- Fin de la grille des cours -->
-
-<div class="flex justify-center mt-8">
-    <?php if ($page > 1): ?>
-        <a href="?action=course&page=<?= $page - 1 ?>" class="px-4 py-2 mx-1 bg-gray-300 rounded hover:bg-gray-400">Précédent</a>
-    <?php endif; ?>
-
-    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <a href="?action=course&page=<?= $i ?>" class="px-4 py-2 mx-1 <?= $i == $page ? 'bg-blue-500 text-white' : 'bg-gray-300 hover:bg-gray-400' ?> rounded">
-            <?= $i ?>
-        </a>
-    <?php endfor; ?>
-
-    <?php if ($page < $totalPages): ?>
-        <a href="?action=course&page=<?= $page + 1 ?>" class="px-4 py-2 mx-1 bg-gray-300 rounded hover:bg-gray-400">Suivant</a>
-    <?php endif; ?>
-</div>
-
-</div> 
 </section>
-
 
 
         </div>
