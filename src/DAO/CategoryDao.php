@@ -96,18 +96,15 @@ class CategoryDao extends BaseDao {
     return $Categorys;
 }
 
+public function getPaginatedCategories(int $limit, int $offset): array {
+    return $this->getAllEntities($limit, $offset);
+}
 
-// public function getDelete($id) {
-
-//     $stmt = $this->connection->prepare("DELETE FROM coursetags WHERE course_id IN (SELECT id FROM courses WHERE category_id = ?)");
-//     $stmt->execute([$id]);
-
-//     $stmt = $this->connection->prepare("DELETE FROM courses WHERE category_id = ?");
-//     $stmt->execute([$id]);
-
-//     $stmt = $this->connection->prepare("DELETE FROM category WHERE id = ?");
-//     $stmt->execute([$id]);
-// }
+public function countCategories(): int {
+    $stmt = $this->connection->prepare("SELECT COUNT(*) FROM category");
+    $stmt->execute();
+    return (int) $stmt->fetchColumn();
+}
 
 
 

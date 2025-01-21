@@ -54,8 +54,20 @@ abstract class BaseDao
         $stmt->execute([$id]);
     }
 
-    public function getAllEntities(): array {
-        $stmt = $this->connection->prepare("SELECT * FROM $this->tableName");
+    public function getAllEntities(int $limit = null, int $offset = 0): array {
+        $query = "SELECT * FROM $this->tableName";
+    
+        if ($limit !== null) {
+            $query .= " LIMIT :limit OFFSET :offset";
+        }
+    
+        $stmt = $this->connection->prepare($query);
+    
+        if ($limit !== null) {
+            $stmt->bindValue(":limit", $limit, PDO::PARAM_INT);
+            $stmt->bindValue(":offset", $offset, PDO::PARAM_INT);
+        }
+    
         $stmt->execute();
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
@@ -63,25 +75,21 @@ abstract class BaseDao
         
         foreach ($rows as $row) {
             $reflectionClass = new ReflectionClass($this->className);
-    
             $constructor = $reflectionClass->getConstructor();
-            
+    
             if ($constructor) {
                 $params = [];
                 foreach ($constructor->getParameters() as $param) {
                     $paramName = $param->getName();
-                    if (array_key_exists($paramName, $row)) {
-                        $params[] = $row[$paramName]; 
-                    } else {
-                        $params[] = null; 
-                    }
+                    $params[] = $row[$paramName] ?? null;
                 }
                 $entity = $reflectionClass->newInstanceArgs($params);
             } 
-
+    
             $entities[] = $entity;
         }
         
         return $entities;
     }
+    
 }

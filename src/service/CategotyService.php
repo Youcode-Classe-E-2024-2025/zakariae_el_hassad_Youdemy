@@ -24,10 +24,14 @@ class CategoryService{
     }
     
 
-    public function categoryService()
-    {
-        return $this->categoryDao->getAllEntities();
+    public function categoryService(int $limit, int $offset) {
+        return $this->categoryDao->getPaginatedCategories($limit, $offset);
     }
+    
+    public function countCategories() {
+        return $this->categoryDao->countCategories();
+    }
+    
 
     public function getCategoryById(int $id): ?Category
     {
