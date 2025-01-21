@@ -28,7 +28,7 @@
             </div>
             <button >Log In</button>
             <div class="register">
-                <p>Don't have an account? <a href="http://127.0.0.1:5500/login/home.html">Register</a></p>
+                <p>Don't have an account? <a href="?action=register-form">Register</a></p>
             </div>
         </form>
     </div>

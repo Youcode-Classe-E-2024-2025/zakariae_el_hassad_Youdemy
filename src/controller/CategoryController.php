@@ -40,15 +40,28 @@ class CategoryController {
     
     
 
-    public function getAll()
-    {
-        $categorys = $this->categoryService->categoryService();
+    public function getAll() {
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit = 15; 
+        $offset = ($page - 1) * $limit;
+    
+        $categorys = $this->categoryService->categoryService($limit, $offset);
+        $totalCategories = $this->categoryService->countCategories();
+        $totalPages = ceil($totalCategories / $limit);
+    
         require_once APP_VIEWS . "category.php";
     }
+    
+    public function getAll2(){
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit = 9;
+        $offset = ($page - 1) * $limit;
+    
+        $categorys = $this->categoryService->categoryService($limit, $offset);
 
-    public function getAll2()
-    {
-        $categorys = $this->categoryService->categoryService();
+        $totalCategories = $this->categoryService->countCategories();
+        $totalPages = ceil($totalCategories / $limit);
+    
         require_once APP_VIEWS . "toutLesCategory.php";
     }
 
@@ -59,13 +72,19 @@ class CategoryController {
     }
 
     public function delete() {
-        if (isset($_GET['category_id'])) {
-            $categoryId = $_GET['category_id']; 
-           
-            $this->categoryService->delete($categoryId); 
+        if (isset($_GET['category_id']) && is_numeric($_GET['category_id'])) {
+            $categoryId = intval($_GET['category_id']); 
+            
+            if ($this->categoryService->delete($categoryId)) {
+                header("Location: ?page=categories&message=deleted");
+                exit();
+            } else {
+                header("Location: ?page=categories&message=error");
+                exit();
+            }
         }
     
-        $categorys = $this->categoryService->categoryService();
-        require_once APP_VIEWS . "toutLesCategory.php";
+        header("Location: ?page=categories&message=invalid");
+        exit();
     }
 }
