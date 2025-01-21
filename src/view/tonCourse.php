@@ -164,6 +164,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                 <span class="ml-4">Buttons</span>
               </a>
             </li> -->
+            <?php if ($_SESSION['user']->getRole()->getId() == 1 || $_SESSION['user']->getRole()->getId() == 2): ?>
             <li class="relative px-6 py-3">
             <span
                 class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
@@ -190,6 +191,8 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                 <span class="ml-4">Ton Course</span>
               </a>
             </li>
+            <?php endif; ?>
+
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -210,7 +213,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                 <span class="ml-4">Tables</span>
               </a>
             </li>
-            <?php if ($_SESSION['user']->getRole()->getId() == 1): ?>
             <li class="relative px-6 py-3">
               <button
                 class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -291,7 +293,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
               </template>
             </li>
           </ul>
-          <?php endif; ?>
           <div class="px-6 my-6">
             <button
               class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
@@ -869,6 +870,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                 <p class="flex items-center"><span class="mr-1">📅</span>7 April</p>
                 <p class="flex items-center"><span class="mr-1">👁</span> 3286 Views</p>
             </div>
+            <p class="text-gray-300 mb-3"><?= htmlspecialchars($course->getDescription()) ?></p>
 
             <?php if ($course->getCategory()): ?>
               <div class="mt-4">
@@ -878,7 +880,8 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                 </div>
               </div>
             <?php endif; ?>
-            
+
+
             <div class="flex justify-between mt-4">
                 <a href="" 
                    class="flex items-center gap-2 bg-green-600 text-white px-3 py-1.5 rounded hover:bg-green-700 transition duration-300">
@@ -886,7 +889,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                     <span>Edit</span>
                 </a>
             
-                <a href="?action=delete_course&course_id=<?= htmlspecialchars($course->getId()) ?>"
+                <a href="?action=&course_id=<?= htmlspecialchars($course->getId()) ?>"
                    class="flex items-center gap-2 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition duration-300">
                     <i class="fas fa-trash"></i>
                     <span>Delete</span>
@@ -902,10 +905,22 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
 
 <?php endforeach; ?>
 
-
-
-
         </div>
+        <div class="flex justify-center mt-8">
+    <?php if ($page > 1): ?>
+        <a href="?action=ton_course&page=<?= $page - 1 ?>" class="px-4 py-2 mx-1 bg-gray-300 rounded hover:bg-gray-400">Précédent</a>
+    <?php endif; ?>
+
+    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+        <a href="?action=ton_course&page=<?= $i ?>" class="px-4 py-2 mx-1 <?= $i == $page ? 'bg-blue-500 text-white' : 'bg-gray-300 hover:bg-gray-400' ?> rounded">
+            <?= $i ?>
+        </a>
+    <?php endfor; ?>
+
+    <?php if ($page < $totalPages): ?>
+        <a href="?action=ton_course&page=<?= $page + 1 ?>" class="px-4 py-2 mx-1 bg-gray-300 rounded hover:bg-gray-400">Suivant</a>
+    <?php endif; ?>
+</div>
     </div>
 </section>
 

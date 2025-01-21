@@ -7,7 +7,7 @@ class CourseDao extends BaseDao {
         parent::__construct("courses", Course::class);
     }
 
-    public function getAll() {
+    public function getAll($limit, $offset) { 
         $stmt = $this->connection->prepare("SELECT 
             c.id,
             c.name, 
@@ -20,12 +20,16 @@ class CourseDao extends BaseDao {
             category.name as category_name, 
             GROUP_CONCAT(tags.name) as tag_names
         FROM courses c
-        JOIN users u on c.enseignant_id = u.id
-        JOIN category on c.category_id = category.id
-        LEFT JOIN coursetags ct on c.id = ct.course_id
-        LEFT JOIN tags on ct.tag_id = tags.id
-        GROUP BY c.id");
+        JOIN users u ON c.enseignant_id = u.id
+        JOIN category ON c.category_id = category.id
+        LEFT JOIN coursetags ct ON c.id = ct.course_id
+        LEFT JOIN tags ON ct.tag_id = tags.id
+        GROUP BY c.id
+        LIMIT :limit OFFSET :offset");
     
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
@@ -52,7 +56,8 @@ class CourseDao extends BaseDao {
         return $courses;
     }
     
-    public function getAllByUser($userId) {
+    
+    public function getAllByUser($userId, $limit, $offset) { 
         $stmt = $this->connection->prepare("SELECT 
             c.id,
             c.name, 
@@ -70,9 +75,12 @@ class CourseDao extends BaseDao {
         LEFT JOIN coursetags ct on c.id = ct.course_id
         LEFT JOIN tags on ct.tag_id = tags.id
         WHERE c.enseignant_id = :userId     
-        GROUP BY c.id");
+        GROUP BY c.id
+        LIMIT :limit OFFSET :offset");
     
         $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
@@ -98,6 +106,7 @@ class CourseDao extends BaseDao {
     
         return $courses;
     }
+    
 
     public function getCourseById($courseId) {
     $stmt = $this->connection->prepare("SELECT 
@@ -143,6 +152,19 @@ class CourseDao extends BaseDao {
     );
 }
 
+public function countAll() {
+    $stmt = $this->connection->prepare("SELECT COUNT(*) as total FROM courses");
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+}
+
+
+public function countByUser($userId) {
+    $stmt = $this->connection->prepare("SELECT COUNT(*) FROM courses WHERE enseignant_id = :userId");
+    $stmt->bindParam(':userId', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
         
         
 }

@@ -61,24 +61,38 @@ class CourseController{
         exit();
     }
 
-    public function getAll()
-    {
-
-        $courses = $this->courseService->getAll();
+    public function getAll() {
+        $limit = 9;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $limit;
+    
+        $courses = $this->courseService->getAll($limit, $offset);
         $tags = $this->tagService->getAllTag();
-        $categorys = $this->categoryService->categoryService();
+        $categories = $this->categoryService->categoryService($limit, $offset);
+        
+        $totalCourses = $this->courseService->countAll();
+        $totalPages = ceil($totalCourses / $limit);
+    
         require_once APP_VIEWS . "course.php";
     }
+    
 
     public function getAllByUser() {
-
+        $limit = 9;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $limit;
+    
         $userId = $_SESSION['user']->getId();  
-        $courses = $this->courseService->getAllByUser($userId);
+        $courses = $this->courseService->getAllByUser($userId, $limit, $offset);
         $tags = $this->tagService->getAllTag();
-        $categorys = $this->categoryService->categoryService();
+        $categories = $this->categoryService->categoryService($limit, $offset);
+    
+        $totalCourses = $this->courseService->countByUser($userId);
+        $totalPages = ceil($totalCourses / $limit);
     
         require_once APP_VIEWS . "tonCourse.php";
     }
+    
 
     public function showCourseDetail() {
         if (!isset($_GET['id']) || empty($_GET['id'])) {
@@ -97,18 +111,28 @@ class CourseController{
 
     public function delete() {
         if (isset($_GET['course_id'])) {
-            $courseId = $_GET['course_id']; 
-           
-            $this->categoryService->delete($courseId); 
+            $courseId = (int)$_GET['course_id']; 
+    
+            $this->courseService->delete($courseId); 
         }
     
-        $userId = $_SESSION['user']->getId();  
-        $courses = $this->courseService->getAllByUser($userId);
+        // Pagination
+        $limit = 9;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $limit;
+    
+        $userId = $_SESSION['user']->getId();
+        $courses = $this->courseService->getAllByUser($userId, $limit, $offset);
         $tags = $this->tagService->getAllTag();
-        $categorys = $this->categoryService->categoryService();
+        $categories = $this->categoryService->categoryService($limit, $offset);
+    
+        // Recalcul du nombre total de pages
+        $totalCourses = $this->courseService->countByUser($userId);
+        $totalPages = ceil($totalCourses / $limit);
     
         require_once APP_VIEWS . "tonCourse.php";
     }
+    
     
 
 

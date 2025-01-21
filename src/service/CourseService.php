@@ -33,13 +33,22 @@ class CourseService{
         $this->courseTagDao->save($courseId, $data["tags"]);
     }
 
-    public function getAll(){
-        return $this->courseDao->getAll();
+    public function getAll($limit, $offset) { 
+        return $this->courseDao->getAll($limit, $offset);
     }
-
-    public function getAllByUser($userId) {
-        return $this->courseDao->getAllByUser($userId);
+    
+    public function countAll() {
+        return $this->courseDao->countAll();
     }
+    
+    public function getAllByUser($userId, $limit, $offset) {
+        return $this->courseDao->getAllByUser($userId, $limit, $offset);
+    }
+    
+    public function countByUser($userId) {
+        return $this->courseDao->countByUser($userId);
+    }
+    
 
     public function getCourseById($courseId) {
         return $this->courseDao->getCourseById($courseId);
