@@ -22,7 +22,8 @@ class UserService
         }
 
         $hashedPassword = password_hash($data["password"], PASSWORD_DEFAULT);
-        $role = new Role(2);
+       $role = new Role();
+        $role->setId($data["role_id"]);
 
         $user = new User(
             name: $data["name"],
@@ -65,7 +66,7 @@ class UserService
     ];
 }
 
-    public function getAllByRoleIds($roleIds) : array
+    public function getAllByRoleIds($roleIds,) : array
     {
         return $this->userDao->getAllByRoleIds($roleIds);
     }

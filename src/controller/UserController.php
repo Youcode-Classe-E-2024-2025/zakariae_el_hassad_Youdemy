@@ -39,6 +39,7 @@
 
         public function showLoginForm()
         {
+            // $this->logout();
             require_once APP_VIEWS . "login.php";
         }
 
@@ -57,10 +58,13 @@
     $_SESSION['logged'] = true;
     
     if ($response['user']->getRole()->getId() == 1) { 
-        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=category");
+        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=admin");
     } 
     else if($response['user']->getRole()->getId() == 2) {
-        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=home");
+        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=ton_course");
+    }
+    else if($response['user']->getRole()->getId() == 3) {
+        header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=category");
     }
     else {
         header("Location: http://localhost/zakariae_el_hassad_Youdemy/?action=login-form");
@@ -95,7 +99,8 @@
         }
 
         public function home(){
-            $users = $this->userService->get3UserByRoleId();
+            $roleIds = [2]; 
+            $users = $this->userService->getAllByRoleIds($roleIds);
             require_once APP_VIEWS . "home.php";
         }
 

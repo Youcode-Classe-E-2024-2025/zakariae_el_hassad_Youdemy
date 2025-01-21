@@ -166,6 +166,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                 <span class="ml-4">Buttons</span>
               </a>
             </li> -->
+            <?php if ($_SESSION['user']->getRole()->getId() == 1 || $_SESSION['user']->getRole()->getId() == 2): ?>
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -188,6 +189,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                 <span class="ml-4">Ton Course</span>
               </a>
             </li>
+            <?php endif; ?>
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
@@ -291,12 +293,13 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
           </ul>
           <?php endif; ?>
           <div class="px-6 my-6">
+            <a href="?action=logout">
             <button
-              class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-            >
-              Create account
+              class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+              <p class="w-full">Login</p>
               <span class="ml-2" aria-hidden="true">+</span>
             </button>
+            </a>
           </div>
         </div>
       </aside>
@@ -512,7 +515,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                       d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
                     ></path>
                   </svg>
-                  <span class="ml-4">ADMIN</span>
+                  <span class="ml-4">Admin</span>
                 </span>
                 <svg
                   class="w-4 h-4"
@@ -633,113 +636,24 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
               </div>
             </div>
             <ul class="flex items-center flex-shrink-0 space-x-6">
-              <!-- Theme toggler -->
-              <li class="flex">
-                <button
-                  class="rounded-md focus:outline-none focus:shadow-outline-purple"
-                  @click="toggleTheme"
-                  aria-label="Toggle color mode"
-                >
-                  <template x-if="!dark">
-                    <svg
-                      class="w-5 h-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
-                      ></path>
-                    </svg>
-                  </template>
-                  <template x-if="dark">
-                    <svg
-                      class="w-5 h-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fill-rule="evenodd"
-                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                        clip-rule="evenodd"
-                      ></path>
-                    </svg>
-                  </template>
-                </button>
-              </li>
-              <!-- Notifications menu -->
-              <li class="relative">
-                <button
-                  class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple"
-                  @click="toggleNotificationsMenu"
-                  @keydown.escape="closeNotificationsMenu"
-                  aria-label="Notifications"
-                  aria-haspopup="true"
-                >
-                  <svg
-                    class="w-5 h-5"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"
-                    ></path>
-                  </svg>
-                  <!-- Notification badge -->
-                  <span
-                    aria-hidden="true"
-                    class="absolute top-0 right-0 inline-block w-3 h-3 transform translate-x-1 -translate-y-1 bg-red-600 border-2 border-white rounded-full dark:border-gray-800"
-                  ></span>
-                </button>
-                <template x-if="isNotificationsMenuOpen">
-                  <ul
-                    x-transition:leave="transition ease-in duration-150"
-                    x-transition:leave-start="opacity-100"
-                    x-transition:leave-end="opacity-0"
-                    @click.away="closeNotificationsMenu"
-                    @keydown.escape="closeNotificationsMenu"
-                    class="absolute right-0 w-56 p-2 mt-2 space-y-2 text-gray-600 bg-white border border-gray-100 rounded-md shadow-md dark:text-gray-300 dark:border-gray-700 dark:bg-gray-700"
-                  >
-                    <li class="flex">
-                      <a
-                        class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                        href="#"
-                      >
-                        <span>Messages</span>
-                        <span
-                          class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600"
-                        >
-                          13
-                        </span>
-                      </a>
-                    </li>
-                    <li class="flex">
-                      <a
-                        class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                        href="#"
-                      >
-                        <span>Sales</span>
-                        <span
-                          class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-600 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-600"
-                        >
-                          2
-                        </span>
-                      </a>
-                    </li>
-                    <li class="flex">
-                      <a
-                        class="inline-flex items-center justify-between w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                        href="#"
-                      >
-                        <span>Alerts</span>
-                      </a>
-                    </li>
-                  </ul>
-                </template>
-              </li>
-              <!-- Profile menu -->
+            <?php if (!$_SESSION['user']->getRole()->getId() == 1 || !$_SESSION['user']->getRole()->getId() == 2 || !$_SESSION['user']->getRole()->getId() == 3): ?>
+            <a href="?action=login-form">
+            <button
+              class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+              <p class="w-full">Login</p>
+              <span class="ml-2" aria-hidden="true">+</span>
+            </button>
+            </a>
+
+            <a href="?action=register-form">
+            <button
+              class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+              <p class="w-full">sing up</p>
+              <span class="ml-2" aria-hidden="true">+</span>
+            </button>
+            </a>
+            <?php endif; ?>
+              <?php if ($_SESSION['user']->getRole()->getId() == 1 || $_SESSION['user']->getRole()->getId() == 2 || $_SESSION['user']->getRole()->getId() == 3): ?>
               <li class="relative">
                 <button
                   class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
@@ -829,6 +743,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                         <span>Log out</span>
                       </a>
                     </li>
+                    <?php endif; ?>
                   </ul>
                 </template>
               </li>
@@ -857,200 +772,36 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                     Adipi sicing elit. Quia, aliquid voluptatum corporis Dicta. Deleniti possimus culpa nemo asperiores aperiam mollitia, maiores Lorem ipsum dolor.
                 </p>
                 <div>
-                    <form class="flex flex-col sm:flex-row justify-center gap-4 max-w-md mx-auto" action="#" method="post">
-                        <input 
-                            type="email" 
-                            placeholder="Email" 
-                            required 
-                            class="px-4 py-2 border rounded-lg bg-white/90 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow"
-                        >
-                        <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                            Subscribe
-                        </button>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<!-- <section class="w3l-call-to-action_9">
-    <div class="call-w3">
-        <div class="container">
-            <div class="booking-form-content">
-                <div class="main-titles-head ">
-                <h3 class="header-name">You Can learn anything
-                </h3>
-                <p class="tiltle-para editContent ">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic fuga sit illo modi aut aspernatur tempore laboriosam saepe dolores eveniet.</p>
-            </div>
-               <div class="row text-center">
-                <div class="col-lg-4 col-md-6 propClone about-line-top ">
-                    <div class="area-box color-white editContent box-active">
-                        <div class="icon-back"><span class="fa fa-thumbs-up"></span></div>
-                        
-                    <h5><a href="blog.html" class="editContent">
-                        Unlimited Access</a></h5>
-                    <p class="para editContent">Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
-                        quos, nobis culpa est</p>
-            </div>
-            </div>
-            <div class="col-lg-4 col-md-6 propClone about-line-top ">
-                <div class="area-box color-white editContent">
-                    <div class="icon-back"><span class="fa fa-users"></span></div>
-                    
-                <h5><a href="blog.html" class="editContent">
-                    Expert Teachers</a></h5>
-                <p class="para editContent">Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
-                    quos, nobis culpa est</p>
-        </div>
-        </div>
-        <div class="col-lg-4 col-md-6 propClone about-line-top">
-            <div class="area-box color-white editContent box-active">
-                <div class="icon-back"><span class="fa fa-pencil"></span></div>
-                
-            <h5><a href="blog.html" class="editContent">
-                Learn Anything</a></h5>
-            <p class="para editContent">Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
-                quos, nobis culpa est</p>
-    </div>
-    </div>
-    <div class="col-lg-4 col-md-6 propClone about-line-top ">
-        <div class="area-box color-white editContent">
-            <div class="icon-back"><span class="fa fa-book"></span></div>
-            
-        <h5><a href="blog.html" class="editContent">
-            Many Courses</a></h5>
-        <p class="para editContent">Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
-            quos, nobis culpa est</p>
-</div>
-</div>
-<div class="col-lg-4 col-md-6 propClone about-line-top ">
-    <div class="area-box color-white editContent box-active">
-        <div class="icon-back"><span class="fa fa-star"></span></div>
-        
-    <h5><a href="blog.html" class="editContent">
-        Bright Future</a></h5>
-    <p class="para editContent">Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
-        quos, nobis culpa est</p>
-</div>
-</div>
-<div class="col-lg-4 col-md-6 propClone about-line-top ">
-    <div class="area-box color-white editContent">
-        <div class="icon-back"><span class="fa fa-check"></span></div>
-        
-    <h5><a href="blog.html" class="editContent">
-        Verified Course</a></h5>
-    <p class="para editContent">Sit amet consect etur adipi sicing elit. Rem quib usdam corporis, dolores
-        quos, nobis culpa est</p>
-</div>
-</div>
-               </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-
-
-
-<!-- <section class="w3l-specification-6">
-    <div class="specification-layout editContent">
-        <div class="container">
-				<div class="grid">
-					<figure class="effect-apollo ser-bg1">
-						<figcaption>
-							<h5><a href="#url">Successfully Trained</a></h5>
-							<p class="para">Lorem ipsum dolor sit amet.Sit amet consect etur adipi sicing elit.</p>
-						</figcaption>			
-					</figure>
-					<figure class="effect-apollo ser-bg2">
-						<figcaption>
-							<h5><a href="#url">We Proudly Received</a></h5>
-							<p class="para">Lorem ipsum dolor sit amet.Sit amet consect etur adipi sicing elit.</p>
-						</figcaption>			
-					</figure>
-					<figure class="effect-apollo ser-bg3">
-						<figcaption>
-							<h5><a href="#url">We Are Getting Featured On</a></h5>
-							<p class="para">Lorem ipsum dolor sit amet.Sit amet consect etur adipi sicing elit.</p>
-						</figcaption>			
-					</figure>
-					<figure class="effect-apollo ser-bg4">
-						<figcaption>
-							<h5><a href="#url">Firmly Established</a></h5>
-							<p class="para">Lorem ipsum dolor sit amet.Sit amet consect etur adipi sicing elit.</p>
-						</figcaption>			
-					</figure>
-				</div>
-                  </div>
-        </div>
-</section> -->
-
-
-
-<!-- <section class="w3l-covers-18">
-        <div class="covers-main editContent">
-            <div class="container">
-              <div class="main-titles-head ">
-                <h3 class="header-name">Browse our top courses
-                </h3>
-                <p class="tiltle-para editContent ">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic fuga sit illo modi aut aspernatur tempore laboriosam saepe dolores eveniet.</p>
-            </div>
-                <div class="gallery-image row">
-                  <div class="col-lg-4 col-md-6">
-                    <img src="../../public/images/b2.jpg" alt="product" class="img-responsive ">
-                    <div class="img-box">
-                    <h5 class="mb-2"><a href="about.html">Branding Design</a></h5>
-                    <div class="blog-date"> 
-                    <p class="pos-date"><span class="fa fa-calendar mr-1"></span>7 April</p> <p class="pos-date"><span class="fa fa-eye mr-1"></span> 3286 Views</p></div>
-                    <p class="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet itaque labor.</p>
-                    </div>
-                  </div>
-                  <div class=" col-lg-4 col-md-6 top-top2">
-                    <img src="../../public/images/b1.jpg" alt="product" class="img-responsive ">
-                    <div class="img-box">
-                    <h5 class="mb-2"><a href="about.html">Art Design</a></h5>
-                    <div class="blog-date"> 
-                      <p class="pos-date"><span class="fa fa-calendar mr-1"></span>7 April</p> <p class="pos-date"><span class="fa fa-eye mr-1"></span> 3286 Views</p></div>
-                      <p class="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet itaque labor.</p>
-                  </div>
-                </div>
-                  <div class="col-lg-4 col-md-6 top-top">
-                    <img src="../../public/images/b3.jpg" alt="product" class="img-responsive ">
-                    <div class="img-box">
-                    <h5 class="mb-2"><a href="about.html">Programming</a></h5>
-                    <div class="blog-date"> 
-                      <p class="pos-date"><span class="fa fa-calendar mr-1"></span>7 April</p> <p class="pos-date"><span class="fa fa-eye mr-1"></span> 3286 Views</p></div>
-                      <p class="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet itaque labor.</p>
-                  </div>
-                  </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
-
-
 <section class="py-16">
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div>
-        <img src="../../public/images/b6.jpg" alt="product" class="w-full rounded-lg shadow-lg">
+        <img src="./public/images/b6.jpg" alt="product" class="w-full rounded-lg shadow-lg">
       </div>
       <div>
         <h6 class="text-blue-600 font-semibold mb-2">HOW WE WORK</h6>
         <h3 class="text-3xl font-bold mb-4">Your bright future is our mission!</h3>
         <p class="text-gray-600 mb-8">Moll itia placeat modi expl icabo volup tatum corporis unde Dicta, provident Rem adipisci Moll itia placeat modi volup tatem tenetur conse quatur.Conseq tenetur conse quatur adipi sicing elit.</p>
-        <a href="about.html" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">Read more</a>
+        <a href="?action=course" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">courses</a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="bg-blue-300 py-16" id="client">
-  <div class="container mx-auto px-4">
+<section class="bg-blue-300 py-16 flex flex-col items-center justify-center" id="client">
+    
+    <div class="w-80 p-6 bg-white rounded-2xl shadow-lg text-blue-900 text-lg font-semibold text-center transition-transform transform hover:scale-105">
+        💼 Enseignant
+    </div>
+
+    <div class="container mx-auto px-4 mt-8">
+        <div class="max-w-3xl mx-auto">
     <div class="max-w-3xl mx-auto">
-      <!-- Slider Structure -->
       <div class="relative" x-data="{ currentSlide: 0, totalSlides: <?= count($users) ?> }">
     <div class="transition-all duration-300">
         <?php foreach ($users as $index => $user): ?>
@@ -1062,7 +813,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
         <?php endforeach; ?>
     </div>
 
-    <!-- Navigation Dots -->
     <div class="flex justify-center space-x-3 mt-8">
         <?php foreach ($users as $index => $user): ?>
             <button @click="currentSlide = <?= $index ?>" 
@@ -1164,30 +914,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
     </div>
     </div>
 
-    <script>
-        document.addEventListener('alpine:init', () => {
-    Alpine.data('slider', () => ({
-        currentSlide: 0,
-        autoSlide: null,
-
-        init() {
-            this.startAutoSlide();
-        },
-
-        startAutoSlide() {
-            this.autoSlide = setInterval(() => {
-                this.currentSlide = (this.currentSlide + 1) % 4;
-            }, 5000);
-        },
-
-        stopAutoSlide() {
-            if (this.autoSlide) {
-                clearInterval(this.autoSlide);
-            }
-        }
-    }));
-});
-    </script>
   </body>
 </html>
 

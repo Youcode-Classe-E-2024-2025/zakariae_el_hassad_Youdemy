@@ -1010,8 +1010,8 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
         </td>
         <td class="px-4 py-3 text-xs">
         <?php
-$activeStatus = $user->getActive(); // Store the result of getActive()
-var_dump($activeStatus); // Debugging output to check the value
+$activeStatus = $user->getActive(); 
+var_dump($activeStatus); 
 ?>
 
 <a href="?action=toggle-active&id=<?= $user->getId(); ?>" class="toggle-active-btn px-2 py-1 font-semibold leading-tight text-white rounded-full <?= $activeStatus == 1 ? 'bg-green-600' : 'bg-red-600' ?>">

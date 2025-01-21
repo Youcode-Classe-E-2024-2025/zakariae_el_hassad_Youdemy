@@ -10,7 +10,7 @@ class User
     private ?Role $role;
     private int $active;
 
-    public function __construct(int $id = 0, string $name = "", string $email = "", string $password = "", ?string $image = null , ?Role $role = null , int $active = 1)
+    public function __construct(int $id = 0, string $name = "", string $email = "", string $password = "", ?string $image = null , ?Role $role = null , int $active = 0)
     {
         $this->id = $id;
         $this->name = $name;
