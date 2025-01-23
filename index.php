@@ -35,18 +35,6 @@ require_once "./src/DAO/TagDao.php";
 require_once "./src/DAO/CourseDao.php";
 require_once "./src/dao/CourseTagDao.php";
 
-$arr = [1, 2, 3, 4, 5];
-
-// [2, 4, 6, 8, 10]
-
-$array = [];
-for ($i=0 ; $i < sizeof($arr) ; $i++){
-    $array[$i]=  $arr[$i] * 2 ; 
-
-}
-var_dump(array_filter($arr , fn($a)=> $a % 2 == 0 ));
-die();
-
 $categoryController = new CategoryController();
 $userController = new UserController();
 $tagContrioller = new TagController();

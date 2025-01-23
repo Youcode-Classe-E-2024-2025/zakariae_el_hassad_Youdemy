@@ -294,14 +294,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
             </li>
           </ul>
           <?php endif; ?>
-          <div class="px-6 my-6">
-            <button
-              class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-            >
-              Create account
-              <span class="ml-2" aria-hidden="true">+</span>
-            </button>
-          </div>
         </div>
       </aside>
       <!-- Mobile sidebar -->
@@ -516,7 +508,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                       d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
                     ></path>
                   </svg>
-                  <span class="ml-4">ADMIN</span>
+                  <span class="ml-4">admin</span>
                 </span>
                 <svg
                   class="w-4 h-4"
