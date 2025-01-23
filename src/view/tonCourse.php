@@ -870,11 +870,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                         </div>
                         <div class="p-6">
                             <h5 class="text-xl font-bold text-white mb-3"><?= htmlspecialchars($course->getName()) ?></h5>
-                            <div class="flex justify-center gap-6 text-gray-400 text-sm mb-4">
-                                <p class="flex items-center"><span class="mr-2">📅</span>7 April</p>
-                                <p class="flex items-center"><span class="mr-2">👁</span> 3286 Views</p>
-                            </div>
-                            <p class="text-gray-300 mb-4"><?= htmlspecialchars($course->getDescription()) ?></p>
                             <?php if ($course->getCategory()): ?>
                                 <div class="mt-4 mb-6">
                                     <span class="text-gray-400 text-sm">Category:</span>

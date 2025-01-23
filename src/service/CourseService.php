@@ -14,6 +14,7 @@ class CourseService{
 
     public function save(array $data){
 
+
         $category = $this->categoryService->getCategoryById((int)$data["isCategory"]);
         $enseignant = new User();
         $user = $_SESSION["user"];
@@ -62,5 +63,17 @@ class CourseService{
         return $this->courseDao->searchCourses($keyword);
     }
 
+
+    public function getCoursesByCategoryWithPagination(int $categoryId, int $limit, int $offset): array {
+        return $this->courseDao->getCoursesByCategoryWithPagination($categoryId, $limit, $offset);
+    }
+    
+    public function countByCategory(int $categoryId): int {
+        return $this->courseDao->countByCategory($categoryId);
+    }
+    
+
+
+    
     
 }

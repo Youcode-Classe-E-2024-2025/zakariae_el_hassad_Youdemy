@@ -35,16 +35,28 @@ require_once "./src/DAO/TagDao.php";
 require_once "./src/DAO/CourseDao.php";
 require_once "./src/dao/CourseTagDao.php";
 
+$arr = [1, 2, 3, 4, 5];
+
+// [2, 4, 6, 8, 10]
+
+$array = [];
+for ($i=0 ; $i < sizeof($arr) ; $i++){
+    $array[$i]=  $arr[$i] * 2 ; 
+
+}
+var_dump(array_filter($arr , fn($a)=> $a % 2 == 0 ));
+die();
+
 $categoryController = new CategoryController();
 $userController = new UserController();
 $tagContrioller = new TagController();
 $courseController = new CourseController();
 session_start();
 
-if(isset($_GET["action"])) {
-    $action=$_GET["action"];
+if (isset($_GET["action"])) {
+    $action = $_GET["action"];
 
-    switch($action){
+    switch ($action) {
         case "register-form":
             $userController->showRegisterForm();
             break;
@@ -78,7 +90,7 @@ if(isset($_GET["action"])) {
         case "logout":
             $userController->logout();
             break;
-        case "save_category" :
+        case "save_category":
             $categoryController->save();
             break;
         case "category":
@@ -105,19 +117,22 @@ if(isset($_GET["action"])) {
         case "course":
             $courseController->getAll();
             break;
-        case "ton_course" :
+        case "ton_course":
             $courseController->getAllByUser();
             break;
-        case "course_documment" : 
+        case "course_documment":
             $courseController->showCourseDetail();
             break;
         case "delete_course":
             $courseController->delete();
             break;
-        case "search" :
+        case "search":
             $courseController->handleSearch();
             break;
-        default :
+        case 'showCoursesByCategory':
+            $courseController->showCoursesByCategory();
+            break;
+        default:
             echo "sjsisbx";
             break;
     }

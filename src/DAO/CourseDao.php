@@ -174,6 +174,63 @@ public function searchCourses($keyword) {
 }
 
 
+public function getCoursesByCategoryWithPagination(int $categoryId, int $limit, int $offset): array {
+    $query = "SELECT 
+        c.id,
+        c.name, 
+        c.description, 
+        c.image, 
+        c.file, 
+        u.id as user_id,
+        u.name as user_name, 
+        category.id as category_id,
+        category.name as category_name, 
+        GROUP_CONCAT(tags.name) as tag_names
+    FROM courses c
+    JOIN users u ON c.enseignant_id = u.id
+    JOIN category ON c.category_id = category.id
+    LEFT JOIN coursetags ct ON c.id = ct.course_id
+    LEFT JOIN tags ON ct.tag_id = tags.id
+    WHERE c.category_id = :category_id
+    GROUP BY c.id
+    LIMIT :limit OFFSET :offset";
+
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindParam(':category_id', $categoryId, PDO::PARAM_INT);
+    $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $courses = [];
+    foreach ($rows as $row) {
+        $enseignant = new User($row['user_id'], $row['user_name']);
+        $category = new Category($row['category_id'], $row['category_name']);
+        $courseTags = !empty($row['tag_names']) ? explode(',', $row['tag_names']) : [];
+
+        $courses[] = new Course(
+            $row['id'],
+            $row['name'],
+            $row['description'],
+            $row['image'],
+            $row['file'],
+            $enseignant,
+            $category,
+            $courseTags
+        );
+    }
+
+    return $courses;
+}
+
+public function countByCategory(int $categoryId): int {
+    $query = "SELECT COUNT(*) FROM courses WHERE category_id = :category_id";
+    $stmt = $this->connection->prepare($query);
+    $stmt->bindParam(':category_id', $categoryId, PDO::PARAM_INT);
+    $stmt->execute();
+    return (int) $stmt->fetchColumn();
+}
+
 
 
         

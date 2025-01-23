@@ -294,14 +294,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
             </li>
           </ul>
           <?php endif; ?>
-          <div class="px-6 my-6">
-            <button
-              class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-            >
-              Create account
-              <span class="ml-2" aria-hidden="true">+</span>
-            </button>
-          </div>
         </div>
       </aside>
       <!-- Mobile sidebar -->
@@ -785,7 +777,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                                     <?= htmlspecialchars($category->getDescription()) ?>
                                 </p>
                             </div>
-                            
+                            <a href="?action=showCoursesByCategory&category_id=<?= $category->getId()  ?>">
                             <div class="mt-4 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                                 <span class="inline-flex items-center text-sm text-blue-400">
                                     Découvrir 
@@ -794,13 +786,13 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                                     </svg>
                                 </span>
                             </div>
+                            </a>
                         </div>
                     </div>
                 </button>
             <?php endforeach; ?>
         </div>
 
-        <!-- Pagination -->
         <div class="flex justify-center mt-12 space-x-2">
             <?php if ($page > 1): ?>
                 <a href="?action=tout-Category&page=<?= $page - 1 ?>" 

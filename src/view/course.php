@@ -757,12 +757,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                         <!-- Content Section -->
                         <div class="p-6">
                             <h5 class="text-xl font-bold text-white mb-3"><?= htmlspecialchars($course->getName()) ?></h5>
-                            
-                            <!-- Stats -->
-                            <div class="flex justify-center gap-6 text-gray-400 text-sm mb-4">
-                                <p class="flex items-center"><span class="mr-2">📅</span>7 April</p>
-                                <p class="flex items-center"><span class="mr-2">👁</span> 3286 Views</p>
-                            </div>
 
                             <!-- Category -->
                             <?php if ($course->getCategory()): ?>

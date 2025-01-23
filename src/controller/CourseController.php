@@ -85,7 +85,7 @@ class CourseController{
         $userId = $_SESSION['user']->getId();  
         $courses = $this->courseService->getAllByUser($userId, $limit, $offset);
         $tags = $this->tagService->getAllTag();
-        $categories = $this->categoryService->categoryService($limit, $offset);
+        $categorys = $this->categoryService->categoryService($limit, $offset);
     
         $totalCourses = $this->courseService->countByUser($userId);
         $totalPages = ceil($totalCourses / $limit);
@@ -144,6 +144,26 @@ class CourseController{
         }
     }
     
+    public function showCoursesByCategory() {
+        if (!isset($_GET['category_id']) || !is_numeric($_GET['category_id'])) {
+            die("Catégorie invalide.");
+        }
+    
+        $categoryId = (int) $_GET['category_id'];
+        $limit = 9;
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($page - 1) * $limit;
+    
+        try {
+            $courses = $this->courseService->getCoursesByCategoryWithPagination($categoryId, $limit, $offset);
+            $totalCourses = $this->courseService->countByCategory($categoryId);
+            $totalPages = ceil($totalCourses / $limit);
+    
+            require_once APP_VIEWS . "table.php";
+        } catch (Exception $e) {
+            die("Erreur : " . $e->getMessage());
+        }
+    }
     
     
 

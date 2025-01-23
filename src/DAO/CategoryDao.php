@@ -22,21 +22,6 @@ class CategoryDao extends BaseDao {
         return $Categorys;
     }
 
-    // public function getAllCategory()
-    // {
-    //     $stmt = $this->connection->prepare("SELECT * FROM category");
-    //     $stmt->execute();
-    //     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
-    //     $Categorys = [];
-    //     foreach ($rows as $row) {
-    //         $Category = new Category($row["id"], $row["name"], $row["description"], $row["image"]);
-    //         array_push($Categorys, $Category);
-    //     }
-    //     return $Categorys;
-    // }
-
-
     public function findById(int $id): ?Category
     {
         try {
