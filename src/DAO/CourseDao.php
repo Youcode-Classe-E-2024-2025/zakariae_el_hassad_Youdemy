@@ -166,13 +166,6 @@ public function countByUser($userId) {
     return $stmt->fetchColumn();
 }
 
-public function searchCourses($keyword) {
-    $sql = "SELECT * FROM courses WHERE name LIKE :keyword OR description LIKE :keyword";
-    $stmt = $this->connection->prepare($sql);
-    $stmt->execute([':keyword' => '%' . $keyword . '%']);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
 
 public function getCoursesByCategoryWithPagination(int $categoryId, int $limit, int $offset): array {
     $query = "SELECT 

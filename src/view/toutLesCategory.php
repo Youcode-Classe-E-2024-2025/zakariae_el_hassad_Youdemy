@@ -61,12 +61,6 @@
             </div>
             
             <div class="flex justify-between mt-4">
-                <a href="" 
-                   class="flex items-center gap-2 bg-green-600 text-white px-3 py-1.5 rounded hover:bg-green-700 transition duration-300">
-                    <i class="fas fa-edit"></i>
-                    <span>Edit</span>
-                </a>
-            
                 <a href="?action=delet-category&category_id=<?= htmlspecialchars($category->getId()) ?>"
                    class="flex items-center gap-2 bg-red-600 text-white px-3 py-1.5 rounded hover:bg-red-700 transition duration-300">
                     <i class="fas fa-trash"></i>

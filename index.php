@@ -20,7 +20,6 @@ require_once "./src/controller/UserController.php";
 require_once "./src/controller/TagController.php";
 require_once "./src/controller/CourseController.php";
 
-
 // service 
 require_once "./src/service/CategotyService.php";
 require_once "./src/service/UserService.php";
@@ -113,9 +112,6 @@ if (isset($_GET["action"])) {
             break;
         case "delete_course":
             $courseController->delete();
-            break;
-        case "search":
-            $courseController->handleSearch();
             break;
         case 'showCoursesByCategory':
             $courseController->showCoursesByCategory();

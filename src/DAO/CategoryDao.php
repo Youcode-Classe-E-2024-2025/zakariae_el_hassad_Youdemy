@@ -11,12 +11,14 @@ class CategoryDao extends BaseDao {
     {
         $stmt = $this->connection->prepare("SELECT * FROM category WHERE admin_id = :id");
 
-        $stmt->execute(["id" => $id]);
+        $stmt->execute(
+            ["id" => $id]
+        );
         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $Categorys = [];
         foreach ($rows as $row) {
-            $Category = new category($row["id"], $row["name"], $row["description"],null);
+            $Category = new category($row["id"], $row["name"], $row["description"]);
             array_push($Categorys, $Category);
         }
         return $Categorys;
@@ -92,8 +94,8 @@ public function countCategories(): int {
 }
 
 
-
-
-
-
 }
+
+
+
+

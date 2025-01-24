@@ -78,14 +78,4 @@ class TagDao extends BaseDao {
         }
         return $tags;
     }
-
-    // public function delete($id){
-
-    //     $stmt = $this->connection->prepare("DELETE FROM   WHERE tag_id = ?");
-    //     $stmt->execute([$id]);
-
-    //     $stmt = $this->connection->prepare("DELETE FROM tags WHERE id = ?");
-    //     $stmt->execute([$id]);
-    // }
-    
 }

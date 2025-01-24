@@ -192,27 +192,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
               </a>
             </li>
             <?php endif; ?>
-
-            <li class="relative px-6 py-3">
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="tables.html"
-              >
-                <svg
-                  class="w-5 h-5"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-                </svg>
-                <span class="ml-4">Tables</span>
-              </a>
-            </li>
             <?php if ($_SESSION['user']->getRole()->getId() == 1): ?>
             <li class="relative px-6 py-3">
               <button
@@ -261,7 +240,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                   class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
                   aria-label="submenu"
                 >
-                  <li
+                <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
                     <a class="w-full" href="?action=admin">home</a>
@@ -276,7 +255,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/forgot-password.html">
+                    <a class="w-full" href="?action=tout-Category">
                     Category
                     </a>
                   </li>
@@ -873,12 +852,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                                 </div>
                             <?php endif; ?>
                             <div class="flex justify-between gap-4 mb-4">
-                                <a href="" 
-                                   class="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition duration-300 flex-1 justify-center">
-                                    <i class="fas fa-edit"></i>
-                                    <span>Edit</span>
-                                </a>
-                                <a href="?action=&course_id=<?= htmlspecialchars($course->getId()) ?>"
+                                <a href="?action=delete_course&course_id=<?= htmlspecialchars($course->getId()) ?>"
                                    class="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300 flex-1 justify-center">
                                     <i class="fas fa-trash"></i>
                                     <span>Delete</span>

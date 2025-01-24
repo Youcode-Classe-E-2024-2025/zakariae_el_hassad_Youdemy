@@ -66,7 +66,7 @@ class UserService
     ];
 }
 
-    public function getAllByRoleIds($roleIds,) : array
+    public function getAllByRoleIds($roleIds) : array
     {
         return $this->userDao->getAllByRoleIds($roleIds);
     }

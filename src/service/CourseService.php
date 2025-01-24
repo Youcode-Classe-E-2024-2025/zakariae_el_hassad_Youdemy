@@ -59,10 +59,6 @@ class CourseService{
         return $this->courseDao->delete($id);
     }
 
-    public function searchCourses($keyword) {
-        return $this->courseDao->searchCourses($keyword);
-    }
-
 
     public function getCoursesByCategoryWithPagination(int $categoryId, int $limit, int $offset): array {
         return $this->courseDao->getCoursesByCategoryWithPagination($categoryId, $limit, $offset);

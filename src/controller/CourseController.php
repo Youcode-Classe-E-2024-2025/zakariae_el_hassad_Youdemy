@@ -116,7 +116,6 @@ class CourseController{
             $this->courseService->delete($courseId); 
         }
     
-        // Pagination
         $limit = 9;
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $offset = ($page - 1) * $limit;
@@ -126,22 +125,10 @@ class CourseController{
         $tags = $this->tagService->getAllTag();
         $categories = $this->categoryService->categoryService($limit, $offset);
     
-        // Recalcul du nombre total de pages
         $totalCourses = $this->courseService->countByUser($userId);
         $totalPages = ceil($totalCourses / $limit);
     
         require_once APP_VIEWS . "tonCourse.php";
-    }
-
-    public function handleSearch() {
-        if (isset($_GET['search'])) {
-            $keyword = htmlspecialchars($_GET['search']); 
-            $courses = $this->courseService->searchCourses($keyword);
-    
-            require_once APP_VIEWS . "course.php";
-        } else {
-            echo "Veuillez entrer un mot-clé pour la recherche.";
-        }
     }
     
     public function showCoursesByCategory() {

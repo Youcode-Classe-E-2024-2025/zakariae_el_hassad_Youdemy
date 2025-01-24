@@ -145,26 +145,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
               </a>
             </li>
             <?php endif; ?>
-            <li class="relative px-6 py-3">
-              <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="tables.html"
-              >
-                <svg
-                  class="w-5 h-5"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
-                </svg>
-                <span class="ml-4">Tables</span>
-              </a>
-            </li>
             <?php if ($_SESSION['user']->getRole()->getId() == 1): ?>
             <li class="relative px-6 py-3">
               <button
@@ -213,7 +193,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                   class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
                   aria-label="submenu"
                 >
-                  <li
+                <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
                     <a class="w-full" href="?action=admin">home</a>
@@ -228,7 +208,7 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                   <li
                     class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                   >
-                    <a class="w-full" href="pages/forgot-password.html">
+                    <a class="w-full" href="?action=tout-Category">
                     Category
                     </a>
                   </li>
@@ -625,51 +605,6 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
                     <li class="flex">
                       <a
                         class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                        href="#"
-                      >
-                        <svg
-                          class="w-4 h-4 mr-3"
-                          aria-hidden="true"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                          ></path>
-                        </svg>
-                        <span>Profile</span>
-                      </a>
-                    </li>
-                    <li class="flex">
-                      <a
-                        class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                        href="#"
-                      >
-                        <svg
-                          class="w-4 h-4 mr-3"
-                          aria-hidden="true"
-                          fill="none"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path
-                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                          ></path>
-                          <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                        <span>Settings</span>
-                      </a>
-                    </li>
-                    <li class="flex">
-                      <a
-                        class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
                         href="?action=logout"
                       >
                         <svg
@@ -709,31 +644,33 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
     </div>
 
     <div class="relative min-h-screen flex items-center">
-        <div class="container mx-auto px-4">
-            <div class="text-center">
-                <h5 class="text-4xl font-bold mb-4 text-white">
-                    Present Education<br> in beautiful way!
-                </h5>
-                <p class="text-gray-200 mb-8 max-w-2xl mx-auto">
-                    Adipi sicing elit. Quia, aliquid voluptatum corporis Dicta. Deleniti possimus culpa nemo asperiores aperiam mollitia, maiores Lorem ipsum dolor.
-                </p>
-                <div>
-                </div>
+    <div class="container mx-auto px-4">
+        <div class="text-center">
+            <h5 class="text-4xl font-bold mb-4 text-white">
+                Apprenez et grandissez <br> avec les meilleures ressources éducatives !
+            </h5>
+            <p class="text-gray-200 mb-8 max-w-2xl mx-auto">
+                Explorez un monde de connaissances avec des cours interactifs, des enseignants passionnés et une approche pédagogique innovante pour assurer votre réussite.
+            </p>
+            <div>
             </div>
         </div>
     </div>
+</div>
 </section>
 <section class="py-16">
   <div class="container mx-auto px-4">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <div>
-        <img src="./public/images/b6.jpg" alt="product" class="w-full rounded-lg shadow-lg">
+        <img src="./public/images/b6.jpg" alt="education" class="w-full rounded-lg shadow-lg">
       </div>
       <div>
-        <h6 class="text-blue-600 font-semibold mb-2">HOW WE WORK</h6>
-        <h3 class="text-3xl font-bold mb-4">Your bright future is our mission!</h3>
-        <p class="text-gray-600 mb-8">Moll itia placeat modi expl icabo volup tatum corporis unde Dicta, provident Rem adipisci Moll itia placeat modi volup tatem tenetur conse quatur.Conseq tenetur conse quatur adipi sicing elit.</p>
-        <a href="?action=course" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">courses</a>
+        <h6 class="text-blue-600 font-semibold mb-2">NOTRE MÉTHODE</h6>
+        <h3 class="text-3xl font-bold mb-4">Votre réussite scolaire, notre priorité !</h3>
+        <p class="text-gray-600 mb-8">
+            Nous mettons à votre disposition des cours adaptés, une plateforme intuitive et un accompagnement pédagogique de qualité pour vous aider à atteindre vos objectifs académiques.
+        </p>
+        <a href="?action=course" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300">Découvrir les cours</a>
       </div>
     </div>
   </div>

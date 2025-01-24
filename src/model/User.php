@@ -12,6 +12,7 @@ class User
 
     public function __construct(int $id = 0, string $name = "", string $email = "", string $password = "", ?string $image = null , ?Role $role = null , int $active = 0)
     {
+
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
@@ -19,6 +20,7 @@ class User
         $this->image = $image;
         $this->role = $role;
         $this->active = $active;
+        
     }
 
     public function getId(): int

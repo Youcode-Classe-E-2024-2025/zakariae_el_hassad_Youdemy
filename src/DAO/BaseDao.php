@@ -9,7 +9,7 @@ abstract class BaseDao
 
     protected function __construct(string $tableName, string $className)
     {
-        $connectionHolder = new DatabaseConnection;
+        $connectionHolder = new DatabaseConnection();
         $this->connection = $connectionHolder->connect();
         $this->tableName = $tableName;
         $this->className = $className;

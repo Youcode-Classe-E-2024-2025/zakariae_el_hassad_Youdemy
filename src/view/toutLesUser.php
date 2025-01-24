@@ -6,36 +6,36 @@
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Bouton Invite */
+       
 .invite-btn {
-    background-color: #007bff; /* Bleu principal */
-    color: white; /* Texte blanc */
+    background-color: #007bff; 
+    color: white; 
     font-weight: bold;
-    border: none; /* Pas de bordure */
-    border-radius: 8px; /* Coins arrondis */
-    transition: all 0.3s ease; /* Transition fluide */
-    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3); /* Ombre légère */
+    border: none; 
+    border-radius: 8px; 
+    transition: all 0.3s ease; 
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
 }
 
 .invite-btn:hover {
-    background-color: #0056b3; /* Bleu foncé au survol */
-    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.5); /* Ombre plus intense */
+    background-color: #0056b3; 
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.5); 
 }
 
-/* Bouton Delete */
+
 .delete-btn {
-    background-color: #dc3545; /* Rouge principal */
-    color: white; /* Texte blanc */
+    background-color: #dc3545; 
+    color: white; 
     font-weight: bold;
-    border: none; /* Pas de bordure */
-    border-radius: 8px; /* Coins arrondis */
-    transition: all 0.3s ease; /* Transition fluide */
-    box-shadow: 0 4px 6px rgba(220, 53, 69, 0.3); /* Ombre légère */
+    border: none; 
+    border-radius: 8px; 
+    transition: all 0.3s ease; 
+    box-shadow: 0 4px 6px rgba(220, 53, 69, 0.3); 
 }
 
 .delete-btn:hover {
-    background-color: #a71d2a; /* Rouge foncé au survol */
-    box-shadow: 0 6px 12px rgba(220, 53, 69, 0.5); /* Ombre plus intense */
+    background-color: #a71d2a; 
+    box-shadow: 0 6px 12px rgba(220, 53, 69, 0.5); 
     transform: scale(1.05);
 }
 
@@ -89,23 +89,13 @@
           <?= htmlspecialchars($user->getEmail()); ?>
         </td>
         <td class="px-4 py-3 text-xs">
-          <button>
-            <span
-              class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
-            >
-              Pending
-            </span>
-          </button>
+          <a href="?action=delete_user&user_id=<?= htmlspecialchars($user->getId()) ?>"
+            class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600">
+              <i class="fas fa-trash"></i>
+                <span>Delete</span>
+          </a>
         </td>
-        <td class="px-4 py-3 text-xs">
-          <button>
-            <span
-              class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
-            >
-              Pending
-            </span>
-          </button>
-        </td>
+        
       </tr>
       <?php endforeach; ?>
     <?php else: ?>

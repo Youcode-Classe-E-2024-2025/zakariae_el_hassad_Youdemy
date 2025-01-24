@@ -44,11 +44,11 @@ CREATE TABLE courses (
 -- Table d'inscription des étudiants aux cours
 CREATE TABLE enrollment (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    student_id INT NOT NULL,
+    user_id INT NOT NULL,
     course_id INT NOT NULL,
-    enrollment_date DATE NOT NULL,
-    FOREIGN KEY (student_id) REFERENCES users(id),
-    FOREIGN KEY (course_id) REFERENCES courses(id)
+    enrollment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 );
 
 -- Table des notifications
