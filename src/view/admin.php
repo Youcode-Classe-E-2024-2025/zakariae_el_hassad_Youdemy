@@ -561,8 +561,8 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
       >
         <th class="px-4 py-3">Name</th>
         <th class="px-4 py-3">Email</th>
-        <th class="px-4 py-3">Active</th>
         <th class="px-4 py-3">Delete</th>
+        <th class="px-4 py-3">Active</th>
       </tr>
     </thead>
     <tbody
@@ -599,9 +599,9 @@ $imagePath = $user ? $user->getImage() : "uploads/default.jpg";
           </a>
         </td>
         <td class="px-4 py-3 text-xs">
-          <a href="?action=toggle-active&id=<?= $user->getId(); ?>" class="toggle-active-btn px-2 py-1 font-semibold leading-tight text-white rounded-full <?= $activeStatus == 1 ? 'bg-green-600' : 'bg-red-600' ?>">
+          <!-- <a href="?action=toggle-active&id=<?= $user->getId(); ?>" class="toggle-active-btn px-2 py-1 font-semibold leading-tight text-white rounded-full <?= $activeStatus == 1 ? 'bg-green-600' : 'bg-red-600' ?>">
             <span><?= $newActiveStatus == 0 ? 'Active' : 'Désactivé' ?></span>
-          </a>
+          </a> -->
 
 
         </td>
