@@ -1,13 +1,11 @@
 CREATE DATABASE croise2;
 USE croise2;
 
--- Table des rôles
 CREATE TABLE roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL
 );
 
--- Table des utilisateurs
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -18,7 +16,6 @@ CREATE TABLE users (
     FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
--- Table des catégories (créée avant courses pour éviter les erreurs de clé étrangère)
 CREATE TABLE category (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -28,7 +25,6 @@ CREATE TABLE category (
     FOREIGN KEY (admin_id) REFERENCES users(id)
 );
 
--- Table des cours
 CREATE TABLE courses (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
@@ -41,35 +37,13 @@ CREATE TABLE courses (
     FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE CASCADE
 );
 
--- Table d'inscription des étudiants aux cours
-CREATE TABLE enrollment (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    course_id INT NOT NULL,
-    enrollment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
-);
-
--- Table des notifications
-CREATE TABLE notification (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    admin_id INT NOT NULL,
-    message TEXT NOT NULL,
-    status ENUM('unread', 'read') NOT NULL,
-    date DATETIME NOT NULL,
-    FOREIGN KEY (admin_id) REFERENCES users(id)
-);
-
--- Table des tags
 CREATE TABLE tags (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    admin_id INT NOT NULL,  -- Correction de 'amin_id' en 'admin_id'
+    admin_id INT NOT NULL, 
     FOREIGN KEY (admin_id) REFERENCES users(id)
 );
 
--- Table de liaison entre cours et tags
 CREATE TABLE courseTags (
     id INT AUTO_INCREMENT PRIMARY KEY,
     course_id INT NOT NULL,
@@ -78,7 +52,6 @@ CREATE TABLE courseTags (
     FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
 );
 
--- Insérer les rôles (AUTO_INCREMENT gère l'ID automatiquement)
 INSERT INTO roles (name) VALUES ("ADMIN");
 INSERT INTO roles (name) VALUES ("Enseignant");
 INSERT INTO roles (name) VALUES ("Étudiant");
